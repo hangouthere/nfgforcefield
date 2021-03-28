@@ -27,7 +27,7 @@ scoreboard players operation @s _ff_player_map = @p _nfg_player_id
 
 # Retrieve the ID to put on the Corner NBT
 scoreboard players operation @s _ff_pair_map = #_ffNextId _ff_calcs
-data modify entity @s ArmorItems[3].tag._ff.id set from storage nfg:forcefield _ffNextId
+execute store result entity @s ArmorItems[3].tag._ff.id int 1 run scoreboard players get #_ffNextId _ff_calcs
 
 # Store Area Calc on Corner
 execute store result entity @s ArmorItems[3].tag._ff.area int 1 run scoreboard players get #_area _nfg_calcs

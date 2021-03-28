@@ -4,5 +4,5 @@
 
 # /trigger ff
 scoreboard players enable @a[gamemode=creative] ff
-execute as @a[scores={ff=1..}] run function nfg_forcefield:commands/ff
-scoreboard players reset @a[scores={ff=1..}]
+execute as @a[scores={ff=1..}] at @s run function nfg_forcefield:commands/ff
+scoreboard players reset @a[scores={ff=1..}] ff

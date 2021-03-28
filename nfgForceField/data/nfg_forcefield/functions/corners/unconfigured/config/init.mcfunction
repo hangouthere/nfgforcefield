@@ -21,8 +21,7 @@ execute as @e[tag=ff_corner,tag=!ff_configured] at @s run function nfg_forcefiel
 function nfg_forcefield:corners/unconfigured/config/finalize_end
 
 # Increment ffId since the ForceField is now Configured
-scoreboard players operation #_ffNextId _ff_calcs += #_1 _nfg_const
-execute store result storage nfg:forcefield _ffNextId int 1 run scoreboard players get #_ffNextId _ff_calcs
+scoreboard players add #_ffNextId _ff_calcs 1
 
 # Mark Corners as now Configured
 tag @e[tag=ff_corner,tag=!ff_configured] add ff_configured

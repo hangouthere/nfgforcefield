@@ -2,89 +2,120 @@
 
 ## TODO:
 
--   New Scan technique: From players!
+### Phase 1
 
-    -   Scans from a Player
-    -   Only selects mobs within "reasonable" distance
-    -   Checks each one for hit
-    -   Disposes of those in-bounds
+When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
-        DataStructure:
+-   ~~Settings:~~
+    -   ~~Initial setup:~~
+        -   ~~Detected via hidden semaphore: `#_doneInit _ff_calcs`, 1.. is true~~
+        -   ~~Doesn't require special tag, but also gives it to the player: `ff_admin`~~
+        -   ~~Convert weird localstorage settings loading of settings to this lifecycle~~
+        -   Should give a Book to describe how everything works
+    -   ~~Admin Helper Book~~
+        -   **Page 1: Overview**
+            -   Force-Give Building Pieces
+            -   `ff_admin` to Nearby: [Give] | [Take]
+            -   [Give Player Helper Book]
+            -   Player's ID
+        -   **Page 2: Intro**
+            -   Should clearly detail that tags need to be given to players to perform similar actions
+            -   This book is meant to help you learn about ForceFields, as well as how they operate, and the different ways you can use them
+        -   **Page 3: About FF**
+            -   Describe how a FF works
+            -   Volume vs Perimeter
+            -   Mob vs Build
+-   Convert to new scan technique:
 
-        ```
-        {
-            // Unique ID for ForceField
-            id,
-            // Unique ID for Player
-            ownerId,
-            // Starting perimiter coords
-            start: {x,y,z},
-            // Ending perimiter coords
-            end: {x,y,z},
-            // Calculated Properties
-            calcs: {
-                // Bearing Vector Starting -> Ending
-                vec: {x,y,z},
-                // Volume Sizing Vector
-                volume: {x,y,z},
-                // Center coords of Volume Space
-                center: {x,y,z},
-                // Squared Distance calculation between start/end points
-                dist_sq: 0,
-                // Area of Volume Space
-                area: 0,
-                w2l: {
-                    // Offset value to convert other vectors to this local space
-                    offset: {x,y,z},
-                    // Bounds as calculated from 0,0,0 of volume space
-                    bounds: {x,y,z}
-                },
-            },
+    -   ~~Power mod: Both on/off at same time causes freak-out~~
+    -   Get rid of area, min/max
+    -   Hardcode minimum?
+    -   Get rid of all traces of option to make corners force chunks
+    -   Get rid of max settings, keep min settings?
+    -   Needs DistSQ check added to ignore forever-more? Tricky because they could be far from one forcefield, but not another 🤔
+        -   Consensus marking for "perma-ignore": Mark as far away if far away, close if close... at the end of the FF loop, we clear both tags for `close`+`far` combo'd entities since they're nearby another field... `close`-only can technically keep it's tag (or can lose it), far only keeps it's tags and ignored on future scans
+    -   Need to add datastructure saving to the env
+    -   Probably don't need the metadata in the forcefield anymore?
+    -   DataStructure:
 
-            // Still to come...
-            type: "perimeter" | "volume",
-            protections: {
-                mob: true,
-                building: true
-            },
-        }
-        ```
+```
+{
+    // Unique ID for ForceField
+    id,
+    // Unique ID for Player
+    ownerId,
+    // Starting perimiter coords
+    start: {x,y,z},
+    // Ending perimiter coords
+    end: {x,y,z},
+    // Calculated Properties
+    calcs: {
+        // Bearing Vector Starting -> Ending
+        vec: {x,y,z},
+        // Volume Sizing Vector
+        volume: {x,y,z},
+        // Center coords of Volume Space
+        center: {x,y,z},
+        // Squared Distance calculation between start/end points
+        dist_sq: 0,
+        // Area of Volume Space
+        area: 0,
+        w2l: {
+            // Offset value to convert other vectors to this local space
+            offset: {x,y,z},
+            // Bounds as calculated from 0,0,0 of volume space
+            bounds: {x,y,z}
+        },
+    },
 
--   Settings:
-    -   Initial setup should give a Book to describe how everything works
-        -   First load (hidden semaphore) will give option for a setup wizard - for small/medium/large fields and default values (or skip and use shipped defaults)
-        -   Can be a kickoff point for giving the stands as well
-        -   Option to show settings 20 seconds
-        -   Option to make corners invisible (off by default)
-        -   Option to make corners show tooltips (on by default)
-        -   Option to make corners force chunks
-    -   Hide DEBUG setting
--   Build small framework around working with corners, and matching the other one? What use cases is this for?
--   Detect same-type fields nested inside each other. Makes zero sense, so don't allow it!
--   Make Multiplayer Friendly! Associate player ID to corners (also preface for "ownable" fields)
-    -   Think about maximum nested sub-types.. ie, to limit the number of Ending Corners when scanning against a matching Starting Corner
--   Convert min/max area settings to read from storage, like \_ffId
--   DELETE `end_crystal_target`, or do something with it, or next row....
--   Idea for Corner Markers (while placing):
-    -   When user places starting corner, use a light block of some sort (for long distance view)
-        -   When moving away from the corner, the block should move upward the same amount to visually see (maybe cap height?)
-            -   ONLY allow/move block if block is air
--   (Let's not actually do this??? Sounds anti-multiplayer) Protect multiple people from building forcefields
-    -   If Tagged player found, error
-    -   No Tagged found, offer items
-        -   Tag player as "operating" while item is in inventory
-        -   If player drops item in inventory, drop the tag from the player
-    -   Alternative, just select based on inventory items?
--   Consider different approach:
-    -   upgrades to combine forcefield types? Mob + Build
-    -   separate mob/build from perimeter/volume, and actually create them separately!
+    // Still to come...
+    type: "perimeter" | "volume",
+    protections: {
+        mob: true,
+        building: true
+    },
+}
+```
+
+-   Clean up Scanning so it's easy to split off for Mob vs Build protection
+-   Mob Protection
+    -   Kill & Zap, like current implementation, but with new technique
 -   Build Protection
     -   Needs to tell user on Entry
     -   Needs to put into Adventure mode on Entry
     -   Needs to tell user on Exit
     -   Needs to put into Survival mode on Exit
--   Corner updates on occassion?
-    -   Items can be moved due to gravity, might need minor updates from time to time
+-   DELETE `end_crystal_target`, or do something with it, or next row....
+-   Get rid of DEBUG completely
+-   Clean up docs:
+    -   Power Status
+    -   first run
+    -   Inventory
+    -   Helpers
+    -   etc?
+
+### Phase 2
+
+-   Make Multiplayer Friendly! Associate player ID to corners (also preface for "ownable" fields)
+-   Per-FF Configuration
+    -   FF Mods: Perim vs Volume, Mob vs Build (see Different Approach below)
+    -   Option to make corners invisible (off by default)
+    -   Option to make corners hide tooltips (off by default)
+    -   Sounds
+        -   Separate ambient vs zap
+    -   Complex idea with chest+books...
+        -   Messaging:
+            -   Incoming Title/Subtitle/ActionBar/Server Text
+            -   Outgoing Title/Subtitle/ActionBar/Server Text
+-   Consider different approach:
+    -   upgrades to combine forcefield types? Mob + Build
+    -   separate mob/build from perimeter/volume, and actually create them separately!
+-   Corner auto-destroy on FF break?
+    -   How should they be destroyable anyway? Currently invincible...
+        -   Destroyable by owner only, somehow?
+        -   Done via helper/config setup? Instantly destroys and gives player items to rebuild?
+    -   Currently in place, but should it? What if I just want to extend my FF? How would I?
+    -   Without any update, if volume protection doesn't protect under the corner, it can be moved by destroying land under it.... this is probably highly undesirable, and needs to be countered somehow... Maybe a smaller ff around each corner to avoid breaking the item somehow? If not the owner, you get bounced back some?
 -   ReadMe Stuffs
     -   Write README about how End Corner targeting works, since there can be multiple corners it has to search through
     -   Explain Power Mods
@@ -96,9 +127,18 @@
     -   Requires Assignable to be functioning or it's just not worthwhile
     -   Needs to be VERY expensive!
 -   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
--   Scanning (and really anything else) - Gate logic of corner gathering unless it's necessary
-    -   Also see if there's way to tighten up the function tree by gating with if checks and limiting the amount of repeated selectors
-    -   Try to use tighter selectors, like `type=armor_stand`
+-   Split up nfgUtil and nfgForceField repos, and include build zip for nfgUtil in nfgForceField
+
+### Phase 3 / Nice to Haves
+
+-   Corner updates on occassion?
+    -   Items can be moved due to gravity, might need minor updates from time to time
+-   Idea for Corner Markers (while placing):
+    -   When user places starting corner, use a light block of some sort (for long distance view)
+        -   When moving away from the corner, the block should move upward the same amount to visually see (maybe cap height?)
+            -   ONLY allow/move block if block is air
+
+---
 
 ## Notes:
 
@@ -107,6 +147,12 @@ Get Tags and ArmorItems info:
 ```
 execute as @e[sort=nearest,limit=1,type=!player] run tag @s list
 execute as @e[sort=nearest,limit=1,type=!player] run data get entity @s ArmorItems[3].tag._ff
+```
+
+Get Player ID:
+
+```
+tellraw @s ["My ID: ", {"score":{"name":"@s","objective":"_nfg_player_id"}}]
 ```
 
 Give an `in3`/`circleMaker` marker:

@@ -6,7 +6,7 @@
 ## Update Corner Name to Generic name
 
 # Powered ON
-execute if entity @s[tag=ff_power_off] run data merge entity @s {CustomName:'{"text":"ForceField - Corner","color":"red"}', CustomNameVisible: 1b}
+execute if entity @s[tag=ff_power_off] run data merge entity @s {CustomName:'{"text":"nfgForceField - Corner","color":"red"}', CustomNameVisible: 1b}
 
 # Powered OFF
-execute if entity @s[tag=ff_power_on] run data merge entity @s {CustomName:'{"text":"ForceField - Corner","color":"green"}', CustomNameVisible: 1b}
+execute if entity @s[tag=ff_power_on] run data merge entity @s {CustomName:'{"text":"nfgForceField - Corner","color":"green"}', CustomNameVisible: 1b}
