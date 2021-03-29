@@ -12,4 +12,4 @@ execute if entity @p[distance=..4] as @s[tag=ff_power_off] run function nfg_forc
 execute if entity @p[distance=4..6] run function nfg_forcefield:corners/configured/tooltip/medium
 
 ## As the player distances from the corner, we remove the CustonName visibility to reduce screen clutter
-execute if entity @p[distance=7..] run data merge entity @s {CustomNameVisible: 0b}
+execute if entity @p[distance=7..16] run data merge entity @s {CustomNameVisible: 0b}

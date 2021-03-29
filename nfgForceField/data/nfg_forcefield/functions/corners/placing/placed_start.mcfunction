@@ -24,6 +24,3 @@ tag @p add ff_placing_lock
 
 # Remove Init tag from Corner
 tag @s remove ff_init
-
-# Force loading of chunks where the corner is (if settings allow it)
-execute if score ChunkLoader _ff_settings matches 1 run forceload add ~ ~

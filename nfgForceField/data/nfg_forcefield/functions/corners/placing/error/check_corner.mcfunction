@@ -14,7 +14,7 @@ scoreboard players set #_numUncfgStart _ff_calcs 0
 scoreboard players set #_numUncfgEnd _ff_calcs 0
 
 # Count UNCONFIGURED Starting and Ending Corners
-# TODO: See if this works
+# TODO: Make this multiplayer friendly
 execute store result score #_numUncfgStart _ff_calcs if entity @e[tag=ff_start,tag=!ff_configured]
 execute store result score #_numUncfgEnd _ff_calcs if entity @e[tag=ff_end,tag=!ff_configured]
 

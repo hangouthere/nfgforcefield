@@ -27,6 +27,11 @@ When this Phase is complete, that means we are able to start using it on the NFG
             -   Mob vs Build
 -   Convert to new scan technique:
 
+    -   Need to add datastructure saving to the env
+        -   ~~Startup needs to define the template~~
+        -   Need to copy over the process of calc vs saving ff data, i liked the split...
+        -   Probably don't need the metadata in the forcefield anymore?
+            -   Keep tooltips? If so, then def need some data
     -   ~~Power mod: Both on/off at same time causes freak-out~~
     -   Get rid of area, min/max
     -   Hardcode minimum?
@@ -34,8 +39,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Get rid of max settings, keep min settings?
     -   Needs DistSQ check added to ignore forever-more? Tricky because they could be far from one forcefield, but not another 🤔
         -   Consensus marking for "perma-ignore": Mark as far away if far away, close if close... at the end of the FF loop, we clear both tags for `close`+`far` combo'd entities since they're nearby another field... `close`-only can technically keep it's tag (or can lose it), far only keeps it's tags and ignored on future scans
-    -   Need to add datastructure saving to the env
-    -   Probably don't need the metadata in the forcefield anymore?
     -   DataStructure:
 
 ```
@@ -93,6 +96,9 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Inventory
     -   Helpers
     -   etc?
+-   Deleting a forcefield needs to remove from the array to stop future processing
+    -   First it must find it, then delete it
+    -   Can do 2 step, find index and then reiterate to delete, or do it in one pass 🤔
 
 ### Phase 2
 
@@ -123,14 +129,15 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Need to basically track ID to player (easy in a scoreboard)
     -   Adds features/capabilities based on matching ID (or mismatching ID)
     -   Multiple players can match an ID for "tribes"
--   Constructable ForceFields
-    -   Requires Assignable to be functioning or it's just not worthwhile
-    -   Needs to be VERY expensive!
 -   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
 -   Split up nfgUtil and nfgForceField repos, and include build zip for nfgUtil in nfgForceField
 
 ### Phase 3 / Nice to Haves
 
+-   Constructable ForceFields
+    -   Requires Assignable to be functioning or it's just not worthwhile
+    -   Needs to be VERY expensive!
+    -   Consider either floor crafting,
 -   Corner updates on occassion?
     -   Items can be moved due to gravity, might need minor updates from time to time
 -   Idea for Corner Markers (while placing):

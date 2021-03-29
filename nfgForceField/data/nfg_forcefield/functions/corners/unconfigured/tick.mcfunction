@@ -8,4 +8,4 @@
 execute if entity @a[tag=ff_placing_lock] run function nfg_forcefield:corners/unconfigured/placing_helper/tick
 
 # Configure Unconfig'd Corners (aka, just Init'd, but NOT Configured)
-execute if entity @s[tag=!ff_init,tag=ff_end] run function nfg_forcefield:corners/unconfigured/config/init
+execute if entity @s[tag=!ff_init,tag=ff_end] run function nfg_forcefield:corners/unconfigured/config/tick

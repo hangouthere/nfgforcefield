@@ -11,14 +11,22 @@
 # - Literally no errors should occur during this process
 # - Should run once per Config setup
 
-function nfg_forcefield:corners/unconfigured/config/finalize_setup
+## Perform Calculations
+# Force execution as the Starting/Ending for assurance of all calcs
+execute as @e[tag=ff_corner,tag=!ff_configured,tag=ff_start] run function nfg_util:vec/store_in1
+execute as @e[tag=ff_corner,tag=!ff_configured,tag=ff_end] run function nfg_util:vec/store_in2
+# Calculate ForceField data
+function nfg_forcefield:corners/unconfigured/config/calc_ff_data
 
+## Store Calculations
+# Store calculated data in storage
+function nfg_forcefield:corners/unconfigured/config/store_ff_data
 # Handle each Corner agnostically
 # Force execution AS to ensure both are targeted
-execute as @e[tag=ff_corner,tag=!ff_configured] at @s run function nfg_forcefield:corners/unconfigured/config/finalize_either
+execute as @e[tag=ff_corner,tag=!ff_configured] at @s run function nfg_forcefield:corners/unconfigured/config/store_corner_data
 
 # Handle Ending Corners (@s) specifically
-function nfg_forcefield:corners/unconfigured/config/finalize_end
+function nfg_forcefield:corners/unconfigured/config/finalize_end_corner
 
 # Increment ffId since the ForceField is now Configured
 scoreboard players add #_ffNextId _ff_calcs 1
@@ -29,4 +37,5 @@ tag @e[tag=ff_corner,tag=!ff_configured] add ff_configured
 # Remove Player lock
 tag @p remove ff_placing_lock
 
+# Hide the placing bar from earlier
 title @p actionbar ""

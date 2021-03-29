@@ -2,7 +2,7 @@
 # Initialize nfgForceField DataPack
 
 # Initial Setup of Settings, so rest of pack runs on first setup
-scoreboard objectives add _ff_settings dummy
+scoreboard objectives add _ff_calcs dummy
 # If the datapack has NEVER initiated, let's do so!
 execute unless score #_doneInit _ff_calcs matches 1.. as @a[limit=1] run function nfg_forcefield:_first_run/init
 
