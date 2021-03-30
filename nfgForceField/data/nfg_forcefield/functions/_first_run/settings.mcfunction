@@ -13,6 +13,7 @@ scoreboard players set #_ffNextId _ff_calcs 1
 # TODO: Set valid values... Also hide via #_ prefix
 scoreboard players set MinAreaVolume _ff_calcs 10
 scoreboard players set MinAreaPerim _ff_calcs 10
+scoreboard players set MobRecycleSeconds _ff_calcs 10
 
 ## Data Storage Configuration
 # Default FF Template

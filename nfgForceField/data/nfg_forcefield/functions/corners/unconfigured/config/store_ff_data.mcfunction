@@ -26,6 +26,7 @@ execute store result storage nfg:forcefield _buildFF.calcs.vol.y int 1 run score
 execute store result storage nfg:forcefield _buildFF.calcs.vol.z int 1 run scoreboard players get #_vol_z _nfg_calcs
 # dist_sq
 execute store result storage nfg:forcefield _buildFF.calcs.dist_sq int 1 run scoreboard players get #_dist_sq _nfg_calcs
+execute store result storage nfg:forcefield _buildFF.calcs.dist_sq_max int 1 run scoreboard players get #_dist_sq_max _ff_calcs
 # area
 execute store result storage nfg:forcefield _buildFF.calcs.area int 1 run scoreboard players get #_area _nfg_calcs
 # center

@@ -1,4 +1,4 @@
-# Vector - Calculate
+# Vector - Calculate Direction Vector
 # Calculates directional vector between two points
 ################################################
 # Inputs:

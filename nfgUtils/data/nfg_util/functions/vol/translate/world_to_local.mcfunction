@@ -56,11 +56,11 @@ execute if score #_temp2_z _nfg_calcs > #_temp1_z _nfg_calcs run scoreboard play
 ## Offset into Local Coordinates
 # Calculate the offset from the [identified] Starting Point to (0,0) (which is just negating the components)
 scoreboard players operation #_W2Loffset_x _nfg_calcs = in1_x _nfg_calcs
-scoreboard players operation #_W2Loffset_x _nfg_calcs *= #_-1 _nfg_const
+scoreboard players operation #_W2Loffset_x _nfg_calcs *= $-1 _nfg_const
 scoreboard players operation #_W2Loffset_y _nfg_calcs = in1_y _nfg_calcs
-scoreboard players operation #_W2Loffset_y _nfg_calcs *= #_-1 _nfg_const
+scoreboard players operation #_W2Loffset_y _nfg_calcs *= $-1 _nfg_const
 scoreboard players operation #_W2Loffset_z _nfg_calcs = in1_z _nfg_calcs
-scoreboard players operation #_W2Loffset_z _nfg_calcs *= #_-1 _nfg_const
+scoreboard players operation #_W2Loffset_z _nfg_calcs *= $-1 _nfg_const
 # Do the actual offset!
 scoreboard players operation in1_x _nfg_calcs += #_W2Loffset_x _nfg_calcs
 scoreboard players operation in2_x _nfg_calcs += #_W2Loffset_x _nfg_calcs

@@ -29,56 +29,15 @@ When this Phase is complete, that means we are able to start using it on the NFG
 
     -   Need to add datastructure saving to the env
         -   ~~Startup needs to define the template~~
-        -   Need to copy over the process of calc vs saving ff data, i liked the split...
-        -   Probably don't need the metadata in the forcefield anymore?
+        -   ~~Need to copy over the process of calc vs saving ff data, i liked the split...~~
+        -   ~~Probably don't need the metadata in the forcefield anymore?~~
             -   Keep tooltips? If so, then def need some data
     -   ~~Power mod: Both on/off at same time causes freak-out~~
-    -   Get rid of area, min/max
-    -   Hardcode minimum?
-    -   Get rid of all traces of option to make corners force chunks
-    -   Get rid of max settings, keep min settings?
+    -   ~~Get rid of all traces of option to make corners force chunks~~
+    -   ~~Get rid of max settings, keep min settings?~~
+    -   ~~Use actual scan technique in the sandbox~~
     -   Needs DistSQ check added to ignore forever-more? Tricky because they could be far from one forcefield, but not another 🤔
         -   Consensus marking for "perma-ignore": Mark as far away if far away, close if close... at the end of the FF loop, we clear both tags for `close`+`far` combo'd entities since they're nearby another field... `close`-only can technically keep it's tag (or can lose it), far only keeps it's tags and ignored on future scans
-    -   DataStructure:
-
-```
-{
-    // Unique ID for ForceField
-    id,
-    // Unique ID for Player
-    ownerId,
-    // Starting perimiter coords
-    start: {x,y,z},
-    // Ending perimiter coords
-    end: {x,y,z},
-    // Calculated Properties
-    calcs: {
-        // Bearing Vector Starting -> Ending
-        vec: {x,y,z},
-        // Volume Sizing Vector
-        volume: {x,y,z},
-        // Center coords of Volume Space
-        center: {x,y,z},
-        // Squared Distance calculation between start/end points
-        dist_sq: 0,
-        // Area of Volume Space
-        area: 0,
-        w2l: {
-            // Offset value to convert other vectors to this local space
-            offset: {x,y,z},
-            // Bounds as calculated from 0,0,0 of volume space
-            bounds: {x,y,z}
-        },
-    },
-
-    // Still to come...
-    type: "perimeter" | "volume",
-    protections: {
-        mob: true,
-        building: true
-    },
-}
-```
 
 -   Clean up Scanning so it's easy to split off for Mob vs Build protection
 -   Mob Protection
@@ -89,14 +48,18 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Needs to tell user on Exit
     -   Needs to put into Survival mode on Exit
 -   DELETE `end_crystal_target`, or do something with it, or next row....
--   Get rid of DEBUG completely
+-   ~~Get rid of DEBUG completely - (left sprinkled in for scanning)~~
 -   Clean up docs:
     -   Power Status
     -   first run
     -   Inventory
     -   Helpers
     -   etc?
--   Deleting a forcefield needs to remove from the array to stop future processing
+-   Deleting a forcefield
+    -   existing needs redo, score won't work if you go out of chunk
+        -   remove concept of score pair :(
+        -   maybe place a hidden "i'm the actual corner" corner that can detect when there ISN'T a typical player corner
+    -   needs to remove from the array to stop future processing
     -   First it must find it, then delete it
     -   Can do 2 step, find index and then reiterate to delete, or do it in one pass 🤔
 
@@ -131,6 +94,8 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Multiple players can match an ID for "tribes"
 -   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
 -   Split up nfgUtil and nfgForceField repos, and include build zip for nfgUtil in nfgForceField
+-   Get rid of DEBUG everywhere?
+-   Upon config of new FF, needs to wipe scan array to force new scan on tick
 
 ### Phase 3 / Nice to Haves
 
@@ -178,13 +143,11 @@ Get the Entity Data that matches the ForceField Ending Corner (Note the extensiv
 data get entity @s Inventory[{id:"minecraft:armor_stand"}].tag.display{Name:'[{"text":"ForceField","color":"gold"},{"text":" - ","color":"white"},{"text":"Ending Corner","color":"aqua"}]'}]
 ```
 
-Target the player with the ForceField Ending Corner
+### Target the player with the ForceField Ending Corner
 
 ```
 execute as @a[nbt={Inventory:[{id:"minecraft:armor_stand",tag:{display:{Name:'[{"text":"ForceField","color":"gold"},{"text":" - ","color":"white"},{"text":"Ending Corner","color":"aqua"}]'}}}]}] run say I have this Item
 ```
-
----
 
 ### Find Paired Items
 
@@ -195,13 +158,53 @@ execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,t
 ### Count non players with same score
 
 ```
-NOT CORRECT - execute store result score _found _ff_pair_map run execute if entity @e[scores={_ff_pair_map=92},type=!player]
-```
-
-### WORKING, but Gross?
-
-```
 scoreboard players reset _found _ff_pair_map
 
 execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,tag=ff_start] if score @s _ff_pair_map = @e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1] _ff_pair_map run scoreboard players add _found _ff_pair_map 1
+```
+
+---
+
+### ForceField Data Structure
+
+```
+{
+    // Unique ID for ForceField
+    id,
+    // Unique ID for Player
+    ownerId,
+    // Starting perimiter coords
+    start: {x,y,z},
+    // Ending perimiter coords
+    end: {x,y,z},
+    // Calculated Properties
+    calcs: {
+        // Bearing Vector Starting -> Ending
+        vec: {x,y,z},
+        // Volume Sizing Vector
+        volume: {x,y,z},
+        // Center coords of Volume Space
+        center: {x,y,z},
+        // Squared Distance calculation between start/end points
+        dist_sq: 0,
+        // Maximum Squared Distance to ever consider again.
+        // Outside these bounds are forever ignored on subsequent scans!
+        dist_sq_max: 0,
+        // Area of Volume Space
+        area: 0,
+        w2l: {
+            // Offset value to convert other vectors to this local space
+            offset: {x,y,z},
+            // Bounds as calculated from 0,0,0 of volume space
+            bounds: {x,y,z}
+        },
+    },
+
+    // Still to come...
+    type: "perimeter" | "volume",
+    protections: {
+        mob: true,
+        building: true
+    },
+}
 ```

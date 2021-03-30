@@ -17,9 +17,9 @@ scoreboard objectives add _nfg_calcs dummy
 
 ## NFG Settings
 # Constants
-scoreboard players set #_1 _nfg_const 1
-scoreboard players set #_2 _nfg_const 2
-scoreboard players set #_-1 _nfg_const -1
+scoreboard players set $-1 _nfg_const -1
+scoreboard players set $2 _nfg_const 2
+scoreboard players set $3 _nfg_const 3
 # Setup Player ID assignment value
 scoreboard players set #_nfgNextPlayerId _nfg_calcs 1
 # Mark DEBUG Off by default

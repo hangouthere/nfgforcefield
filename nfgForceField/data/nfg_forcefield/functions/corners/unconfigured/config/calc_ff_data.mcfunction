@@ -4,7 +4,11 @@ function nfg_util:vec/distance_squared
 function nfg_util:vol/calc
 function nfg_util:vol/area
 
-# Copy dist sq for evals later
+# TODO: Determine valid value!
+# Calculate maximum dist_sq to permanently ignore for this ForceField
+scoreboard players operation #_dist_sq_max _ff_calcs = #_dist_sq _nfg_calcs
+scoreboard players operation #_dist_sq_max _ff_calcs *= $3 _nfg_const
+
 # Calculate offset to center (half of diameter, which is calculated in distance_squared)
 scoreboard players operation #_center_offset_x _ff_calcs = in1_x _nfg_calcs
 scoreboard players operation #_center_offset_x _ff_calcs += #_half_x _nfg_calcs
