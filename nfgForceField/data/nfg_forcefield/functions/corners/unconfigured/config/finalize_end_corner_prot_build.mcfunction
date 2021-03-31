@@ -11,4 +11,3 @@ data modify entity @s ArmorItems[3].tag._ff.type set value "Build"
 
 # Mark paired Starting Corner (nearest, since we exec AT it) with the Protection Type
 execute as @e[tag=ff_corner,sort=nearest,limit=1] run data modify entity @s ArmorItems[3].tag._ff.type set value "Build"
-

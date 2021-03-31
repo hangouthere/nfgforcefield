@@ -15,3 +15,10 @@ tellraw @a [{"text":"[nfgForceField] ","color":"gold"},{"text":"by ","color":"wh
 # TODO: Do we need this?
 # Ensure old tags aren't left around by accident
 tag @a remove ff_placing_lock
+# Clear suspended values.... also think about removing this?
+tag @e remove ff_processed
+tag @e remove ff_suspend
+tag @e remove ff_suspend_temp
+tag @e remove ff_suspend_perm
+
+function nfg_forcefield:scanning/process/loop/reset_scan

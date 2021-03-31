@@ -31,14 +31,16 @@ When this Phase is complete, that means we are able to start using it on the NFG
         -   ~~Startup needs to define the template~~
         -   ~~Need to copy over the process of calc vs saving ff data, i liked the split...~~
         -   ~~Probably don't need the metadata in the forcefield anymore?~~
-            -   Keep tooltips? If so, then def need some data
+            -   ~~Got rid of some, keeping some for tooltips~~
     -   ~~Power mod: Both on/off at same time causes freak-out~~
     -   ~~Get rid of all traces of option to make corners force chunks~~
     -   ~~Get rid of max settings, keep min settings?~~
     -   ~~Use actual scan technique in the sandbox~~
     -   Needs DistSQ check added to ignore forever-more? Tricky because they could be far from one forcefield, but not another 🤔
         -   Consensus marking for "perma-ignore": Mark as far away if far away, close if close... at the end of the FF loop, we clear both tags for `close`+`far` combo'd entities since they're nearby another field... `close`-only can technically keep it's tag (or can lose it), far only keeps it's tags and ignored on future scans
+    -   Clean up `ff_processed_` tags, make them less junky if possible
 
+-   Clean up scanning namespace in storage... uses _scan_\*, should be isolated to namespaces!
 -   Clean up Scanning so it's easy to split off for Mob vs Build protection
 -   Mob Protection
     -   Kill & Zap, like current implementation, but with new technique
@@ -49,12 +51,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Needs to put into Survival mode on Exit
 -   DELETE `end_crystal_target`, or do something with it, or next row....
 -   ~~Get rid of DEBUG completely - (left sprinkled in for scanning)~~
--   Clean up docs:
-    -   Power Status
-    -   first run
-    -   Inventory
-    -   Helpers
-    -   etc?
 -   Deleting a forcefield
     -   existing needs redo, score won't work if you go out of chunk
         -   remove concept of score pair :(
@@ -62,6 +58,12 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   needs to remove from the array to stop future processing
     -   First it must find it, then delete it
     -   Can do 2 step, find index and then reiterate to delete, or do it in one pass 🤔
+-   Clean up docs:
+    -   Power Status
+    -   first run
+    -   Inventory
+    -   Helpers
+    -   etc?
 
 ### Phase 2
 
@@ -85,9 +87,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
         -   Done via helper/config setup? Instantly destroys and gives player items to rebuild?
     -   Currently in place, but should it? What if I just want to extend my FF? How would I?
     -   Without any update, if volume protection doesn't protect under the corner, it can be moved by destroying land under it.... this is probably highly undesirable, and needs to be countered somehow... Maybe a smaller ff around each corner to avoid breaking the item somehow? If not the owner, you get bounced back some?
--   ReadMe Stuffs
-    -   Write README about how End Corner targeting works, since there can be multiple corners it has to search through
-    -   Explain Power Mods
 -   Assignable Forcefields
     -   Need to basically track ID to player (easy in a scoreboard)
     -   Adds features/capabilities based on matching ID (or mismatching ID)
@@ -95,7 +94,16 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
 -   Split up nfgUtil and nfgForceField repos, and include build zip for nfgUtil in nfgForceField
 -   Get rid of DEBUG everywhere?
--   Upon config of new FF, needs to wipe scan array to force new scan on tick
+-   Upon config of new FF, should wipe scan array to force new scan on tick
+-   ReadMe Stuffs
+    -   Explain Volume vs Perimeter Shapes
+    -   Explain Mob vs Build Protection
+    -   Explain Power Mods
+    -   Explain Settings
+    -   Explain Scanning Process(es?)
+    -   Explain Suspension system (for optimization)
+        -   How settings relate to tweaking for your own server
+        -
 
 ### Phase 3 / Nice to Haves
 
@@ -113,6 +121,12 @@ When this Phase is complete, that means we are able to start using it on the NFG
 ---
 
 ## Notes:
+
+Give self vindicator egg (dumb)
+
+```
+give @s minecraft:vindicator_spawn_egg{EntityTag:{NoAI:1b,Silent:1b}}
+```
 
 Get Tags and ArmorItems info:
 
@@ -169,38 +183,40 @@ execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,t
 
 ```
 {
-    // Unique ID for ForceField
-    id,
-    // Unique ID for Player
-    ownerId,
-    // Starting perimiter coords
-    start: {x,y,z},
-    // Ending perimiter coords
-    end: {x,y,z},
-    // Calculated Properties
-    calcs: {
-        // Bearing Vector Starting -> Ending
-        vec: {x,y,z},
-        // Volume Sizing Vector
-        volume: {x,y,z},
-        // Center coords of Volume Space
-        center: {x,y,z},
-        // Squared Distance calculation between start/end points
-        dist_sq: 0,
-        // Maximum Squared Distance to ever consider again.
-        // Outside these bounds are forever ignored on subsequent scans!
-        dist_sq_max: 0,
-        // Area of Volume Space
-        area: 0,
-        w2l: {
-            // Offset value to convert other vectors to this local space
-            offset: {x,y,z},
-            // Bounds as calculated from 0,0,0 of volume space
-            bounds: {x,y,z}
-        },
+    id: {
+        // Unique ID for ForceField
+        ff:0,
+        // Unique ID for Player
+        owner:0
     },
 
-    // Still to come...
+    // Different Zones to test for various hit-detections
+    zone: {
+        // Kill Zone - zappable mobs die here
+        kill: {
+            // Offset value to convert other vectors to this local space
+            offset: {x:0, y:0, z:0},
+            // Bounds as calculated from 0,0,0 of volume space
+            bounds: {x:0, y:0, z:0}
+        },
+        // Track Zone - this area may contain mobs
+        // close to the field, consider trackable
+        track: {
+            // Offset value to convert other vectors to this local space
+            offset: {x:0, y:0, z:0},
+            // Bounds as calculated from 0,0,0 of volume space
+            bounds: {x:0, y:0, z:0}
+        },
+        // Suspend Zone - mobs in this area will be ignored for a time determined by settings (MobRecycleSeconds)
+        suspend: {
+            // Offset value to convert other vectors to this local space
+            offset: {x:0, y:0, z:0},
+            // Bounds as calculated from 0,0,0 of volume space
+            bounds: {x:0, y:0, z:0}
+        }
+    }
+
+    // Still to come... needs thought out
     type: "perimeter" | "volume",
     protections: {
         mob: true,
@@ -208,3 +224,32 @@ execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,t
     },
 }
 ```
+
+## Scan Process Example
+
+Scan Starts: - [Tick] - (scanCount > 1) isn't true, so we reset - sets scanMobs = 2 - sets playerCount = 0 - - Not Scanning Mobs, No Players, loop Players
+
+FF1:
+
+-   Scans Mob A in
+-   Scans Mob B Suspend Temp
+-   Scans Mob C Suspend Perm
+-   Scans Mob D Suspend Perm
+-   Scans Mob E Suspend Perm
+-   Scans Mob F Suspend Perm
+    FF2:
+-   Scans Mob A Suspend Temp
+-   Scans Mob B Suspend Perm
+-   Scans Mob C Suspend Perm
+-   Scans Mob D Suspend Temp
+-   Scans Mob E in
+-   Scans Mob F kill
+
+mid cleanup:
+
+-   A - in + s-temp = remove s-temp
+-   B - s-temp + s-perm = remove s-perm
+-   C - s-perm + s-perm = noop
+-   D - same as B
+-   E - s-perm + in = remove s-perm
+-   F - s-perm + kill = remove s-perm (but will also kill)

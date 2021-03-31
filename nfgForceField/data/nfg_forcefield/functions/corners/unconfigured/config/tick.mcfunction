@@ -37,5 +37,14 @@ tag @e[tag=ff_corner,tag=!ff_configured] add ff_configured
 # Remove Player lock
 tag @p remove ff_placing_lock
 
+# TODO: See which of these we should actually remove
+# Reintroduce Suspended mobs, because a ForceField could have been built nearby
+tag @e remove ff_suspend
+tag @e remove ff_suspend_temp
+tag @e remove ff_suspend_perm
+
+# Force a clean Scan with the newly included/created ForceField
+function nfg_forcefield:scanning/process/loop/reset_scan
+
 # Hide the placing bar from earlier
 title @p actionbar ""
