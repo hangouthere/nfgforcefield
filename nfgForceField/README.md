@@ -40,11 +40,11 @@ When this Phase is complete, that means we are able to start using it on the NFG
         -   ~~Consensus marking for "perma-ignore": Mark as far away if far away, close if close... at the end of the FF loop, we clear both tags for `close`+`far` combo'd entities since they're nearby another field... `close`-only can technically keep it's tag (or can lose it), far only keeps it's tags and ignored on future scans~~
     -   ~~Clean up `ff_processed_` tags, make them less junky if possible~~
 
--   Clean up scanning namespace in storage... uses _scan_\*, should be isolated to namespaces!
+-   ~~Clean up scanning namespace in storage... uses _scan_\*, should be isolated to namespaces!~~
+-   ~~Mob Protection~~
+    -   ~~Kill & Zap, like current implementation, but with new technique~~
+    -   ~~Needs to include betteranimalsplus hostile mobs~~
 -   Clean up Scanning so it's easy to split off for Mob vs Build protection
--   Mob Protection
-    -   Kill & Zap, like current implementation, but with new technique
-    -   Needs to include betteranimalsplus hostile mobs
 -   Build Protection
     -   Needs to tell user on Entry
     -   Needs to put into Adventure mode on Entry

@@ -20,7 +20,7 @@ scoreboard players set #_MobRecycle_triggered _ff_calcs 0
 
 ## Reset scanning field score so we ensure a full reset
 # Clear Current Scan FF until it actually loops (to avoid memory clutter)
-data modify storage nfg:forcefield _scan_current set value {}
+data modify storage nfg:forcefield _scan.current set value {}
 # Reset Hit Counts
 scoreboard players set @e _ff_scan_track 0
 scoreboard players set @e _ff_suspend_perm 0
@@ -31,9 +31,9 @@ scoreboard players set #_scan_player_idx _ff_calcs 0
 scoreboard players set #_scan_stateMobSearch _ff_calcs 2
 
 # Copy ForceFields to temp location that we can destroy as we iterate as a queue
-data modify storage nfg:forcefield _scan_ForceFields set from storage nfg:forcefield ForceFields
+data modify storage nfg:forcefield _scan.ForceFields set from storage nfg:forcefield ForceFields
 
 # Set Count of ForceFields from the iterative array (for loop index)
-execute store result score #_scan_ff_idx _ff_calcs run data get storage nfg:forcefield _scan_ForceFields
+execute store result score #_scan_ff_idx _ff_calcs run data get storage nfg:forcefield _scan.ForceFields
 # Set Count of ForceFields from the iterative array (for max counts)
-execute store result score #_scan_ff_count _ff_calcs run data get storage nfg:forcefield _scan_ForceFields
+execute store result score #_scan_ff_count _ff_calcs run data get storage nfg:forcefield _scan.ForceFields

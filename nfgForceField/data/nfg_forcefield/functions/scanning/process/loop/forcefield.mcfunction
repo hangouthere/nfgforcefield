@@ -4,7 +4,7 @@
 execute if score #DEBUG _ff_calcs matches 1 run tellraw @a ["Loop ++ ", {"score":{"name":"#_scan_ff_idx","objective":"_ff_calcs"}}]
 
 # Set current item in memory by copying current index
-data modify storage nfg:forcefield _scan_current set from storage nfg:forcefield _scan_ForceFields[0]
+data modify storage nfg:forcefield _scan.current set from storage nfg:forcefield _scan.ForceFields[0]
 
 # Scan mobs as new since we're testing a different FF now
 tag @e[tag=!ff_bounds_track_in,tag=!ff_bounds_kill_in] remove ff_processed
@@ -21,7 +21,7 @@ scoreboard players set in1_z _nfg_calcs 0
 
 ## Iterate ForceField numbers/data
 # Delete self in list, and if an item shifted in place then this will re-run on another tick
-data remove storage nfg:forcefield _scan_ForceFields[0]
+data remove storage nfg:forcefield _scan.ForceFields[0]
 # Count down scanning ForceField by 1
 scoreboard players remove #_scan_ff_idx _ff_calcs 1
 # Reset Player Count to number of Players

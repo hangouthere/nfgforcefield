@@ -35,4 +35,4 @@ execute store result storage nfg:forcefield _buildFF.zone.suspend.offset.z int 1
 data modify storage nfg:forcefield ForceFields append from storage nfg:forcefield _buildFF
 
 # Wipe template copy to clean up storage
-data modify storage nfg:forcefield _buildFF set value {}
+data remove storage nfg:forcefield _buildFF
