@@ -24,11 +24,12 @@ scoreboard players set MinAreaVolume _ff_calcs 10
 scoreboard players set MinAreaPerim _ff_calcs 10
 scoreboard players set BoundsTrackZoneDistance _ff_calcs 75
 scoreboard players set BoundsIgnoreZoneDistance _ff_calcs 150
+scoreboard players set BoundsProtectZoneDistance _ff_calcs 16
 scoreboard players set MobRecycleSeconds _ff_calcs 15
 
 ## Data Storage Configuration
 # Default FF Template
-data modify storage nfg:forcefield _tmpl.buildFF set value {id:{ff:0,owner:0},zone:{kill:{offset:{x:0,y:0,z:0},bounds:{x:0,y:0,z:0}},track:{offset:{x:0,y:0,z:0},bounds:{x:0,y:0,z:0}},suspend:{offset:{x:0,y:0,z:0},bounds:{x:0,y:0,z:0}}}}
+data modify storage nfg:forcefield _tmpl.buildFF set value { id: { ff: 0, owner: 0 }, zone: { kill: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}, protect: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}, track: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}, suspend: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}}, protections: { mob: 'perimeter', building: 'volume' }, messages: { entering: { title: 'Entering Safe Zone', subtitle: 'Welcome!', actionbar: 'Extended Block Protection Enabled' }, leaving: { title: 'Leaving Safe Zone', subtitle: 'Be safe, wanderer...', actionbar: 'Extended Block Protection Disabled' }}}
 
 # ForceField Storage
 data modify storage nfg:forcefield ForceFields set value []

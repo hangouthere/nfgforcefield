@@ -23,7 +23,9 @@
 # #_scan_ff_count - Scoped Count total of ForceFields for a given Scan cycle
 # #_scan_ff_idx - Iteration Countdown for number of ForceFields
 # #_scan_player_idx - Iteration Countdown for number of Players
-# #_scan_state - Enum State for scanning state. 2 = Searching, 1 = Initialized/Done Searching
+# #_scan_state - Enum State for scanning state.
+#   1 = Initialized/Done Searching
+#   2 = Searching Mobs for a Player
 
 # Cleanup Overlap Suspend Errors
 function nfg_forcefield:scanning/process/loop/cleanup_suspend_errors
@@ -40,7 +42,7 @@ execute unless score #_scan_state _ff_calcs matches 2 if score #_scan_player_idx
 execute if score #_scan_state _ff_calcs matches 1 run function nfg_forcefield:scanning/process/loop/players
 
 # Scan at a Player is in-progress, continue next batch on this tick
-execute if score #_scan_state _ff_calcs matches 2 run function nfg_forcefield:scanning/process/loop/mob_detection
+execute if score #_scan_state _ff_calcs matches 2 as @p[tag=ff_thread_start] at @s run function nfg_forcefield:scanning/process/loop/process_thread
 
-# Perform Zap!
-execute as @e[scores={_ff_scan_kill=1..}] at @s run function nfg_forcefield:scanning/process/loop/zap_hostile
+# Perform Zaps!
+execute as @e[scores={_ff_scan_kill=1..}] at @s run function nfg_forcefield:scanning/process/zap_entity

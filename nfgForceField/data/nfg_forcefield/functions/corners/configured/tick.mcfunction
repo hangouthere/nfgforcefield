@@ -8,3 +8,6 @@ function nfg_forcefield:corners/configured/power_status/tick
 
 # Tooltip Configured Corners
 function nfg_forcefield:corners/configured/tooltip/tick
+
+# Detect Breaking of Corners
+function nfg_forcefield:corners/configured/destroy/tick

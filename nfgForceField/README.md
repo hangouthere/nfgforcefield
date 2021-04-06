@@ -44,12 +44,13 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   ~~Mob Protection~~
     -   ~~Kill & Zap, like current implementation, but with new technique~~
     -   ~~Needs to include betteranimalsplus hostile mobs~~
--   Clean up Scanning so it's easy to split off for Mob vs Build protection
--   Build Protection
-    -   Needs to tell user on Entry
-    -   Needs to put into Adventure mode on Entry
-    -   Needs to tell user on Exit
-    -   Needs to put into Survival mode on Exit
+-   ~~Clean up Scanning so it's easy to split off for Mob vs Build protection~~
+-   ~~Build Protection~~
+    -   ~~Needs to tell user on Entry~~
+    -   ~~Needs to put into Adventure mode on Entry~~
+    -   ~~Needs to tell user on Exit~~
+    -   ~~Needs to put into Survival mode on Exit~~
+    -   ~~Added: New buffer perim for protecting against destroying corners/etc~~
 -   DELETE `end_crystal_target`, or do something with it, or next row....
 -   ~~Get rid of DEBUG completely - (left sprinkled in for scanning)~~
 -   Deleting a forcefield
@@ -59,6 +60,15 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   needs to remove from the array to stop future processing
     -   First it must find it, then delete it
     -   Can do 2 step, find index and then reiterate to delete, or do it in one pass 🤔
+-   Consider different approach:
+    -   upgrades to combine forcefield types? Mob + Build
+    -   separate mob/build from perimeter/volume, and actually create them separately!
+-   Corner auto-destroy on FF break?
+    -   How should they be destroyable anyway? Currently invincible...
+        -   Destroyable by owner only, somehow?
+        -   Done via helper/config setup? Instantly destroys and gives player items to rebuild?
+    -   Currently in place, but should it? What if I just want to extend my FF? How would I?
+    -   Without any update, if volume protection doesn't protect under the corner, it can be moved by destroying land under it.... this is probably highly undesirable, and needs to be countered somehow... Maybe a smaller ff around each corner to avoid breaking the item somehow? If not the owner, you get bounced back some?
 -   Clean up/review all docs
 
 ### Phase 2
@@ -74,15 +84,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
         -   Messaging:
             -   Incoming Title/Subtitle/ActionBar/Server Text
             -   Outgoing Title/Subtitle/ActionBar/Server Text
--   Consider different approach:
-    -   upgrades to combine forcefield types? Mob + Build
-    -   separate mob/build from perimeter/volume, and actually create them separately!
--   Corner auto-destroy on FF break?
-    -   How should they be destroyable anyway? Currently invincible...
-        -   Destroyable by owner only, somehow?
-        -   Done via helper/config setup? Instantly destroys and gives player items to rebuild?
-    -   Currently in place, but should it? What if I just want to extend my FF? How would I?
-    -   Without any update, if volume protection doesn't protect under the corner, it can be moved by destroying land under it.... this is probably highly undesirable, and needs to be countered somehow... Maybe a smaller ff around each corner to avoid breaking the item somehow? If not the owner, you get bounced back some?
 -   Assignable Forcefields
     -   Need to basically track ID to player (easy in a scoreboard)
     -   Adds features/capabilities based on matching ID (or mismatching ID)
@@ -115,7 +116,7 @@ When this Phase is complete, that means we are able to start using it on the NFG
 
 ---
 
-## Notes:
+## Useful Commands:
 
 Give self vindicator egg (dumb)
 
@@ -143,9 +144,7 @@ Give an `in3`/`circleMaker` marker:
 give @p armor_stand{EntityTag:{CustomNameVisible:1b,NoGravity:1b,Silent:1b,Invulnerable:1b,ShowArms:0b,Small:1b,Tags:["circleMaker","ff_init","in3"],ArmorItems:[{},{},{},{id:"minecraft:gold_block",Count:1b}],CustomName:'{"text":"CircleMaker"}'}} 1
 ```
 
----
-
-### Detect a specific item (Inventory, Hand, Chest/Block, On Ground): https://www.reddit.com/r/MinecraftCommands/wiki/questions/detectitem
+Detect a specific item (Inventory, Hand, Chest/Block, On Ground): https://www.reddit.com/r/MinecraftCommands/wiki/questions/detectitem
 
 Get the Entity Data that matches the ForceField Ending Corner (Note the extensive inclusion of full `Name` value as it's all a giant JSONText string, and not NBT Compound data)
 
@@ -153,19 +152,19 @@ Get the Entity Data that matches the ForceField Ending Corner (Note the extensiv
 data get entity @s Inventory[{id:"minecraft:armor_stand"}].tag.display{Name:'[{"text":"ForceField","color":"gold"},{"text":" - ","color":"white"},{"text":"Ending Corner","color":"aqua"}]'}]
 ```
 
-### Target the player with the ForceField Ending Corner
+Target the player with the ForceField Ending Corner
 
 ```
 execute as @a[nbt={Inventory:[{id:"minecraft:armor_stand",tag:{display:{Name:'[{"text":"ForceField","color":"gold"},{"text":" - ","color":"white"},{"text":"Ending Corner","color":"aqua"}]'}}}]}] run say I have this Item
 ```
 
-### Find Paired Items
+Find Paired Items
 
 ```
 execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,tag=ff_start] if score @s _ff_pair_map = @e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1] _ff_pair_map run say Test
 ```
 
-### Count non players with same score
+Count non players with same score
 
 ```
 scoreboard players reset _found _ff_pair_map
@@ -175,7 +174,20 @@ execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,t
 
 ---
 
-### ForceField Data Structure
+## ForceField Settings
+
+| Var Name                  | Default Value | Description                                                                                                                                                                 |
+| ------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| MinAreaVolume             | 10            | Minimum Area for Volume Shape necessary to finalize a build.                                                                                                                |
+| MinAreaPerim              | 10            | Minimum Area for Area Shape necessary to finalize a build.                                                                                                                  |
+| BoundsProtectZoneDistance | 16            | Protection Buffer around ForceField Shape to help ensure safety of perimeter and Corner Pieces.                                                                             |
+| BoundsTrackZoneDistance   | 75            | Mob Scan: Zone around the ForceField Shape to always track/scan. Hostile Entities outside of this area will be Suspended.                                                   |
+| BoundsIgnoreZoneDistance  | 150           | Mob Scan: Outside this Zone will be _permanently_ ignored, meanwhile within these bounds will only be _temporarily_ ignored, and eventually recycled back into scan cycles. |
+| MobRecycleSeconds         | 15            | Mob Scan: How many seconds to elapse before re-introducing Hostile Entities into scan cycles.                                                                               |
+
+---
+
+## ForceField Data Structure
 
 ```
 {
@@ -210,14 +222,27 @@ execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,t
             // Bounds as calculated from 0,0,0 of volume space
             bounds: {x:0, y:0, z:0}
         }
-    }
-
-    // Still to come... needs thought out
-    type: "perimeter" | "volume",
-    protections: {
-        mob: true,
-        building: true
     },
+
+    // Define the protections: "perimeter", "volume", or "off"
+    protections: {
+        mob: "perimeter",
+        building: "volume"
+    },
+
+    // Messages for enter/leaving the Protection Zone
+    messages: {
+        entering: {
+            title: "Entering Safe Zone",
+            subtitle: "Welcome home",
+            actionbar: "Block Protection Enabled"
+        },
+        leaving: {
+            title: "Leaving Safe Zone",
+            subtitle: "See you next time!",
+            actionbar: "Block Protection Disabled"
+        },
+    }
 }
 ```
 
@@ -249,3 +274,13 @@ mid cleanup:
 -   D - same as B
 -   E - s-perm + in = remove s-perm
 -   F - s-perm + kill = remove s-perm (but will also kill)
+
+# Known Issues
+
+There's some things out of my control considering this is a datapack, so because of that I'll list out some potential issues.
+
+### Corners can be destroyed by explosions
+
+This is actually a MineCraft bug itself: https://bugs.mojang.com/browse/MC-78689
+
+A simple solution is to ensure `BoundsProtectZoneDistance` has a reasonable size so players cannot get explosions close enough

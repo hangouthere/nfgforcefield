@@ -14,6 +14,14 @@ execute store result storage nfg:forcefield _buildFF.zone.kill.bounds.z int 1 ru
 execute store result storage nfg:forcefield _buildFF.zone.kill.offset.x int 1 run scoreboard players get #_W2Loffset_x _nfg_calcs
 execute store result storage nfg:forcefield _buildFF.zone.kill.offset.y int 1 run scoreboard players get #_W2Loffset_y _nfg_calcs
 execute store result storage nfg:forcefield _buildFF.zone.kill.offset.z int 1 run scoreboard players get #_W2Loffset_z _nfg_calcs
+# zone.protect.bounds{xyz}
+execute store result storage nfg:forcefield _buildFF.zone.protect.bounds.x int 1 run scoreboard players get #_zoneBoundsProtect_x _ff_calcs
+execute store result storage nfg:forcefield _buildFF.zone.protect.bounds.y int 1 run scoreboard players get #_zoneBoundsProtect_y _ff_calcs
+execute store result storage nfg:forcefield _buildFF.zone.protect.bounds.z int 1 run scoreboard players get #_zoneBoundsProtect_z _ff_calcs
+# zone.protect.offset{xyz}
+execute store result storage nfg:forcefield _buildFF.zone.protect.offset.x int 1 run scoreboard players get #_zoneOffsetProtect_x _ff_calcs
+execute store result storage nfg:forcefield _buildFF.zone.protect.offset.y int 1 run scoreboard players get #_zoneOffsetProtect_y _ff_calcs
+execute store result storage nfg:forcefield _buildFF.zone.protect.offset.z int 1 run scoreboard players get #_zoneOffsetProtect_z _ff_calcs
 # zone.track.bounds{xyz}
 execute store result storage nfg:forcefield _buildFF.zone.track.bounds.x int 1 run scoreboard players get #_zoneBoundsTrack_x _ff_calcs
 execute store result storage nfg:forcefield _buildFF.zone.track.bounds.y int 1 run scoreboard players get #_zoneBoundsTrack_y _ff_calcs
