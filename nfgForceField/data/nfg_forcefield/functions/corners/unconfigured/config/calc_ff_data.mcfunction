@@ -35,12 +35,12 @@ scoreboard players operation #_zoneBoundsTrack_z _ff_calcs = in2_z _nfg_calcs
 # Restore original coords
 function nfg_util:helpers/restore_in1_in2
 # Offset bounds by distance settings
-scoreboard players operation in1_x _nfg_calcs -= BoundsSuspendZoneDistance _ff_calcs
-scoreboard players operation in1_y _nfg_calcs -= BoundsSuspendZoneDistance _ff_calcs
-scoreboard players operation in1_z _nfg_calcs -= BoundsSuspendZoneDistance _ff_calcs
-scoreboard players operation in2_x _nfg_calcs += BoundsSuspendZoneDistance _ff_calcs
-scoreboard players operation in2_y _nfg_calcs += BoundsSuspendZoneDistance _ff_calcs
-scoreboard players operation in2_z _nfg_calcs += BoundsSuspendZoneDistance _ff_calcs
+scoreboard players operation in1_x _nfg_calcs -= BoundsIgnoreZoneDistance _ff_calcs
+scoreboard players operation in1_y _nfg_calcs -= BoundsIgnoreZoneDistance _ff_calcs
+scoreboard players operation in1_z _nfg_calcs -= BoundsIgnoreZoneDistance _ff_calcs
+scoreboard players operation in2_x _nfg_calcs += BoundsIgnoreZoneDistance _ff_calcs
+scoreboard players operation in2_y _nfg_calcs += BoundsIgnoreZoneDistance _ff_calcs
+scoreboard players operation in2_z _nfg_calcs += BoundsIgnoreZoneDistance _ff_calcs
 # Convert bounds to Local Space!
 function nfg_util:vol/translate/world_to_local
 # Store Bounds to temp vars

@@ -3,7 +3,7 @@
 # TODO: Pick some better sounds, really...
 # TODO: Determine audio channel (currently ambient)
 # Play sound to nearby players
-execute as @a[distance=..16] run playsound nfg_forcefield:zap ambient @s ~ ~ ~ 0.4
+execute as @a[distance=..16] run playsound nfg_forcefield:zap ambient @s ~ ~ ~ 3
 
 # TODO: Finalize this appearance
 # Show zap particle

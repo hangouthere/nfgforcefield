@@ -6,6 +6,9 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
+-   Make these work (maybe more?):
+    ":feralwolf",
+    "betteranimalsplus:shark"
 -   ~~Settings:~~
     -   ~~Initial setup:~~
         -   ~~Detected via hidden semaphore: `#_doneInit _ff_calcs`, 1.. is true~~
@@ -36,7 +39,7 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   ~~Get rid of all traces of option to make corners force chunks~~
     -   ~~Get rid of max settings, keep min settings?~~
     -   ~~Use actual scan technique in the sandbox~~
-    -   Needs DistSQ check added to ignore forever-more? Tricky because they could be far from one forcefield, but not another 🤔
+    -   Needs check added to ignore forever-more? Tricky because they could be far from one forcefield, but not another 🤔
         -   Consensus marking for "perma-ignore": Mark as far away if far away, close if close... at the end of the FF loop, we clear both tags for `close`+`far` combo'd entities since they're nearby another field... `close`-only can technically keep it's tag (or can lose it), far only keeps it's tags and ignored on future scans
     -   Clean up `ff_processed_` tags, make them less junky if possible
 
@@ -44,6 +47,7 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   Clean up Scanning so it's easy to split off for Mob vs Build protection
 -   Mob Protection
     -   Kill & Zap, like current implementation, but with new technique
+    -   Needs to include betteranimalsplus hostile mobs
 -   Build Protection
     -   Needs to tell user on Entry
     -   Needs to put into Adventure mode on Entry
@@ -126,6 +130,7 @@ Give self vindicator egg (dumb)
 
 ```
 give @s minecraft:vindicator_spawn_egg{EntityTag:{NoAI:1b,Silent:1b}}
+give @s minecraft:villager{EntityTag:{NoAI:1b,Silent:1b}}
 ```
 
 Get Tags and ArmorItems info:

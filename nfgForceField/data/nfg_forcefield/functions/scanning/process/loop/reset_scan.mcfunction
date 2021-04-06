@@ -15,6 +15,7 @@ tag @e remove ff_bounds_kill_out
 
 # Re-allow Mobs in future scans, don't remove temp tag though, it'll get cleaned up in scan process
 execute if score #_MobRecycle_triggered _ff_calcs matches 1 run tag @e[type=#nfg_forcefield:zappable,tag=ff_suspend_temp] remove ff_suspend
+execute if score #_MobRecycle_triggered _ff_calcs matches 1 run tag @e[type=#nfg_forcefield:zappable,tag=ff_suspend_temp] remove ff_suspend_temp
 scoreboard players set #_MobRecycle_triggered _ff_calcs 0
 
 ## Reset scanning field score so we ensure a full reset

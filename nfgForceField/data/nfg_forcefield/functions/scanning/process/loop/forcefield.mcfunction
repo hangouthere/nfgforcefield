@@ -12,7 +12,6 @@ tag @e[tag=!ff_bounds_track_in,tag=!ff_bounds_kill_in] remove ff_processed
 # Scan players as new since we're testing a different FF now
 tag @a remove ff_thread_start
 tag @a remove ff_thread_processed
-tag @a remove 
 
 ## Utilize Offsets to initially calculate hitbox in Track Zone's Local Space
 # Set in1 at Local Origin (0,0,0)

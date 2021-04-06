@@ -18,12 +18,12 @@ scoreboard objectives add _ff_scan_track dummy
 scoreboard objectives add _ff_scan_kill dummy
 # Setup FF IDs
 scoreboard players set #_ffNextId _ff_calcs 1
-# TODO: Set valid values... Also consider hiding via #_ prefix
+# TODO: Set valid values...
 scoreboard players set MinAreaVolume _ff_calcs 10
 scoreboard players set MinAreaPerim _ff_calcs 10
-scoreboard players set BoundsTrackZoneDistance _ff_calcs 10
-scoreboard players set BoundsSuspendZoneDistance _ff_calcs 30
-scoreboard players set MobRecycleSeconds _ff_calcs 10
+scoreboard players set BoundsTrackZoneDistance _ff_calcs 75
+scoreboard players set BoundsIgnoreZoneDistance _ff_calcs 150
+scoreboard players set MobRecycleSeconds _ff_calcs 15
 
 ## Data Storage Configuration
 # Default FF Template
