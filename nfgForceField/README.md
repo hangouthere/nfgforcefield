@@ -6,9 +6,6 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
--   Make these work (maybe more?):
-    ":feralwolf",
-    "betteranimalsplus:shark"
 -   ~~Settings:~~
     -   ~~Initial setup:~~
         -   ~~Detected via hidden semaphore: `#_doneInit _ff_calcs`, 1.. is true~~
@@ -28,9 +25,9 @@ When this Phase is complete, that means we are able to start using it on the NFG
             -   Describe how a FF works
             -   Volume vs Perimeter
             -   Mob vs Build
--   Convert to new scan technique:
+-   ~~Convert to new scan technique:~~
 
-    -   Need to add datastructure saving to the env
+    -   ~~Need to add datastructure saving to the env~~
         -   ~~Startup needs to define the template~~
         -   ~~Need to copy over the process of calc vs saving ff data, i liked the split...~~
         -   ~~Probably don't need the metadata in the forcefield anymore?~~
@@ -39,9 +36,9 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   ~~Get rid of all traces of option to make corners force chunks~~
     -   ~~Get rid of max settings, keep min settings?~~
     -   ~~Use actual scan technique in the sandbox~~
-    -   Needs check added to ignore forever-more? Tricky because they could be far from one forcefield, but not another 🤔
-        -   Consensus marking for "perma-ignore": Mark as far away if far away, close if close... at the end of the FF loop, we clear both tags for `close`+`far` combo'd entities since they're nearby another field... `close`-only can technically keep it's tag (or can lose it), far only keeps it's tags and ignored on future scans
-    -   Clean up `ff_processed_` tags, make them less junky if possible
+    -   ~~Needs check added to ignore forever-more? Tricky because they could be far from one forcefield, but not another 🤔~~
+        -   ~~Consensus marking for "perma-ignore": Mark as far away if far away, close if close... at the end of the FF loop, we clear both tags for `close`+`far` combo'd entities since they're nearby another field... `close`-only can technically keep it's tag (or can lose it), far only keeps it's tags and ignored on future scans~~
+    -   ~~Clean up `ff_processed_` tags, make them less junky if possible~~
 
 -   Clean up scanning namespace in storage... uses _scan_\*, should be isolated to namespaces!
 -   Clean up Scanning so it's easy to split off for Mob vs Build protection

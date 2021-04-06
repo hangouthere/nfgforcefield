@@ -18,7 +18,8 @@ scoreboard objectives add _ff_scan_track dummy
 scoreboard objectives add _ff_scan_kill dummy
 # Setup FF IDs
 scoreboard players set #_ffNextId _ff_calcs 1
-# TODO: Set valid values...
+# Establish base settings for ForceField settings
+# TODO: pick better MinArea settings
 scoreboard players set MinAreaVolume _ff_calcs 10
 scoreboard players set MinAreaPerim _ff_calcs 10
 scoreboard players set BoundsTrackZoneDistance _ff_calcs 75

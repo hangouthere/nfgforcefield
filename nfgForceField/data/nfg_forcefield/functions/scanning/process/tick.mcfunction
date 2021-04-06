@@ -45,4 +45,4 @@ execute if score #_scan_stateMobSearch _ff_calcs matches 2 run function nfg_forc
 execute if score #_scan_stateMobSearch _ff_calcs matches 1 run function nfg_forcefield:scanning/process/loop/mob_detection
 
 # Perform Zap!
-execute as @e[scores={_ff_scan_kill=1..}] at @s run function nfg_forcefield:scanning/process/loop/zap_hostiles
+execute as @e[scores={_ff_scan_kill=1..}] at @s run function nfg_forcefield:scanning/process/loop/zap_hostile
