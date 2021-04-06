@@ -1,6 +1,6 @@
 # Count down on player count
 scoreboard players remove #_scan_player_idx _ff_calcs 1
-scoreboard players set #_scan_stateMobSearch _ff_calcs 2
+scoreboard players set #_scan_state _ff_calcs 2
 
 # Mark no players as the current thread start, we're about to pick one
 tag @a remove ff_thread_start

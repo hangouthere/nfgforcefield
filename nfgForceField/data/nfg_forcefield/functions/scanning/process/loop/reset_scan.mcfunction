@@ -26,7 +26,7 @@ scoreboard players set @e _ff_suspend_temp 0
 
 scoreboard players set #_scan_ff_idx _ff_calcs 0
 scoreboard players set #_scan_player_idx _ff_calcs 0
-scoreboard players set #_scan_stateMobSearch _ff_calcs 1
+scoreboard players set #_scan_state _ff_calcs 1
 
 # Copy ForceFields to temp location that we can destroy as we iterate as a queue
 data modify storage nfg:forcefield _scan.ForceFields set from storage nfg:forcefield ForceFields
