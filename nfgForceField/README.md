@@ -53,18 +53,13 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   DELETE `end_crystal_target`, or do something with it, or next row....
 -   ~~Get rid of DEBUG completely - (left sprinkled in for scanning)~~
 -   Deleting a forcefield
-    -   existing needs redo, score won't work if you go out of chunk
+    -   existing needs redo, score won't work if you go out of chunk and kills the FF's
         -   remove concept of score pair :(
         -   maybe place a hidden "i'm the actual corner" corner that can detect when there ISN'T a typical player corner
     -   needs to remove from the array to stop future processing
     -   First it must find it, then delete it
     -   Can do 2 step, find index and then reiterate to delete, or do it in one pass 🤔
--   Clean up docs:
-    -   Power Status
-    -   first run
-    -   Inventory
-    -   Helpers
-    -   etc?
+-   Clean up/review all docs
 
 ### Phase 2
 
@@ -94,7 +89,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Multiple players can match an ID for "tribes"
 -   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
 -   Split up nfgUtil and nfgForceField repos, and include build zip for nfgUtil in nfgForceField
--   Get rid of DEBUG everywhere?
 -   Upon config of new FF, should wipe scan array to force new scan on tick
 -   ReadMe Stuffs
     -   Explain Volume vs Perimeter Shapes

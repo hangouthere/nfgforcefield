@@ -1,7 +1,5 @@
 # Global reset of scan vars
 
-execute if score #DEBUG _ff_calcs matches 1 run say --------------------------------- RESET
-
 function nfg_forcefield:scanning/process/loop/finalize_suspend_states
 
 # Reset tags for a new scan sweep, unless we have more unProcessedMobs to test
@@ -28,7 +26,7 @@ scoreboard players set @e _ff_suspend_temp 0
 
 scoreboard players set #_scan_ff_idx _ff_calcs 0
 scoreboard players set #_scan_player_idx _ff_calcs 0
-scoreboard players set #_scan_stateMobSearch _ff_calcs 2
+scoreboard players set #_scan_stateMobSearch _ff_calcs 1
 
 # Copy ForceFields to temp location that we can destroy as we iterate as a queue
 data modify storage nfg:forcefield _scan.ForceFields set from storage nfg:forcefield ForceFields

@@ -23,26 +23,24 @@
 # #_scan_ff_count - Scoped Count total of ForceFields for a given Scan cycle
 # #_scan_ff_idx - Iteration Countdown for number of ForceFields
 # #_scan_player_idx - Iteration Countdown for number of Players
-# #_scan_stateMobSearch - Enum State for scanning state. 1 = Searching, 2 = Initialized/Done Searching
-
-execute if score #DEBUG _ff_calcs matches 1 run say [Tick] ---------------------------------
+# #_scan_stateMobSearch - Enum State for scanning state. 2 = Searching, 1 = Initialized/Done Searching
 
 # Cleanup Overlap Suspend Errors
 function nfg_forcefield:scanning/process/loop/cleanup_suspend_errors
 
 # Reset if no more ForceFields can be scanned... (Handles initial state, ie: no #_scan_ff_idx)
-execute unless score #_scan_stateMobSearch _ff_calcs matches 1 unless score #_scan_ff_idx _ff_calcs matches 1.. run function nfg_forcefield:scanning/process/loop/reset_scan
+execute unless score #_scan_stateMobSearch _ff_calcs matches 2 unless score #_scan_ff_idx _ff_calcs matches 1.. run function nfg_forcefield:scanning/process/loop/reset_scan
 
 # Not currently scanning, and All Players were initialized or
 # finished a Scan Loop (count = 0), meaning our ForceField is
 # fully scanned... Loop to the next one!
-execute unless score #_scan_stateMobSearch _ff_calcs matches 1 if score #_scan_player_idx _ff_calcs matches 0 run function nfg_forcefield:scanning/process/loop/forcefield
+execute unless score #_scan_stateMobSearch _ff_calcs matches 2 if score #_scan_player_idx _ff_calcs matches 0 run function nfg_forcefield:scanning/process/loop/forcefield
 
 # Mob Scan is initialized or just finished scanning for a Player (ie, state = 2), so loop to next Player
-execute if score #_scan_stateMobSearch _ff_calcs matches 2 run function nfg_forcefield:scanning/process/loop/players
+execute if score #_scan_stateMobSearch _ff_calcs matches 1 run function nfg_forcefield:scanning/process/loop/players
 
 # Scan at a Player is in-progress, continue next batch on this tick
-execute if score #_scan_stateMobSearch _ff_calcs matches 1 run function nfg_forcefield:scanning/process/loop/mob_detection
+execute if score #_scan_stateMobSearch _ff_calcs matches 2 run function nfg_forcefield:scanning/process/loop/mob_detection
 
 # Perform Zap!
 execute as @e[scores={_ff_scan_kill=1..}] at @s run function nfg_forcefield:scanning/process/loop/zap_hostile

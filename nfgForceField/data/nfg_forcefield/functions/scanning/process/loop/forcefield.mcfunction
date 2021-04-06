@@ -1,8 +1,6 @@
 # Process the current FF on the top of the list, then remove it...
 # If there's data in the first item still (ie, items shifted), it'll re-run after all players have been processed
 
-execute if score #DEBUG _ff_calcs matches 1 run tellraw @a ["Loop ++ ", {"score":{"name":"#_scan_ff_idx","objective":"_ff_calcs"}}]
-
 # Set current item in memory by copying current index
 data modify storage nfg:forcefield _scan.current set from storage nfg:forcefield _scan.ForceFields[0]
 
