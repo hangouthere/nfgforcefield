@@ -12,4 +12,4 @@ execute as @e[tag=ff_corner,tag=ff_start,tag=ff_prot_mob,tag=!ff_configured,sort
 execute as @e[tag=ff_corner,tag=ff_start,tag=ff_prot_build,tag=!ff_configured,sort=nearest,limit=1] run function nfg_util:perim/area
 
 # Update Screen
-title @p actionbar [{"text":"Type: ","color":"gold"},{"nbt":"ArmorItems[3].tag._ff.type","entity":"@e[tag=ff_corner,tag=ff_start,tag=!ff_configured,sort=nearest,limit=1]","color":"green"},{"text":" | "},{"text":"Min: ","color":"yellow"},{"score":{"name":"#_areaMin","objective":"_ff_calcs"},"color":"white"},{"text":" | "},{"text":" | "},{"text":"Δ: ","color":"dark_purple"},{"score":{"name":"#_area","objective":"_nfg_calcs"},"color":"aqua"}]
+title @p[tag=ff_placing_lock] actionbar [{"text":"Type: ","color":"gold"},{"nbt":"ArmorItems[3].tag._ff.type","entity":"@e[tag=ff_corner,tag=ff_start,tag=!ff_configured,sort=nearest,limit=1]","color":"green"},{"text":" | "},{"text":"Min: ","color":"yellow"},{"score":{"name":"#_areaMin","objective":"_ff_calcs"},"color":"white"},{"text":" | "},{"text":" | "},{"text":"Δ: ","color":"dark_purple"},{"score":{"name":"#_area","objective":"_nfg_calcs"},"color":"aqua"}]
