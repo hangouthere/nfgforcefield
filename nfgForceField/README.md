@@ -51,28 +51,47 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   ~~Needs to tell user on Exit~~
     -   ~~Needs to put into Survival mode on Exit~~
     -   ~~Added: New buffer perim for protecting against destroying corners/etc~~
--   DELETE `end_crystal_target`, or do something with it, or next row....
 -   ~~Get rid of DEBUG completely - (left sprinkled in for scanning)~~
--   Deleting a forcefield
-    -   existing needs redo, score won't work if you go out of chunk and kills the FF's
-        -   remove concept of score pair :(
-        -   maybe place a hidden "i'm the actual corner" corner that can detect when there ISN'T a typical player corner
-    -   needs to remove from the array to stop future processing
-    -   First it must find it, then delete it
-    -   Can do 2 step, find index and then reiterate to delete, or do it in one pass 🤔
--   Consider different approach:
+-   ~~DELETE `end_crystal_target`, or do something with it, or next row....~~
+-   ~~Delete all of `__ARCHIVE` junk~~
+-   ~~Fix validation errors for non-creative players - they lose the corners!~~
+-   ~~Deleting a forcefield~~
+    -   ~~existing needs redo, score won't work if you go out of chunk and kills the FF's~~
+        -   ~~remove concept of score pair :(~~
+    -   ~~ needs to remove from the array to stop future processing~~
+    -   ~~Corners in unloaded chunks need handling~~
+        -   ~~Store for deletion later~~
+        -   ~~On corner scan test if we need to delete~~
+    -   Needs to return corners, and not dropped items
+-   Consider different/updated approaches:
     -   upgrades to combine forcefield types? Mob + Build
     -   separate mob/build from perimeter/volume, and actually create them separately!
--   Corner auto-destroy on FF break?
-    -   How should they be destroyable anyway? Currently invincible...
-        -   Destroyable by owner only, somehow?
-        -   Done via helper/config setup? Instantly destroys and gives player items to rebuild?
-    -   Currently in place, but should it? What if I just want to extend my FF? How would I?
-    -   Without any update, if volume protection doesn't protect under the corner, it can be moved by destroying land under it.... this is probably highly undesirable, and needs to be countered somehow... Maybe a smaller ff around each corner to avoid breaking the item somehow? If not the owner, you get bounced back some?
+    -   Tooltips will need update
+    -   Corner creation beyond chunk loadings need to function properly
+        -   maybe sorta opposite of delete process?
+-   Player Book
+    -   Basic configuration/information
+    -   on/off? (will change later to cost players, don't overengineer this yet)
+    -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
+-   Clean up placement actionbar
+    -   had runtime issue with the bar going to wrong player
+-   Normalize corner and data storage data structure formats
+    -   That includes scanning lookups, etc... Try to use STORAGE where possible
+-   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
+    -   Corner deletion/creation updates kinda stuff? every 10-20t
+    -   Corner tooltip updates could be every 10t
 -   Clean up/review all docs
 
 ### Phase 2
 
+-   Consider effects:
+    -   Fancy particles indicating internal
+    -   Heals at all?
+        -   Enable Setting
+        -   Maybe after some delay (setting)?
+    -   Corner sparkles of sorts?
+        -   Maybe following perimeter?
+    -   Stranger vs Owner messages when entering/leaving FF?
 -   Make Multiplayer Friendly! Associate player ID to corners (also preface for "ownable" fields)
 -   Per-FF Configuration
     -   FF Mods: Perim vs Volume, Mob vs Build (see Different Approach below)
@@ -91,6 +110,9 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
 -   Split up nfgUtil and nfgForceField repos, and include build zip for nfgUtil in nfgForceField
 -   Upon config of new FF, should wipe scan array to force new scan on tick
+-   Deeper Admin Tools
+    -   Orphaned/Broken FF's? (somehow not properly deleted)
+    -   Remove Suspends
 -   ReadMe Stuffs
     -   Explain Volume vs Perimeter Shapes
     -   Explain Mob vs Build Protection
@@ -129,7 +151,7 @@ Get Tags and ArmorItems info:
 
 ```
 execute as @e[sort=nearest,limit=1,type=!player] run tag @s list
-execute as @e[sort=nearest,limit=1,type=!player] run data get entity @s ArmorItems[3].tag._ff
+execute as @e[sort=nearest,limit=1,type=!player] run data get entity @s ArmorItems[0].tag._ff
 ```
 
 Get Player ID:
@@ -173,6 +195,8 @@ execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,t
 ```
 
 ---
+
+# ForceField Meta
 
 ## ForceField Settings
 

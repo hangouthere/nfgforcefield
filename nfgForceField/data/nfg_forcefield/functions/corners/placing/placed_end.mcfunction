@@ -14,8 +14,8 @@ function nfg_forcefield:corners/placing/error/check_area
 
 # TODO: Make multiplayer friendly
 # Update Type Tag (based on already-Init'd, unConfigured, Starting Corner)
-execute if entity @s[tag=ff_prot_build,tag=ff_corner,tag=ff_start,tag=!ff_init,tag=!ff_configured,tag=ff_no_errors] run data modify entity @s ArmorItems[3].tag._ff.type set value "Build"
-execute if entity @s[tag=ff_prot_mob,tag=ff_corner,tag=ff_start,tag=!ff_init,tag=!ff_configured,tag=ff_no_errors] run data modify entity @s ArmorItems[3].tag._ff.type set value "Mob"
+execute if entity @s[tag=ff_prot_build,tag=ff_corner,tag=ff_start,tag=!ff_init,tag=!ff_configured,tag=ff_no_errors] run data modify entity @s ArmorItems[0].tag._ff.type set value "Build"
+execute if entity @s[tag=ff_prot_mob,tag=ff_corner,tag=ff_start,tag=!ff_init,tag=!ff_configured,tag=ff_no_errors] run data modify entity @s ArmorItems[0].tag._ff.type set value "Mob"
 
 # TODO: End remote-targeting system??
 

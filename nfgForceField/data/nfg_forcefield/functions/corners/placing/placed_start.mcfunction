@@ -13,8 +13,8 @@ function nfg_forcefield:corners/placing/error/check_corner
 execute as @a[distance=..16] run playsound nfg_forcefield:hum ambient @s ~ ~ ~ 0.6 2
 
 # Update Type meta-Tag
-execute if entity @s[tag=ff_prot_build] run data modify entity @s ArmorItems[3].tag._ff.type set value "Build"
-execute if entity @s[tag=ff_prot_mob] run data modify entity @s ArmorItems[3].tag._ff.type set value "Mob"
+execute if entity @s[tag=ff_prot_build] run data modify entity @s ArmorItems[0].tag._ff.type set value "Build"
+execute if entity @s[tag=ff_prot_mob] run data modify entity @s ArmorItems[0].tag._ff.type set value "Mob"
 
 # TODO: Need to set up targeting system of some sort here while placing Ending Corner?
 

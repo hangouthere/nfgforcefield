@@ -12,13 +12,12 @@
 # - area - for quick info in tooltips
 
 # FF ID
-scoreboard players operation @s _ff_pair_map = #_ffNextId _ff_calcs
-execute store result entity @s ArmorItems[3].tag._ff.id int 1 run scoreboard players get #_ffNextId _ff_calcs
+execute store result entity @s ArmorItems[0].tag._ff.id int 1 run scoreboard players get #_ffNextId _ff_calcs
 # Area
-execute store result entity @s ArmorItems[3].tag._ff.area int 1 run scoreboard players get #_area _nfg_calcs
+execute store result entity @s ArmorItems[0].tag._ff.area int 1 run scoreboard players get #_area _nfg_calcs
 # TODO: Determine if we need this here, or if storage is good enough
 # ownerId
-execute store result entity @s ArmorItems[3].tag._ff.ownerId int 1 run scoreboard players get @p _nfg_player_id
+execute store result entity @s ArmorItems[0].tag._ff.ownerId int 1 run scoreboard players get @p _nfg_player_id
 
 # Show name by default
 data merge entity @s {CustomNameVisible: 1b, Glowing: 0b}

@@ -1,7 +1,10 @@
 # Corners - Configured [Tick]
 # Per tick, evaluate configured Corners!
 #####################################
-# Started as: execute as @s[tag=!ff_init,tag=ff_configured]
+# Started as: execute as @e[tag=ff_corner] at @s | execute if entity @s[tag=!ff_init,tag=ff_configured,tag=ff_no_errors]
+
+# Handle Orphaned Corners (if there are any to find)
+execute if data storage nfg:forcefield _scan.deleted[0] run function nfg_forcefield:corners/configured/orphaned/tick
 
 # Handle Power Changes
 function nfg_forcefield:corners/configured/power_status/tick
@@ -9,5 +12,5 @@ function nfg_forcefield:corners/configured/power_status/tick
 # Tooltip Configured Corners
 function nfg_forcefield:corners/configured/tooltip/tick
 
-# Detect Breaking of Corners
-function nfg_forcefield:corners/configured/destroy/tick
+# Permit Demolishion of Corners
+execute if entity @p[distance=..8] run function nfg_forcefield:corners/configured/permit_demolish/tick

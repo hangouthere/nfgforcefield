@@ -10,3 +10,6 @@ execute if entity @s[tag=ff_power_off] run data merge entity @s {CustomName:'{"t
 
 # Powered OFF
 execute if entity @s[tag=ff_power_on] run data merge entity @s {CustomName:'{"text":"nfgForceField - Corner","color":"green"}', CustomNameVisible: 1b}
+
+tag @p remove ff_tooltip_near
+tag @p add ff_tooltip_medium

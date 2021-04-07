@@ -4,14 +4,12 @@
 ## Scoreboard Setup
 # Cleanup Old Values, just in case...
 scoreboard objectives remove _ff_calcs
-scoreboard objectives remove _ff_pair_map
 scoreboard objectives remove _ff_suspend_perm
 scoreboard objectives remove _ff_suspend_temp
 scoreboard objectives remove _ff_scan_track
 scoreboard objectives remove _ff_scan_kill
 # Temp storage for calculations
 scoreboard objectives add _ff_calcs dummy
-scoreboard objectives add _ff_pair_map dummy
 scoreboard objectives add _ff_suspend_perm dummy
 scoreboard objectives add _ff_suspend_temp dummy
 scoreboard objectives add _ff_scan_track dummy
@@ -33,3 +31,7 @@ data modify storage nfg:forcefield _tmpl.buildFF set value { id: { ff: 0, owner:
 
 # ForceField Storage
 data modify storage nfg:forcefield ForceFields set value []
+
+# Scan Storage
+data modify storage nfg:forcefield _scan.deleted set value []
+data modify storage nfg:forcefield _scan.current set value {}

@@ -1,13 +1,8 @@
-###################
-## Scan for Player in Protect Zone
-## This Zone is extra protection buffer around the ForceField to avoid 5-block,
-## or explosion radius damage to the perimeter and corners.
+# Get owner ID and store it for evaluation
+execute store result score #_ffOwnerId _ff_calcs run data get storage nfg:forcefield _scan.current.id.owner
 
-# Detect if player is in the "kill zone", aka, the ForceField
-execute as @s run function nfg_forcefield:scanning/process/prot_build/zone_test_protect
+# Scan Player if they DON'T own the ForceField
+execute unless score @s _nfg_player_id = #_ffOwnerId _ff_calcs run function nfg_forcefield:scanning/process/prot_build/scan_stranger
 
-# Player Entered the Build Protection Zone
-execute if score #_hitDetected _nfg_calcs matches 1 if entity @s[tag=!ff_prot_build] run function nfg_forcefield:scanning/process/prot_build/protect_entering
-
-# Player Leaving the Build Protection Zone
-execute if score #_hitDetected _nfg_calcs matches 0 if entity @s[tag=ff_prot_build] run function nfg_forcefield:scanning/process/prot_build/protect_leaving
+# Ensure if teleported home from a safe zone, they are insta-cleared of protection
+execute if score @s _nfg_player_id = #_ffOwnerId _ff_calcs run function nfg_forcefield:scanning/process/prot_build/scan_owner

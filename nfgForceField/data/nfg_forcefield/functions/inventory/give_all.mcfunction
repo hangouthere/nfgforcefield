@@ -1,2 +1,0 @@
-function nfg_forcefield:inventory/give_prot_build
-function nfg_forcefield:inventory/give_prot_mob

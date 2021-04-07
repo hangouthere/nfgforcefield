@@ -31,11 +31,12 @@ function nfg_forcefield:corners/unconfigured/config/finalize_end_corner
 # Increment ffId since the ForceField is now Configured
 scoreboard players add #_ffNextId _ff_calcs 1
 
-# Mark Corners as now Configured
-tag @e[tag=ff_corner,tag=!ff_configured] add ff_configured
-
 # Remove Player lock
 tag @p remove ff_placing_lock
+# Remove Player management tags
+tag @p remove ff_demolish_near
+tag @p remove ff_tooltip_near
+tag @p remove ff_tooltip_medium
 
 # TODO: See which of these we should actually remove
 # Reintroduce Suspended mobs, because a ForceField could have been built nearby
@@ -48,3 +49,6 @@ function nfg_forcefield:scanning/process/loop/reset_scan
 
 # Hide the placing bar from earlier
 title @p actionbar ""
+
+# Mark Corners as now Configured
+tag @e[tag=ff_corner,tag=!ff_configured] add ff_configured

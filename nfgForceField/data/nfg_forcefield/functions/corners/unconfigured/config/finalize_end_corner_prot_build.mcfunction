@@ -7,7 +7,7 @@
 tellraw @p [{"text":"[nfgForceField] ","color":"gold"},{"text":"Build Protection ","color":"light_purple"},{"text":"ForceField "},{"text":"Created!","color":"white"}]
 
 # Mark ourselves (Ending Corner) with the Protection Type
-data modify entity @s ArmorItems[3].tag._ff.type set value "Build"
+data modify entity @s ArmorItems[0].tag._ff.type set value "Build"
 
 # Mark paired Starting Corner (nearest, since we exec AT it) with the Protection Type
-execute as @e[tag=ff_corner,sort=nearest,limit=1] run data modify entity @s ArmorItems[3].tag._ff.type set value "Build"
+execute as @e[tag=ff_corner,sort=nearest,limit=1] run data modify entity @s ArmorItems[0].tag._ff.type set value "Build"

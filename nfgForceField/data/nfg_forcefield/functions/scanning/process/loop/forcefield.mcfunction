@@ -5,7 +5,7 @@
 data modify storage nfg:forcefield _scan.current set from storage nfg:forcefield _scan.ForceFields[0]
 
 # Scan mobs as new since we're testing a different FF now
-tag @e[tag=!ff_bounds_track_in,tag=!ff_bounds_kill_in] remove ff_processed
+tag @e remove ff_processed
 
 # Scan players as new since we're testing a different FF now
 tag @a remove ff_thread_start
