@@ -62,19 +62,20 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   ~~Corners in unloaded chunks need handling~~
         -   ~~Store for deletion later~~
         -   ~~On corner scan test if we need to delete~~
-    -   Needs to return corners, and not dropped items
+    -   ~~Needs to return corners, and not dropped items~~
 -   Consider different/updated approaches:
     -   upgrades to combine forcefield types? Mob + Build
     -   separate mob/build from perimeter/volume, and actually create them separately!
     -   Tooltips will need update
     -   Corner creation beyond chunk loadings need to function properly
         -   maybe sorta opposite of delete process?
+-   Clean up placement actionbar
+    -   had runtime issue with the bar going to wrong player
+    -   Probably needs to target player and matching placing start corner
 -   Player Book
     -   Basic configuration/information
     -   on/off? (will change later to cost players, don't overengineer this yet)
     -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
--   Clean up placement actionbar
-    -   had runtime issue with the bar going to wrong player
 -   Normalize corner and data storage data structure formats
     -   That includes scanning lookups, etc... Try to use STORAGE where possible
 -   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
