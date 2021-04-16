@@ -6,21 +6,19 @@
 # Assumptions:
 # - Corners are type=armor_stand (info for advanced pair tagging)
 
+# Mark player as building a forcefield
+tag @p add ff_building
+
 # Check for Error Conditions: Init Corner Placement
 function nfg_forcefield:corners/placing/error/check_corner
 
 # Newly placed items trigger a small sound
 execute as @a[distance=..16] run playsound nfg_forcefield:hum ambient @s ~ ~ ~ 0.6 2
 
-# Update Type meta-Tag
-execute if entity @s[tag=ff_prot_build] run data modify entity @s ArmorItems[0].tag._ff.type set value "Build"
-execute if entity @s[tag=ff_prot_mob] run data modify entity @s ArmorItems[0].tag._ff.type set value "Mob"
-
 # TODO: Need to set up targeting system of some sort here while placing Ending Corner?
 
-# TODO: This needs to become multiplayer friendly!
-# Mark player as a lock against others placing
-tag @p add ff_placing_lock
+# Initialize a Build Helper
+function nfg_forcefield:corners/placing/building_helper_init
 
 # Remove Init tag from Corner
 tag @s remove ff_init

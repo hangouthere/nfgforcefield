@@ -63,12 +63,41 @@ When this Phase is complete, that means we are able to start using it on the NFG
         -   ~~Store for deletion later~~
         -   ~~On corner scan test if we need to delete~~
     -   ~~Needs to return corners, and not dropped items~~
+-   Refactor `tag._ff` to just `tag`
+-   Look at combining `placing` and `config` into same namespace since they're practically related
+    -   It should require more cleanup of `placing` as well, building deeper namespaces and general cleanup
+-   Fix `_scan.deleted` namespace... in fact, redo all namespaces to be tighter
+    -   get rid of prefix-underscores in all namespaces
+    -   `_scan` should literally ONLY be scan based, `deleted` is not really a scan
+        -   same for `_scan.found_id`, `_scan.break_id`, etc
+    -   Considered NS':
+        -   scan
+            -   current (replaces current)
+            -   list (replaces ForceFields)
+        -   operations
+            -   create
+            -   delete
+            -   meta (depends on loop for other operations, such as finding deleted items, or holding newly created items)
+            -
 -   Consider different/updated approaches:
-    -   upgrades to combine forcefield types? Mob + Build
+
+    -   ~~upgrades to combine forcefield types? Mob + Build~~
     -   separate mob/build from perimeter/volume, and actually create them separately!
-    -   Tooltips will need update
+    -   ~~Tooltips will need update~~
+    -   ~~Update error checks to go off data on helper instead of corner~~
+        -   ~~ending can't be placed because start can't be detected~~
     -   Corner creation beyond chunk loadings need to function properly
         -   maybe sorta opposite of delete process?
+        -   Update corner ID's/meta for tooltips, and owner evaluations
+            -   don't forget process of out of chunk load!
+    -   No start/end concept, just --CORNER--
+    -   Update labeling to get rid of mob vs build protection wording
+        -   Kinda look everywhere else for it as well
+    -   ~~Upon config of new FF, should wipe scan array to force new scan on tick~~
+    -   Default to:
+        -   Mob: Perimeter
+        -   Build: Volume
+
 -   Clean up placement actionbar
     -   had runtime issue with the bar going to wrong player
     -   Probably needs to target player and matching placing start corner
@@ -76,44 +105,48 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Basic configuration/information
     -   on/off? (will change later to cost players, don't overengineer this yet)
     -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
+-   ~~Make Multiplayer Friendly! Associate player ID to corners (also preface for "ownable" fields)~~
 -   Normalize corner and data storage data structure formats
     -   That includes scanning lookups, etc... Try to use STORAGE where possible
+-   Corner protection (beyond the Protect Boundary)
+    -   Needs to push back non-owners (really fuck 'em up without hurting them) to ensure they stay safe from punching
+-   Bug: When player destroys starting corner they keep tags.. need to once more detect breakage 🤪
+    -   Also needs to kill `ff_building_helper`
+-   Bug: Items are still dropping when a corner is destroyed
+-   Exploit/Bug: When owner is near corner it's vulnerable, if enemy player is near it can be destroyed by them
+    -   Verify this somehow, although pushback idea should take care of it
+-   Revisit admin book, make sure terminology and functionality matches new processing and implementation(s)
 -   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
     -   Corner deletion/creation updates kinda stuff? every 10-20t
     -   Corner tooltip updates could be every 10t
+-   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
 -   Clean up/review all docs
 
 ### Phase 2
 
--   Consider effects:
-    -   Fancy particles indicating internal
-    -   Heals at all?
-        -   Enable Setting
-        -   Maybe after some delay (setting)?
-    -   Corner sparkles of sorts?
-        -   Maybe following perimeter?
-    -   Stranger vs Owner messages when entering/leaving FF?
--   Make Multiplayer Friendly! Associate player ID to corners (also preface for "ownable" fields)
+-   Split up nfgUtil and nfgForceField repos, and include build zip for nfgUtil in nfgForceField
+-   Consider changing coords from {x,y,z} to [x,y,z] for less command execs?
 -   Per-FF Configuration
     -   FF Mods: Perim vs Volume, Mob vs Build (see Different Approach below)
     -   Option to make corners invisible (off by default)
     -   Option to make corners hide tooltips (off by default)
+    -   Heals at all?
+        -   Enable Setting
+        -   Maybe after some delay (setting)?
+    -   Fancy particles indicating internal to FF?
+    -   Corner sparkles of sorts?
+        -   Maybe following perimeter?
+    -   Stranger vs Owner messages when entering/leaving FF?
     -   Sounds
         -   Separate ambient vs zap
     -   Complex idea with chest+books...
-        -   Messaging:
-            -   Incoming Title/Subtitle/ActionBar/Server Text
-            -   Outgoing Title/Subtitle/ActionBar/Server Text
+        -   ~~Messaging:
+            -   ~~Incoming Title/Subtitle/ActionBar/~~Server Text
+            -   ~~Outgoing Title/Subtitle/ActionBar/~~Server Text
 -   Assignable Forcefields
-    -   Need to basically track ID to player (easy in a scoreboard)
-    -   Adds features/capabilities based on matching ID (or mismatching ID)
+    -   ~~Need to basically track ID to player~~
+    -   ~~Adds features/capabilities based on matching ID (or mismatching ID)~~
     -   Multiple players can match an ID for "tribes"
--   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
--   Split up nfgUtil and nfgForceField repos, and include build zip for nfgUtil in nfgForceField
--   Upon config of new FF, should wipe scan array to force new scan on tick
--   Deeper Admin Tools
-    -   Orphaned/Broken FF's? (somehow not properly deleted)
-    -   Remove Suspends
 -   ReadMe Stuffs
     -   Explain Volume vs Perimeter Shapes
     -   Explain Mob vs Build Protection
@@ -122,7 +155,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Explain Scanning Process(es?)
     -   Explain Suspension system (for optimization)
         -   How settings relate to tweaking for your own server
-        -
 
 ### Phase 3 / Nice to Haves
 
@@ -130,8 +162,11 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Requires Assignable to be functioning or it's just not worthwhile
     -   Needs to be VERY expensive!
     -   Consider either floor crafting,
+-   Deeper Admin Tools
+    -   Orphaned/Broken FF's? (somehow not properly deleted)
+    -   Reset Suspends to fix broken perma-suspends
 -   Corner updates on occassion?
-    -   Items can be moved due to gravity, might need minor updates from time to time
+    -   Items might be moved due to gravity, might need minor updates from time to time
 -   Idea for Corner Markers (while placing):
     -   When user places starting corner, use a light block of some sort (for long distance view)
         -   When moving away from the corner, the block should move upward the same amount to visually see (maybe cap height?)
@@ -221,6 +256,15 @@ execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,t
         ff:0,
         // Unique ID for Player
         owner:0
+    },
+
+    corner: {
+        start: {x:0, y:0, z:0},
+        end: {x:0, y:0, z:0}
+    },
+
+    calc: {
+        area: 0
     },
 
     // Different Zones to test for various hit-detections

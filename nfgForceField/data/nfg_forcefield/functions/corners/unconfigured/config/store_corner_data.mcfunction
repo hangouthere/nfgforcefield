@@ -7,17 +7,10 @@
 # - Runs as each Corner in a pair, unConfigured
 
 ## Modify the base Item NBT of Head Armor to have a tag with
-# - id - pairing id to associate later
-# - ownerId - for Owner validation in scans
-# - area - for quick info in tooltips
-
-# FF ID
-execute store result entity @s ArmorItems[0].tag._ff.id int 1 run scoreboard players get #_ffNextId _ff_calcs
-# Area
-execute store result entity @s ArmorItems[0].tag._ff.area int 1 run scoreboard players get #_area _nfg_calcs
-# TODO: Determine if we need this here, or if storage is good enough
-# ownerId
-execute store result entity @s ArmorItems[0].tag._ff.ownerId int 1 run scoreboard players get @p _nfg_player_id
+# calc.area - for quick info in tooltips
+execute store result entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag._ff.calc.area int 1 run scoreboard players get #_area _nfg_calcs
+# Copy `ff_building_helper` tag data to corner tag data
+data modify entity @s ArmorItems[0].tag set from entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag
 
 # Show name by default
 data merge entity @s {CustomNameVisible: 1b, Glowing: 0b}

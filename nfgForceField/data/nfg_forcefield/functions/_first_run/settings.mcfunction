@@ -27,7 +27,7 @@ scoreboard players set MobRecycleSeconds _ff_calcs 15
 
 ## Data Storage Configuration
 # Default FF Template
-data modify storage nfg:forcefield _tmpl.buildFF set value { id: { ff: 0, owner: 0 }, zone: { kill: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}, protect: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}, track: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}, suspend: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}}, protections: { mob: 'perimeter', building: 'volume' }, messages: { entering: { title: 'Entering Safe Zone', subtitle: 'Welcome!', actionbar: 'Extended Block Protection Enabled' }, leaving: { title: 'Leaving Safe Zone', subtitle: 'Be safe, wanderer...', actionbar: 'Extended Block Protection Disabled' }}}
+data modify storage nfg:forcefield _tmpl.buildFF set value { id: { ff: 0, owner: 0 }, calc: { area: 0 }, corner: { start: [0,0,0], end: [0,0,0] }, zone: { kill: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}, protect: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}, track: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}, suspend: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 }}}, protections: { mob: 'perimeter', building: 'volume' }, messages: { entering: { title: 'Entering Safe Zone', subtitle: 'Welcome!', actionbar: 'Extended Block Protection Enabled' }, leaving: { title: 'Leaving Safe Zone', subtitle: 'Be safe, wanderer...', actionbar: 'Extended Block Protection Disabled' }}}
 
 # ForceField Storage
 data modify storage nfg:forcefield ForceFields set value []

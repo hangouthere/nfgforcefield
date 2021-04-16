@@ -1,4 +1,4 @@
-# Detect if player is in the "kill zone", aka, the ForceField
+# Detect if player is in the "protect zone", aka, the ForceField + BoundsProtectZoneDistance
 execute as @s run function nfg_forcefield:scanning/process/prot_build/zone_test_protect
 
 # Player Entered the Build Protection Zone

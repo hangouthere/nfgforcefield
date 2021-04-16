@@ -3,7 +3,7 @@
 #####################################
 # Started as: execute as @e[tag=ff_corner] at @s
 
-execute store result score #_ff_curr_ownerId _ff_calcs run data get entity @s ArmorItems[0].tag._ff.ownerId
+execute store result score #_ff_curr_ownerId _ff_calcs run data get entity @s ArmorItems[0].tag._ff.id.owner
 
 # Newly Placed Corners (Starting AND Ending) handling...
 execute if entity @s[tag=ff_init,tag=!ff_configured] run function nfg_forcefield:corners/placing/tick

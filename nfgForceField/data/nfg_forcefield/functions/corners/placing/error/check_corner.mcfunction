@@ -11,15 +11,13 @@
 
 # Remove Counts
 scoreboard players set #_numUncfgStart _ff_calcs 0
-scoreboard players set #_numUncfgEnd _ff_calcs 0
 
 # Count UNCONFIGURED Starting and Ending Corners
 # TODO: Make this multiplayer friendly
 execute store result score #_numUncfgStart _ff_calcs if entity @e[tag=ff_start,tag=!ff_configured]
-execute store result score #_numUncfgEnd _ff_calcs if entity @e[tag=ff_end,tag=!ff_configured]
 
 # Too many Starting Corners (>1), handle it
 execute if score #_numUncfgStart _ff_calcs matches 2.. run function nfg_forcefield:corners/placing/error/detected_too_many_starters
 
-# Ending Corner placed, but no Starting Corner, handle it
-execute if score #_numUncfgStart _ff_calcs matches 0 run execute if score #_numUncfgEnd _ff_calcs matches 1.. run function nfg_forcefield:corners/placing/error/detected_missing_starter
+# Ending Corner placed, but player hasn't placed a Starting Corner (aka building), handle it
+execute unless entity @p[tag=ff_building,distance=..6] run function nfg_forcefield:corners/placing/error/detected_missing_starter

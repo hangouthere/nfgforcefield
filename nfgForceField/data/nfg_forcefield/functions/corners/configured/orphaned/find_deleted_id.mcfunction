@@ -14,7 +14,7 @@ execute unless score #_demo_find_id _ff_calcs matches 1.. store result score #_d
 data modify storage nfg:forcefield _scan.id_test set from storage nfg:forcefield _scan.deleted[0]
 
 # Do ID compare...
-execute store success score #_demo_found _ff_calcs run data modify storage nfg:forcefield _scan.id_test set from entity @s ArmorItems[0].tag._ff.id
+execute store success score #_demo_found _ff_calcs run data modify storage nfg:forcefield _scan.id_test set from entity @s ArmorItems[0].tag._ff.id.ff
 
 # Found!
 execute if score #_demo_found _ff_calcs matches 0 run function nfg_forcefield:corners/configured/orphaned/found

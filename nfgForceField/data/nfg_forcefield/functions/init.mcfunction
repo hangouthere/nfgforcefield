@@ -14,7 +14,7 @@ tellraw @a [{"text":"[nfgForceField] ","color":"gold"},{"text":"by ","color":"wh
 
 # TODO: Do we need this?
 # Ensure old tags aren't left around by accident
-tag @a remove ff_placing_lock
+tag @a remove ff_building
 # Clear suspended values.... also think about removing this?
 tag @e remove ff_processed
 tag @e remove ff_suspend

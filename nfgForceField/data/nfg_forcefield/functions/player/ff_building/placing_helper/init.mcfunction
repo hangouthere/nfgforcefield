@@ -1,7 +1,7 @@
 # Corners - Placing Helper: Init
 # Initializes starting point, metrics, and other misc info
 #####################################
-# Started as: execute as @s[tag=ff_corner] at @s | execute as @p[tag=ff_placing_lock]
+# Started as: execute as @s[tag=ff_corner] at @s | execute as @p[tag=ff_building]
 
 # Store in1 as ourselves (the player locked)
 function nfg_util:vec/store_in1
