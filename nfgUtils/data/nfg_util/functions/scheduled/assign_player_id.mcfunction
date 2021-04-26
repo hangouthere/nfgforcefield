@@ -3,5 +3,5 @@
 #####################################
 # Started as: Scheduled
 
-scoreboard players operation @s _nfg_player_id = #_nfgNextPlayerId _nfg_calcs
-execute store result storage nfg:util _nfgNextPlayerId int 1 run scoreboard players add #_nfgNextPlayerId _nfg_calcs 1
+scoreboard players operation @s nfg_player_id = #_nfgNextPlayerId nfg_calcs
+execute store result storage nfg:util nfgNextPlayerId int 1 run scoreboard players add #_nfgNextPlayerId nfg_calcs 1

@@ -2,9 +2,9 @@
 # Initialize nfgForceField DataPack
 
 # Initial Setup of Settings, so rest of pack runs on first setup
-scoreboard objectives add _ff_calcs dummy
+scoreboard objectives add ff_calcs dummy
 # If the datapack has NEVER initiated, let's do so!
-execute unless score #_doneInit _ff_calcs matches 1.. as @a[limit=1] run function nfg_forcefield:_first_run/init
+execute unless score #_doneInit ff_calcs matches 1.. as @a[limit=1] run function nfg_forcefield:_first_run/init
 
 function nfg_forcefield:commands/init
 function nfg_forcefield:scheduled/init
@@ -20,5 +20,6 @@ tag @e remove ff_processed
 tag @e remove ff_suspend
 tag @e remove ff_suspend_temp
 tag @e remove ff_suspend_perm
+tag @e remove ff_demolish_near
 
 function nfg_forcefield:scanning/process/loop/reset_scan

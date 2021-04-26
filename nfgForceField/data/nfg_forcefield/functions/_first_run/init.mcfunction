@@ -13,4 +13,4 @@ function nfg_forcefield:inventory/give_admin_book
 
 ####
 # Mark DataPack Init complete
-scoreboard players set #_doneInit _ff_calcs 1
+scoreboard players set #_doneInit ff_calcs 1

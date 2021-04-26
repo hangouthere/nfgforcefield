@@ -7,4 +7,4 @@ function nfg_util:_first_run/settings
 
 ####
 # Mark DataPack Init complete
-scoreboard players set #_doneInit _nfg_settings 1
+scoreboard players set #_doneInit nfg_settings 1

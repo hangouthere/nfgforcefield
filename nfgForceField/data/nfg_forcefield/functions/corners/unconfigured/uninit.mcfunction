@@ -10,3 +10,5 @@
 kill @e[tag=!ff_configured,tag=!ff_init,tag=ff_corner,tag=ff_start]
 
 tellraw @s [{"text":"[nfgForceField] ","color":"gold"},{"text":"Unfinished ForceFields ","color":"white"},{"text":"Destroyed","color":"red"},{"text":"!","color":"white"}]
+
+tag @p[tag=ff_building] remove ff_building

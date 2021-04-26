@@ -8,7 +8,7 @@
 
 ## Modify the base Item NBT of Head Armor to have a tag with
 # calc.area - for quick info in tooltips
-execute store result entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag._ff.calc.area int 1 run scoreboard players get #_area _nfg_calcs
+execute store result entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag.calc.area int 1 run scoreboard players get #_area nfg_calcs
 # Copy `ff_building_helper` tag data to corner tag data
 data modify entity @s ArmorItems[0].tag set from entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag
 

@@ -16,17 +16,17 @@
 function nfg_forcefield:corners/unconfigured/config/store_in1_in2
 
 # Calculate ForceField data
-function nfg_forcefield:corners/unconfigured/config/calc_ff_data
+function nfg_forcefield:corners/unconfigured/config/calcff_data
 
 ## Store Calculations
 # Store calculated data in storage
-function nfg_forcefield:corners/unconfigured/config/store_ff_data
+function nfg_forcefield:corners/unconfigured/config/storeff_data
 # Handle each Corner agnostically
 # Force execution AS to ensure both are targeted
 execute as @e[tag=ff_corner,tag=!ff_configured] at @s run function nfg_forcefield:corners/unconfigured/config/store_corner_data
 
 # Add ForceField to storage array for persistence!
-data modify storage nfg:forcefield ForceFields append from entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag._ff
+data modify storage nfg:forcefield ForceFields append from entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag
 
 # Handle Ending Corners (@s) specifically
 function nfg_forcefield:corners/unconfigured/config/cleanup_build_process

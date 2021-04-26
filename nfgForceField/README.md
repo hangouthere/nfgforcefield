@@ -8,7 +8,7 @@ When this Phase is complete, that means we are able to start using it on the NFG
 
 -   ~~Settings:~~
     -   ~~Initial setup:~~
-        -   ~~Detected via hidden semaphore: `#_doneInit _ff_calcs`, 1.. is true~~
+        -   ~~Detected via hidden semaphore: `#_doneInit ff_calcs`, 1.. is true~~
         -   ~~Doesn't require special tag, but also gives it to the player: `ff_admin`~~
         -   ~~Convert weird localstorage settings loading of settings to this lifecycle~~
         -   Should give a Book to describe how everything works
@@ -26,7 +26,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
             -   Volume vs Perimeter
             -   Mob vs Build
 -   ~~Convert to new scan technique:~~
-
     -   ~~Need to add datastructure saving to the env~~
         -   ~~Startup needs to define the template~~
         -   ~~Need to copy over the process of calc vs saving ff data, i liked the split...~~
@@ -39,7 +38,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   ~~Needs check added to ignore forever-more? Tricky because they could be far from one forcefield, but not another 🤔~~
         -   ~~Consensus marking for "perma-ignore": Mark as far away if far away, close if close... at the end of the FF loop, we clear both tags for `close`+`far` combo'd entities since they're nearby another field... `close`-only can technically keep it's tag (or can lose it), far only keeps it's tags and ignored on future scans~~
     -   ~~Clean up `ff_processed_` tags, make them less junky if possible~~
-
 -   ~~Clean up scanning namespace in storage... uses _scan_\*, should be isolated to namespaces!~~
 -   ~~Mob Protection~~
     -   ~~Kill & Zap, like current implementation, but with new technique~~
@@ -63,21 +61,22 @@ When this Phase is complete, that means we are able to start using it on the NFG
         -   ~~Store for deletion later~~
         -   ~~On corner scan test if we need to delete~~
     -   ~~Needs to return corners, and not dropped items~~
--   Refactor `tag._ff` to just `tag`
--   Look at combining `placing` and `config` into same namespace since they're practically related
-    -   It should require more cleanup of `placing` as well, building deeper namespaces and general cleanup
--   Fix `_scan.deleted` namespace... in fact, redo all namespaces to be tighter
+-   ~~Refactor `tag.ff` to `tag.ff`~~
+-   ~~Look at combining `placing` and `config` into same namespace since they're practically related~~
+    -   ~~It should require more cleanup of `placing` as well, building deeper namespaces and general cleanup~~
+-   Fix namespaces to be tighter
     -   get rid of prefix-underscores in all namespaces
-    -   `_scan` should literally ONLY be scan based, `deleted` is not really a scan
-        -   same for `_scan.found_id`, `_scan.break_id`, etc
     -   Considered NS':
-        -   scan
-            -   current (replaces current)
-            -   list (replaces ForceFields)
+        -   ~~scanner~~
+            -   ~~current (replaces current)~~
+            -   ~~list (replaces ForceFields)~~
         -   operations
             -   create
-            -   delete
-            -   meta (depends on loop for other operations, such as finding deleted items, or holding newly created items)
+            -   ~~delete~~
+            -   ~~meta~~
+                -   ~~id_found~~
+                -   ~~id_break~~
+                -   ~~id_test~~
             -
 -   Consider different/updated approaches:
 
@@ -86,6 +85,7 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   ~~Tooltips will need update~~
     -   ~~Update error checks to go off data on helper instead of corner~~
         -   ~~ending can't be placed because start can't be detected~~
+    -   ~~Stranger vs Owner messages when entering/leaving FF?~~
     -   Corner creation beyond chunk loadings need to function properly
         -   maybe sorta opposite of delete process?
         -   Update corner ID's/meta for tooltips, and owner evaluations
@@ -94,6 +94,7 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Update labeling to get rid of mob vs build protection wording
         -   Kinda look everywhere else for it as well
     -   ~~Upon config of new FF, should wipe scan array to force new scan on tick~~
+    -   Double check error checking to ensure it's MP and chunk-unload friendly
     -   Default to:
         -   Mob: Perimeter
         -   Build: Volume
@@ -113,8 +114,14 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   Bug: When player destroys starting corner they keep tags.. need to once more detect breakage 🤪
     -   Also needs to kill `ff_building_helper`
 -   Bug: Items are still dropping when a corner is destroyed
+    -   Try tagging the items on the stand, and when they drop just del them `@e[type=item,tag=ff_corner_armor]`
+-   Bug: When building, a player that's technically closer will take control
+    -   Needs to error if >= 2 players found within 5 (or 6) radius of newly placed corners (to avoid mis-writing)
 -   Exploit/Bug: When owner is near corner it's vulnerable, if enemy player is near it can be destroyed by them
     -   Verify this somehow, although pushback idea should take care of it
+-   Bug: deleting FF sometimes doens't seems to track a need to delete the other corner
+    -   was able to get it to work by having them near, or inside each other????
+    -   deleting KILLS tps!
 -   Revisit admin book, make sure terminology and functionality matches new processing and implementation(s)
 -   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
     -   Corner deletion/creation updates kinda stuff? every 10-20t
@@ -136,7 +143,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Fancy particles indicating internal to FF?
     -   Corner sparkles of sorts?
         -   Maybe following perimeter?
-    -   Stranger vs Owner messages when entering/leaving FF?
     -   Sounds
         -   Separate ambient vs zap
     -   Complex idea with chest+books...
@@ -187,7 +193,7 @@ Get Tags and ArmorItems info:
 
 ```
 execute as @e[sort=nearest,limit=1,type=!player] run tag @s list
-execute as @e[sort=nearest,limit=1,type=!player] run data get entity @s ArmorItems[0].tag._ff
+execute as @e[sort=nearest,limit=1,type=!player] run data get entity @s ArmorItems[0].tag
 ```
 
 Get Player ID:
@@ -219,15 +225,15 @@ execute as @a[nbt={Inventory:[{id:"minecraft:armor_stand",tag:{display:{Name:'[{
 Find Paired Items
 
 ```
-execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,tag=ff_start] if score @s _ff_pair_map = @e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1] _ff_pair_map run say Test
+execute as @e[scores={ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,tag=ff_start] if score @s ff_pair_map = @e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1] ff_pair_map run say Test
 ```
 
 Count non players with same score
 
 ```
-scoreboard players reset _found _ff_pair_map
+scoreboard players reset _found ff_pair_map
 
-execute as @e[scores={_ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,tag=ff_start] if score @s _ff_pair_map = @e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1] _ff_pair_map run scoreboard players add _found _ff_pair_map 1
+execute as @e[scores={ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,tag=ff_start] if score @s ff_pair_map = @e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1] ff_pair_map run scoreboard players add _found ff_pair_map 1
 ```
 
 ---

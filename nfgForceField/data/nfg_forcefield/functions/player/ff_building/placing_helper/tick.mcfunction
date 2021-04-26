@@ -11,4 +11,4 @@ execute as @p[tag=ff_building] run function nfg_forcefield:player/ff_building/pl
 function nfg_util:perim/area
 
 # Update Screen
-title @p[tag=ff_building] actionbar [{"text":"Min: ","color":"yellow"},{"score":{"name":"#_areaMin","objective":"_ff_calcs"},"color":"white"},{"text":" | "},{"text":"Δ: ","color":"dark_purple"},{"score":{"name":"#_area","objective":"_nfg_calcs"},"color":"aqua"}]
+title @p[tag=ff_building] actionbar [{"text":"Min: ","color":"yellow"},{"score":{"name":"#_areaMin","objective":"ff_calcs"},"color":"white"},{"text":" | "},{"text":"Δ: ","color":"dark_purple"},{"score":{"name":"#_area","objective":"_nfg_calcs"},"color":"aqua"}]

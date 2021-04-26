@@ -20,8 +20,8 @@
 # into the mix to ensure they don't encroach on a ForceField
 #######################
 # Important vars
-# #_scan_ff_count - Scoped Count total of ForceFields for a given Scan cycle
-# #_scan_ff_idx - Iteration Countdown for number of ForceFields
+# #_scanff_count - Scoped Count total of ForceFields for a given Scan cycle
+# #_scanff_idx - Iteration Countdown for number of ForceFields
 # #_scan_player_idx - Iteration Countdown for number of Players
 # #_scan_state - Enum State for scanning state.
 #   1 = Initialized/Done Searching
@@ -30,19 +30,19 @@
 # Cleanup Overlap Suspend Errors
 function nfg_forcefield:scanning/process/loop/cleanup_suspend_errors
 
-# Reset if no more ForceFields can be scanned... (Handles initial state, ie: no #_scan_ff_idx)
-execute unless score #_scan_state _ff_calcs matches 2 unless score #_scan_ff_idx _ff_calcs matches 1.. run function nfg_forcefield:scanning/process/loop/reset_scan
+# Reset if no more ForceFields can be scanned... (Handles initial state, ie: no #_scanff_idx)
+execute unless score #_scan_state ff_calcs matches 2 unless score #_scanff_idx ff_calcs matches 1.. run function nfg_forcefield:scanning/process/loop/reset_scan
 
 # Not currently scanning, and All Players were initialized or
 # finished a Scan Loop (count = 0), meaning our ForceField is
 # fully scanned... Loop to the next one!
-execute unless score #_scan_state _ff_calcs matches 2 if score #_scan_player_idx _ff_calcs matches 0 run function nfg_forcefield:scanning/process/loop/forcefield
+execute unless score #_scan_state ff_calcs matches 2 if score #_scan_player_idx ff_calcs matches 0 run function nfg_forcefield:scanning/process/loop/forcefield
 
 # Mob Scan is initialized or just finished scanning for a Player (ie, state = 2), so loop to next Player
-execute if score #_scan_state _ff_calcs matches 1 run function nfg_forcefield:scanning/process/loop/players
+execute if score #_scan_state ff_calcs matches 1 run function nfg_forcefield:scanning/process/loop/players
 
 # Scan at a Player is in-progress, continue next batch on this tick
-execute if score #_scan_state _ff_calcs matches 2 as @p[tag=ff_thread_start] at @s run function nfg_forcefield:scanning/process/loop/process_thread
+execute if score #_scan_state ff_calcs matches 2 as @p[tag=ff_thread_start] at @s run function nfg_forcefield:scanning/process/loop/process_thread
 
 # Perform Zaps!
-execute as @e[scores={_ff_scan_kill=1..}] at @s run function nfg_forcefield:scanning/process/zap_entity
+execute as @e[scores={ff_scan_kill=1..}] at @s run function nfg_forcefield:scanning/process/zap_entity

@@ -3,6 +3,6 @@
 ################################################
 # Example: execute as @e[tag=inputEntity1] run function nfg_util:vec/store_in1
 
-execute store result score in1_x _nfg_calcs run data get entity @s Pos[0] 1
-execute store result score in1_y _nfg_calcs run data get entity @s Pos[1] 1
-execute store result score in1_z _nfg_calcs run data get entity @s Pos[2] 1
+execute store result score in1_x nfg_calcs run data get entity @s Pos[0] 1
+execute store result score in1_y nfg_calcs run data get entity @s Pos[1] 1
+execute store result score in1_z nfg_calcs run data get entity @s Pos[2] 1

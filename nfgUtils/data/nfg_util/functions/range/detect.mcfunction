@@ -14,15 +14,15 @@
 # #_inRange = #_aboveLow *= #_belowHigh
 
 # Setup test vars
-scoreboard players set #_inRange _nfg_calcs 0
-scoreboard players set #_aboveLow _nfg_calcs 0
-scoreboard players set #_belowHigh _nfg_calcs 0
+scoreboard players set #_inRange nfg_calcs 0
+scoreboard players set #_aboveLow nfg_calcs 0
+scoreboard players set #_belowHigh nfg_calcs 0
 
 # Test Range!
 
-execute store result score #_aboveLow _nfg_calcs if score #_testFor _nfg_calcs >= #_low _nfg_calcs
-execute store result score #_belowHigh _nfg_calcs if score #_testFor _nfg_calcs <= #_high _nfg_calcs
+execute store result score #_aboveLow nfg_calcs if score #_testFor nfg_calcs >= #_low nfg_calcs
+execute store result score #_belowHigh nfg_calcs if score #_testFor nfg_calcs <= #_high nfg_calcs
 
 # AND operation to ensure both are satisified
-scoreboard players operation #_inRange _nfg_calcs = #_aboveLow _nfg_calcs
-scoreboard players operation #_inRange _nfg_calcs *= #_belowHigh _nfg_calcs
+scoreboard players operation #_inRange nfg_calcs = #_aboveLow nfg_calcs
+scoreboard players operation #_inRange nfg_calcs *= #_belowHigh nfg_calcs

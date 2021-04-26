@@ -10,9 +10,9 @@
 # Psuedo:
 # out = (b - a)
 
-scoreboard players operation #_vec_x _nfg_calcs = in2_x _nfg_calcs
-scoreboard players operation #_vec_y _nfg_calcs = in2_y _nfg_calcs
-scoreboard players operation #_vec_z _nfg_calcs = in2_z _nfg_calcs
-scoreboard players operation #_vec_x _nfg_calcs -= in1_x _nfg_calcs
-scoreboard players operation #_vec_y _nfg_calcs -= in1_y _nfg_calcs
-scoreboard players operation #_vec_z _nfg_calcs -= in1_z _nfg_calcs
+scoreboard players operation #_vec_x nfg_calcs = in2_x nfg_calcs
+scoreboard players operation #_vec_y nfg_calcs = in2_y nfg_calcs
+scoreboard players operation #_vec_z nfg_calcs = in2_z nfg_calcs
+scoreboard players operation #_vec_x nfg_calcs -= in1_x nfg_calcs
+scoreboard players operation #_vec_y nfg_calcs -= in1_y nfg_calcs
+scoreboard players operation #_vec_z nfg_calcs -= in1_z nfg_calcs

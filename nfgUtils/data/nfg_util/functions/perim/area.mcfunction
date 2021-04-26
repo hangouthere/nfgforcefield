@@ -10,5 +10,5 @@
 # area = vol.x * vol.z
 
 # Calculate Perimeter Area
-scoreboard players operation #_area _nfg_calcs = #_vol_x _nfg_calcs
-scoreboard players operation #_area _nfg_calcs *= #_vol_z _nfg_calcs
+scoreboard players operation #_area nfg_calcs = #_vol_x nfg_calcs
+scoreboard players operation #_area nfg_calcs *= #_vol_z nfg_calcs

@@ -3,7 +3,7 @@
 #####################################
 
 # Get ID
-execute store result score #_ff_curr_ownerId _ff_calcs run data get entity @s ArmorItems[0].tag._ff.id.owner
+execute store result score #ff_curr_ownerId ff_calcs run data get entity @s ArmorItems[0].tag.IDs.owner
 
 # Handle detection mechanism creation/destruction tracking
-execute if score #_ff_curr_ownerId _ff_calcs = @p _nfg_player_id run function nfg_forcefield:corners/configured/permit_demolish/track_corner_owner
+execute if score #ff_curr_ownerId ff_calcs = @p[distance=..8] nfg_player_id run function nfg_forcefield:corners/configured/permit_demolish/track_corner_owner

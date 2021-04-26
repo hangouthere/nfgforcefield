@@ -20,24 +20,24 @@
 # #_dist_sq = tmp_dist_x + tmp_dist_y + tmp_dist_z
 
 # Square up X
-scoreboard players operation #_tmp_dist_x _nfg_calcs = #_vec_x _nfg_calcs
-scoreboard players operation #_tmp_dist_x _nfg_calcs /= $2 _nfg_const
-scoreboard players operation #_half_x _nfg_calcs = #_tmp_dist_x _nfg_calcs
-scoreboard players operation #_tmp_dist_x _nfg_calcs *= #_tmp_dist_x _nfg_calcs
+scoreboard players operation #_tmp_dist_x nfg_calcs = #_vec_x nfg_calcs
+scoreboard players operation #_tmp_dist_x nfg_calcs /= $2 nfg_const
+scoreboard players operation #_half_x nfg_calcs = #_tmp_dist_x nfg_calcs
+scoreboard players operation #_tmp_dist_x nfg_calcs *= #_tmp_dist_x nfg_calcs
 
 # Square up Y
-scoreboard players operation #_tmp_dist_y _nfg_calcs = #_vec_y _nfg_calcs
-scoreboard players operation #_tmp_dist_y _nfg_calcs /= $2 _nfg_const
-scoreboard players operation #_half_y _nfg_calcs = #_tmp_dist_y _nfg_calcs
-scoreboard players operation #_tmp_dist_y _nfg_calcs *= #_tmp_dist_y _nfg_calcs
+scoreboard players operation #_tmp_dist_y nfg_calcs = #_vec_y nfg_calcs
+scoreboard players operation #_tmp_dist_y nfg_calcs /= $2 nfg_const
+scoreboard players operation #_half_y nfg_calcs = #_tmp_dist_y nfg_calcs
+scoreboard players operation #_tmp_dist_y nfg_calcs *= #_tmp_dist_y nfg_calcs
 
 # Square up Z
-scoreboard players operation #_tmp_dist_z _nfg_calcs = #_vec_z _nfg_calcs
-scoreboard players operation #_tmp_dist_z _nfg_calcs /= $2 _nfg_const
-scoreboard players operation #_half_z _nfg_calcs = #_tmp_dist_z _nfg_calcs
-scoreboard players operation #_tmp_dist_z _nfg_calcs *= #_tmp_dist_z _nfg_calcs
+scoreboard players operation #_tmp_dist_z nfg_calcs = #_vec_z nfg_calcs
+scoreboard players operation #_tmp_dist_z nfg_calcs /= $2 nfg_const
+scoreboard players operation #_half_z nfg_calcs = #_tmp_dist_z nfg_calcs
+scoreboard players operation #_tmp_dist_z nfg_calcs *= #_tmp_dist_z nfg_calcs
 
 # Sum the squares
-scoreboard players operation #_dist_sq _nfg_calcs = #_tmp_dist_x _nfg_calcs
-scoreboard players operation #_dist_sq _nfg_calcs += #_tmp_dist_y _nfg_calcs
-scoreboard players operation #_dist_sq _nfg_calcs += #_tmp_dist_z _nfg_calcs
+scoreboard players operation #_dist_sq nfg_calcs = #_tmp_dist_x nfg_calcs
+scoreboard players operation #_dist_sq nfg_calcs += #_tmp_dist_y nfg_calcs
+scoreboard players operation #_dist_sq nfg_calcs += #_tmp_dist_z nfg_calcs

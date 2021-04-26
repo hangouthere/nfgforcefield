@@ -9,7 +9,7 @@ data modify entity @s Pose set value {Head:[75f,0f,0f]}
 data modify entity @s HandItems set value []
 
 # Update MetaTags
-data modify entity @s ArmorItems[0].tag._ff.configured.power_status set value 0
+data modify entity @s ArmorItems[0].tag.configured.power_status set value 0
 
 # Fun Particles at the Corner
 particle minecraft:smoke ~ ~ ~ 0 1 0 0.1 10

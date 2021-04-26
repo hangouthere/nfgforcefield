@@ -7,10 +7,10 @@ tag @s add ff_processed
 function nfg_forcefield:scanning/process/prot_mob/zone_test_track
 
 # If we are within Track Zone, and "in reach", then test for Kill Zone!
-execute if entity @s[scores={_ff_scan_track=1..},type=#nfg_forcefield:protect_zappable] run function nfg_forcefield:scanning/process/prot_mob/zone_test_protect
+execute if entity @s[scores={ff_scan_track=1..},type=#nfg_forcefield:protect_zappable] run function nfg_forcefield:scanning/process/prot_mob/zone_test_protect
 
 # If we are within Track Zone, and "in reach", then test for Kill Zone!
-execute if entity @s[scores={_ff_scan_track=1..}] run function nfg_forcefield:scanning/process/prot_mob/zone_test_kill
+execute if entity @s[scores={ff_scan_track=1..}] run function nfg_forcefield:scanning/process/prot_mob/zone_test_kill
 
 # If not within Track Zone, determine Suspend type
-execute if entity @s[scores={_ff_scan_track=0}] run function nfg_forcefield:scanning/process/prot_mob/zone_test_suspend
+execute if entity @s[scores={ff_scan_track=0}] run function nfg_forcefield:scanning/process/prot_mob/zone_test_suspend

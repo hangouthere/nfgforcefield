@@ -6,18 +6,18 @@
 ## Setup necessary data, but only first run
 
 # Prep ID index loop value
-execute unless score #_demo_ff_idx _ff_calcs matches 1.. store result score #_demo_ff_idx _ff_calcs run data get storage nfg:forcefield ForceFields
+execute unless score #_demoff_idx ff_calcs matches 1.. store result score #_demoff_idx ff_calcs run data get storage nfg:forcefield ForceFields
 
 ## Do evaluations
 
 # Copy value to test against
-data modify storage nfg:forcefield _scan.id_test set from storage nfg:forcefield ForceFields[0].id.ff
+data modify storage nfg:forcefield operations.meta.id_test set from storage nfg:forcefield ForceFields[0].id.ff
 
 # Do ID compare...
-execute store success score #_demo_found _ff_calcs run data modify storage nfg:forcefield _scan.id_test set from storage nfg:forcefield _scan.break_id
+execute store success score #_demo_found ff_calcs run data modify storage nfg:forcefield operations.meta.id_test set from storage nfg:forcefield operations.meta.id_break
 
 # Found!
-execute if score #_demo_found _ff_calcs matches 0 run function nfg_forcefield:corners/configured/demolish_marker/found
+execute if score #_demo_found ff_calcs matches 0 run function nfg_forcefield:corners/configured/demolish_marker/found
 
 # Not Found
-execute if score #_demo_found _ff_calcs matches 1 run function nfg_forcefield:corners/configured/demolish_marker/not_found
+execute if score #_demo_found ff_calcs matches 1 run function nfg_forcefield:corners/configured/demolish_marker/not_found
