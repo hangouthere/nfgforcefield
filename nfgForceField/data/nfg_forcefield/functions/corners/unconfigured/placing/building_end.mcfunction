@@ -1,5 +1,5 @@
 # End usage of a Build Helper
-function nfg_forcefield:corners/unconfigured/building_helper/uninit
+function nfg_forcefield:corners/unconfigured/placing/building_helper/uninit
 
 # TODO: End remote-targeting system??
 

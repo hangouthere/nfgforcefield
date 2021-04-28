@@ -4,7 +4,7 @@
 # Started as: execute if score #_area nfg_calcs < #_areaMin ff_calcs
 
 # Tell user about error, provide area min/max/current info
-tellraw @p [{"text":"[nfgForceField] ","color":"gold"},{"text":"Error","color":"red"},{"text":": ","color":"white"},{"text":"The are you're trying to protect is too SMALL! ","color":"white"},{"text":"(Min: ","color":"white"},{"score":{"name":"#_areaMin","objective":"ff_calcs"},"color":"dark_green"},{"text":", Current: ","color":"white"},{"score":{"name":"#_area","objective":"_nfg_calcs"},"color":"red"},{"text":")","color":"white"}]
+tellraw @p [{"text":"[nfgForceField] ","color":"gold"},{"text":"Error","color":"red"},{"text":": ","color":"white"},{"text":"The are you're trying to protect is too SMALL! ","color":"white"},{"text":"(Min: ","color":"white"},{"score":{"name":"#_areaMin","objective":"ff_calcs"},"color":"dark_green"},{"text":", Current: ","color":"white"},{"score":{"name":"#_area","objective":"nfg_calcs"},"color":"red"},{"text":")","color":"white"}]
 
 # Error sound, and Kill the erroneous Corner
 playsound minecraft:entity.elder_guardian.curse master @p ~ ~ ~ 0.3 2

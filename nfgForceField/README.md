@@ -199,7 +199,7 @@ execute as @e[sort=nearest,limit=1,type=!player] run data get entity @s ArmorIte
 Get Player ID:
 
 ```
-tellraw @s ["My ID: ", {"score":{"name":"@s","objective":"_nfg_player_id"}}]
+tellraw @s ["My ID: ", {"score":{"name":"@s","objective":"nfg_player_id"}}]
 ```
 
 Give an `in3`/`circleMaker` marker:
