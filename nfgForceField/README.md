@@ -64,14 +64,14 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   ~~Refactor `tag.ff` to `tag.ff`~~
 -   ~~Look at combining `placing` and `config` into same namespace since they're practically related~~
     -   ~~It should require more cleanup of `placing` as well, building deeper namespaces and general cleanup~~
--   Fix namespaces to be tighter
-    -   get rid of prefix-underscores in all namespaces
-    -   Considered NS':
+-   ~~Fix namespaces to be tighter~~
+    -   ~~get rid of prefix-underscores in all namespaces~~
+    -   ~~Considered NS':~~
         -   ~~scanner~~
             -   ~~current (replaces current)~~
             -   ~~list (replaces ForceFields)~~
-        -   operations
-            -   create
+        -   ~~operations~~
+            -   ~~create~~
             -   ~~delete~~
             -   ~~meta~~
                 -   ~~id_found~~
@@ -81,34 +81,35 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   Consider different/updated approaches:
 
     -   ~~upgrades to combine forcefield types? Mob + Build~~
-    -   separate mob/build from perimeter/volume, and actually create them separately!
     -   ~~Tooltips will need update~~
     -   ~~Update error checks to go off data on helper instead of corner~~
         -   ~~ending can't be placed because start can't be detected~~
     -   ~~Stranger vs Owner messages when entering/leaving FF?~~
-    -   Corner creation beyond chunk loadings need to function properly
-        -   maybe sorta opposite of delete process?
-        -   Update corner ID's/meta for tooltips, and owner evaluations
-            -   don't forget process of out of chunk load!
+    -   ~~Corner creation beyond chunk loadings need to function properly~~
+        -   ~~maybe sorta opposite of delete process?~~
+        -   ~~Update corner ID's/meta for tooltips, and owner evaluations~~
+            -   ~~don't forget process of out of chunk load!~~
     -   No start/end concept, just --CORNER--
     -   Update labeling to get rid of mob vs build protection wording
         -   Kinda look everywhere else for it as well
     -   ~~Upon config of new FF, should wipe scan array to force new scan on tick~~
-    -   Double check error checking to ensure it's MP and chunk-unload friendly
-    -   Default to:
-        -   Mob: Perimeter
-        -   Build: Volume
+    -   Double check error checking:
+        -   ~~chunk-unload friendly~~
+        -   to ensure it's MP friendly
+    -   ~~Default to:~~
+        -   ~~Mob: Perimeter~~
+        -   ~~Build: Volume~~
 
 -   Clean up placement actionbar
+    -   ~~Use ff_building_helper to get data~~
     -   had runtime issue with the bar going to wrong player
-    -   Probably needs to target player and matching placing start corner
 -   Player Book
     -   Basic configuration/information
     -   on/off? (will change later to cost players, don't overengineer this yet)
     -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
 -   ~~Make Multiplayer Friendly! Associate player ID to corners (also preface for "ownable" fields)~~
--   Normalize corner and data storage data structure formats
-    -   That includes scanning lookups, etc... Try to use STORAGE where possible
+-   ~~Normalize corner and data storage data structure formats~~
+    -   ~~That includes scanning lookups, etc... Try to use STORAGE where possible~~
 -   Corner protection (beyond the Protect Boundary)
     -   Needs to push back non-owners (really fuck 'em up without hurting them) to ensure they stay safe from punching
 -   Bug: When player destroys starting corner they keep tags.. need to once more detect breakage 🤪
@@ -119,20 +120,23 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Needs to error if >= 2 players found within 5 (or 6) radius of newly placed corners (to avoid mis-writing)
 -   Exploit/Bug: When owner is near corner it's vulnerable, if enemy player is near it can be destroyed by them
     -   Verify this somehow, although pushback idea should take care of it
--   Bug: deleting FF sometimes doens't seems to track a need to delete the other corner
-    -   was able to get it to work by having them near, or inside each other????
-    -   deleting KILLS tps!
+-   Bug: Corners near each other don't handle break detection correctly
+    -   Armor stand is left behind
+    -   Could this mean enemies can exploit this?
 -   Revisit admin book, make sure terminology and functionality matches new processing and implementation(s)
+    -   Add info about settings and meanings
+    -   Cover protection area well
+-   Consider changing coords from {x,y,z} to [x,y,z] for less command execs?
+    -   Basically anywhere `_x` appears
+-   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
+-   Clean up/review all docs
 -   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
     -   Corner deletion/creation updates kinda stuff? every 10-20t
     -   Corner tooltip updates could be every 10t
--   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
--   Clean up/review all docs
 
 ### Phase 2
 
 -   Split up nfgUtil and nfgForceField repos, and include build zip for nfgUtil in nfgForceField
--   Consider changing coords from {x,y,z} to [x,y,z] for less command execs?
 -   Per-FF Configuration
     -   FF Mods: Perim vs Volume, Mob vs Build (see Different Approach below)
     -   Option to make corners invisible (off by default)

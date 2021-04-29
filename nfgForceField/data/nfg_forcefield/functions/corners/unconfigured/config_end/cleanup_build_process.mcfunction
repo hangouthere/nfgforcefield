@@ -19,5 +19,8 @@ function nfg_forcefield:scanning/process/loop/reset_scan
 # Hide the placing bar from placement helper
 title @p actionbar ""
 
-# Mark Corners as now Configured
-tag @e[tag=ff_corner,tag=!ff_configured] add ff_configured
+# Mark End Corner as now Configured
+tag @s add ff_configured
+
+# Clean up data storage
+data remove storage nfg:forcefield operations.meta

@@ -33,5 +33,5 @@ data modify storage nfg:forcefield template.buildFF set value { id: { ff: 0, own
 data modify storage nfg:forcefield ForceFields set value []
 
 # Scan Storage
-data modify storage nfg:forcefield operations.delete set value []
+data modify storage nfg:forcefield operations set value { delete: [], create: [], meta: {} }
 data modify storage nfg:forcefield scanner.current set value {}

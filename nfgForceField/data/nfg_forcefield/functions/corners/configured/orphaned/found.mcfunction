@@ -3,4 +3,3 @@ data modify storage nfg:forcefield operations.meta.id_found set from entity @s A
 
 # Remove from `operations.delete` array to avoid processing again
 data remove storage nfg:forcefield operations.delete[0]
-
