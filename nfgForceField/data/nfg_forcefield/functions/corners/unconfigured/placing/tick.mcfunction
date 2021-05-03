@@ -1,8 +1,9 @@
 # Pre-init with no errors
 tag @s add ff_no_errors
 
-# Handle Starting Corners
-execute if entity @s[tag=ff_start] run function nfg_forcefield:corners/unconfigured/placing/corner_starting
+# Current player is NOT building, this is effectively the start corner
+execute if entity @p[tag=!ff_building] run function nfg_forcefield:corners/unconfigured/placing/corner_starting
 
-# Handle Ending Corners
-execute if entity @s[tag=ff_end] run function nfg_forcefield:corners/unconfigured/placing/corner_ending
+# Current player IS building, and this Corner is still init'd,
+# this is effectively the end corner and we want to finalize the build
+execute if entity @p[tag=ff_building] if entity @s[tag=ff_init] run function nfg_forcefield:corners/unconfigured/placing/corner_ending

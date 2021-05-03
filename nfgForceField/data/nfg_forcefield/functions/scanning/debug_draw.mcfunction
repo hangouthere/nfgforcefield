@@ -1,7 +1,6 @@
 # Draws particles at hostiles for scanning results
 
-execute at @e[tag=ff_start,tag=ff_corner,tag=ff_configured] run particle dust 0 1 1 0.5 ~ ~ ~ 0.125 2 0.125 0 20
-execute at @e[tag=ff_end,tag=ff_corner,tag=ff_configured] run particle dust 1 0 0.867 0.5 ~ ~ ~ 0.125 2 0.125 0 20
+execute at @e[tag=ff_corner,tag=ff_configured] run particle dust 1 0 0.867 0.5 ~ ~ ~ 0.125 2 0.125 0 20
 
 execute at @e[tag=ff_processed] run particle dust 0.004 0.494 0.78 0.5 ~ ~1.9 ~ 0 0 0 0 20
 

@@ -5,4 +5,4 @@
 
 execute as @e[tag=ff_corner,tag=ff_configured,tag=ff_power_on] at @s facing entity @p[distance=..16] eyes run tp @s ^ ^ ^ ~ ~
 
-schedule function nfg_forcefield:scheduled/corners/target_player 1s
+schedule function nfg_forcefield:scheduled/corners/target_player 5t

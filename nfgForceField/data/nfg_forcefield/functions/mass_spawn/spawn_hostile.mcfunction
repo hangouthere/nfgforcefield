@@ -1,11 +1,11 @@
 execute at @e[tag=ff_mass_spawner] run summon vindicator ~ ~ ~ {NoAI:1b,Silent:1b,Tags:["sacrifice"],ArmorItems:[{},{},{},{id:"minecraft:leather_helmet",Count:1b,tag:{ff:{}}},{},{}]}
-execute as @e[tag=ff_mass_spawner] at @s run tp @s ^ ^ ^-6
+execute as @e[tag=ff_mass_spawner] at @s run tp @s ~1 ~ ~
 
 # Inc X
 scoreboard players add _mobSpawnX ff_calcs 1
 
 # Inc Y and reset X when we've gone too far!
-execute if score _mobSpawnX ff_calcs matches 15 as @e[tag=ff_mass_spawner] at @s run tp @s ^-6 ^ ^90
+execute if score _mobSpawnX ff_calcs matches 15 as @e[tag=ff_mass_spawner] at @s run tp @s ~-15 ~ ~1
 execute if score _mobSpawnX ff_calcs matches 15 run scoreboard players add _mobSpawnY ff_calcs 1
 # Reset X
 execute if score _mobSpawnX ff_calcs matches 15 run scoreboard players set _mobSpawnX ff_calcs 0

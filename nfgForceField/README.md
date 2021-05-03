@@ -78,8 +78,7 @@ When this Phase is complete, that means we are able to start using it on the NFG
                 -   ~~id_break~~
                 -   ~~id_test~~
             -
--   Consider different/updated approaches:
-
+-   ~~Consider different/updated approaches:~~
     -   ~~upgrades to combine forcefield types? Mob + Build~~
     -   ~~Tooltips will need update~~
     -   ~~Update error checks to go off data on helper instead of corner~~
@@ -89,13 +88,12 @@ When this Phase is complete, that means we are able to start using it on the NFG
         -   ~~maybe sorta opposite of delete process?~~
         -   ~~Update corner ID's/meta for tooltips, and owner evaluations~~
             -   ~~don't forget process of out of chunk load!~~
-    -   No start/end concept, just --CORNER--
-    -   Update labeling to get rid of mob vs build protection wording
-        -   Kinda look everywhere else for it as well
+    -   ~~No start/end concept, just --CORNER--~~
+    -   ~~Remove `ff_prot_build`, `ff_prob_mob` concept (will later use data!!)~~
+    -   ~~Update labeling to get rid of mob vs build protection wording~~
     -   ~~Upon config of new FF, should wipe scan array to force new scan on tick~~
-    -   Double check error checking:
+    -   ~~Double check error checking:~~
         -   ~~chunk-unload friendly~~
-        -   to ensure it's MP friendly
     -   ~~Default to:~~
         -   ~~Mob: Perimeter~~
         -   ~~Build: Volume~~
@@ -123,16 +121,28 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   Bug: Corners near each other don't handle break detection correctly
     -   Armor stand is left behind
     -   Could this mean enemies can exploit this?
+-   Bug: Entering/Leaving as non-owner makes text freak out
+-   Bug: Power mod status doesn't affect matching corner
+    -   Might need an `operations` namespace/process?
+    -   Doesn't actually have an effect on the FF
 -   Revisit admin book, make sure terminology and functionality matches new processing and implementation(s)
     -   Add info about settings and meanings
-    -   Cover protection area well
+    -   Cover protection area better
 -   Consider changing coords from {x,y,z} to [x,y,z] for less command execs?
     -   Basically anywhere `_x` appears
+- Enchance corner tooltips, they're bland and boring. Might need multi-line!
 -   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
 -   Clean up/review all docs
 -   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
     -   Corner deletion/creation updates kinda stuff? every 10-20t
     -   Corner tooltip updates could be every 10t
+
+Things to Test:
+
+* 2 players placing at the same time
+  * 1 player deleting while placing
+  * Actionbar is giving accurate info
+  * Have players run through eachother to see if helper's swap
 
 ### Phase 2
 
@@ -226,20 +236,6 @@ Target the player with the ForceField Ending Corner
 execute as @a[nbt={Inventory:[{id:"minecraft:armor_stand",tag:{display:{Name:'[{"text":"ForceField","color":"gold"},{"text":" - ","color":"white"},{"text":"Ending Corner","color":"aqua"}]'}}}]}] run say I have this Item
 ```
 
-Find Paired Items
-
-```
-execute as @e[scores={ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,tag=ff_start] if score @s ff_pair_map = @e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1] ff_pair_map run say Test
-```
-
-Count non players with same score
-
-```
-scoreboard players reset _found ff_pair_map
-
-execute as @e[scores={ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,tag=ff_start] if score @s ff_pair_map = @e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1] ff_pair_map run scoreboard players add _found ff_pair_map 1
-```
-
 ---
 
 # ForceField Meta
@@ -248,7 +244,6 @@ execute as @e[scores={ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,ta
 
 | Var Name                  | Default Value | Description                                                                                                                                                                 |
 | ------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| MinAreaVolume             | 10            | Minimum Area for Volume Shape necessary to finalize a build.                                                                                                                |
 | MinAreaPerim              | 10            | Minimum Area for Area Shape necessary to finalize a build.                                                                                                                  |
 | BoundsProtectZoneDistance | 16            | Protection Buffer around ForceField Shape to help ensure safety of perimeter and Corner Pieces.                                                                             |
 | BoundsTrackZoneDistance   | 75            | Mob Scan: Zone around the ForceField Shape to always track/scan. Hostile Entities outside of this area will be Suspended.                                                   |
@@ -257,7 +252,33 @@ execute as @e[scores={ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,ta
 
 ---
 
-## ForceField Data Structure
+## FF Build Process
+
+Tick
+  - if entity @s[tag=ff_building_helper] (Building Helper Detected)
+    - tp @s @p[tag=ff_building]
+  - if entity @s[tag=ff_corner] (Corner Detected)
+    - if entity @s[tag=ff_init] (Corner init'd, freshly placed, both corners)
+      - if entity @p[tag=!ff_building] (Current player is NOT building, this is effectively the start corner)
+        - Tag player as `ff_building`
+        - Copy FF template to Storage meta
+        - Update new Storage meta to have `ff_id` and `player_id`
+        - Init `ff_building_helper`
+        - Store primary data on Corner
+        - Copy primary data to Helper
+        - Set score `#_sameTick` to 1
+        - Remove `ff_init` so it's no longer fresh init'd
+      - unless score `#_sameTick` matches 1 if entity @p[tag=ff_building]
+        (If not already marked as the sameTick, building is already started, let's try to finalize the FF build)
+        - Check Area for minimum reqs
+          - If Fail, delete and give back a Corner
+          - If not Failed, mark it as such (tag ff_no_errors)
+        - if entity @p[tag=!ff_no_errors]
+          - Calculate final data of FF
+          - Copy data from `ff_building_helper` into Storage
+          - Store final data in Storage
+          - Copy data from Storage to this corner
+    - Set score `#_sameTick` to 0 to reset## ForceField Data Structure
 
 ```
 {
@@ -324,6 +345,8 @@ execute as @e[scores={ff_pair_map=1..}] at @e[tag=ff_corner,tag=ff_configured,ta
     }
 }
 ```
+
+
 
 ## Scan Process Example
 

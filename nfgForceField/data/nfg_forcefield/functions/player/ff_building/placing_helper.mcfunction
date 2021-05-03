@@ -1,25 +1,22 @@
-# Corners - Error: Check Area
-# Check Area for Errors, ensuring it's within settings
+# Corners - Placing Helper: Init
+# Initializes starting point, metrics, and other misc info
 #####################################
-# Started as:
-#####################################
-# Assumptions:
-# - Corner Checks already completed
+# Started as: execute as @s[tag=ff_corner] at @s | execute as @p[tag=ff_building]
 
-# Store in1_{x,y,z}
+# Store in1 as ourselves (the player locked)
 function nfg_util:vec/store_in1
 
-# Store in2_{x,y,z}
+# Store Starting Corner as in2
 data modify storage nfg:forcefield operations.meta set from entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag
 execute store result score in2_x nfg_calcs run data get storage nfg:forcefield operations.meta.corner.start[0] 1
 execute store result score in2_y nfg_calcs run data get storage nfg:forcefield operations.meta.corner.start[1] 1
 execute store result score in2_z nfg_calcs run data get storage nfg:forcefield operations.meta.corner.start[2] 1
 data remove storage nfg:forcefield operations.meta
 
-# Do calculations
+# Calculate supporting values
 function nfg_util:vec/calc
 function nfg_util:vol/calc
 function nfg_util:perim/area
 
-# Detected that our volume is too small (per normalized settings)
-execute if score #_area nfg_calcs < MinAreaPerim ff_calcs run function nfg_forcefield:corners/unconfigured/error_checking/detected_area_small
+# Update Screen
+title @p[tag=ff_building] actionbar [{"text":"Minimum Area: ","color":"yellow"},{"score":{"name":"MinAreaPerim","objective":"ff_calcs"},"color":"white"},{"text":" | "},{"text":"Current Area: ","color":"light_purple"},{"score":{"name":"#_area","objective":"nfg_calcs"},"color":"aqua"}]
