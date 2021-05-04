@@ -97,30 +97,25 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   ~~Default to:~~
         -   ~~Mob: Perimeter~~
         -   ~~Build: Volume~~
-
--   Clean up placement actionbar
+-   ~~Clean up placement actionbar~~
     -   ~~Use ff_building_helper to get data~~
-    -   had runtime issue with the bar going to wrong player
--   Player Book
-    -   Basic configuration/information
-    -   on/off? (will change later to cost players, don't overengineer this yet)
-    -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
+
 -   ~~Make Multiplayer Friendly! Associate player ID to corners (also preface for "ownable" fields)~~
 -   ~~Normalize corner and data storage data structure formats~~
     -   ~~That includes scanning lookups, etc... Try to use STORAGE where possible~~
--   Corner protection (beyond the Protect Boundary)
-    -   Needs to push back non-owners (really fuck 'em up without hurting them) to ensure they stay safe from punching
+-   ~~Corner protection (beyond the Protect Boundary)~~
+    -   ~~Needs to push back non-owners (really fuck 'em up without hurting them) to ensure they stay safe from punching~~
 -   Bug: When player destroys starting corner they keep tags.. need to once more detect breakage 🤪
     -   Also needs to kill `ff_building_helper`
+    -   Dropped items from corners should be tagged for more accurate destroying (instead of destroying in a block zone around detected breaking)
 -   Bug: Items are still dropping when a corner is destroyed
     -   Try tagging the items on the stand, and when they drop just del them `@e[type=item,tag=ff_corner_armor]`
 -   Bug: When building, a player that's technically closer will take control
     -   Needs to error if >= 2 players found within 5 (or 6) radius of newly placed corners (to avoid mis-writing)
 -   Exploit/Bug: When owner is near corner it's vulnerable, if enemy player is near it can be destroyed by them
     -   Verify this somehow, although pushback idea should take care of it
--   Bug: Corners near each other don't handle break detection correctly
-    -   Armor stand is left behind
-    -   Could this mean enemies can exploit this?
+-   ~~Bug: Corners near each other don't handle break detection correctly~~
+    -   ~~Armor stand is left behind~~
 -   Bug: Entering/Leaving as non-owner makes text freak out
 -   Bug: Power mod status doesn't affect matching corner
     -   Might need an `operations` namespace/process?
@@ -136,6 +131,11 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
     -   Corner deletion/creation updates kinda stuff? every 10-20t
     -   Corner tooltip updates could be every 10t
+-   Player Book
+    -   Basic configuration/information
+    -   on/off? (will change later to cost players, don't overengineer this yet)
+    -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
+
 
 Things to Test:
 
