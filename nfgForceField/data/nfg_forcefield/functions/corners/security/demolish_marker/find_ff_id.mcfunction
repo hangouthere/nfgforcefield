@@ -17,7 +17,7 @@ data modify storage nfg:forcefield operations.meta.id_test set from storage nfg:
 execute store success score #_demo_found ff_calcs run data modify storage nfg:forcefield operations.meta.id_test set from storage nfg:forcefield operations.meta.id_break
 
 # Found!
-execute if score #_demo_found ff_calcs matches 0 run function nfg_forcefield:corners/configured/demolish_marker/found
+execute if score #_demo_found ff_calcs matches 0 run function nfg_forcefield:corners/security/demolish_marker/found
 
 # Not Found
-execute if score #_demo_found ff_calcs matches 1 run function nfg_forcefield:corners/configured/demolish_marker/not_found
+execute if score #_demo_found ff_calcs matches 1 run function nfg_forcefield:corners/security/demolish_marker/not_found

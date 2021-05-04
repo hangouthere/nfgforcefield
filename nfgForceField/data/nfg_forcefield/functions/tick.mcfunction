@@ -12,4 +12,4 @@ execute as @a at @s run function nfg_forcefield:player/tick
 execute as @e[tag=ff_corner] at @s run function nfg_forcefield:corners/tick
 
 # Tick for each Demolishion Marker
-execute as @e[tag=ff_demolish_marker] at @s run function nfg_forcefield:corners/configured/demolish_marker/tick
+execute as @e[tag=ff_demolish_marker] at @s run function nfg_forcefield:corners/security/demolish_marker/tick

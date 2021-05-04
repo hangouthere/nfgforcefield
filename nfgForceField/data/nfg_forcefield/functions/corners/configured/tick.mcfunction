@@ -11,6 +11,3 @@ function nfg_forcefield:corners/configured/power_status/tick
 
 # Tooltip Configured Corners
 function nfg_forcefield:corners/configured/tooltip/tick
-
-# Security System for Corners
-execute if entity @p[distance=..9] run function nfg_forcefield:corners/configured/security/tick

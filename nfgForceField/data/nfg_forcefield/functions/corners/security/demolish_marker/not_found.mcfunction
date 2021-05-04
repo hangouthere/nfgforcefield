@@ -9,7 +9,7 @@ execute if data storage nfg:forcefield ForceFields[0] run data modify storage nf
 execute if data storage nfg:forcefield ForceFields[0] run data remove storage nfg:forcefield ForceFields[0]
 
 # If we haven't hit our last index (ie, 0), keep looping!
-execute unless score #_demo_found ff_calcs matches 0 if score #_demoff_idx ff_calcs matches 0.. run function nfg_forcefield:corners/configured/demolish_marker/findff_id
+execute unless score #_demo_found ff_calcs matches 0 if score #_demoff_idx ff_calcs matches 0.. run function nfg_forcefield:corners/security/demolish_marker/findff_id
 
 # Wipe out value if it was not found :(
 execute unless score #_demo_found ff_calcs matches 0 if score #_demoff_idx ff_calcs matches 0 run data remove storage nfg:forcefield operations.meta.id_found
