@@ -3,6 +3,8 @@
 ## Phase 1
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
+
+-   Bug: When multiple FF's exist, entering/leaving an area gets wonky real quick
 -   Bug: When building, a player that's technically closer will take control
     -   Needs to error if >= 2 players found within 5 (or 6) radius of newly placed corners (to avoid mis-writing)
 -   Exploit/Bug: When owner is near corner it's vulnerable, if enemy player is near it can be destroyed by them
@@ -18,12 +20,16 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Cover protection area better
 -   Consider changing coords from {x,y,z} to [x,y,z] for less command execs?
     -   Basically anywhere `_x` appears
-- Enchance corner tooltips, they're bland and boring. Might need multi-line!
+-   Enchance corner tooltips, they're bland and boring. Might need multi-line!
 -   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
+-   Check/clean up things that maybe shouldn't happen in Creative Mode
+    -   Corner Knockbacks shouldn't affect creative mode ppl
 -   Clean up/review all docs
 -   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
+    -   Clean up entity selectors, esp when copy/writing data... Use storage as temp location, then store on Entity at end
     -   Corner deletion/creation updates kinda stuff? every 10-20t
     -   Corner tooltip updates could be every 10t
+    -   Double check scores (esp `store result score`) to make sure scopes are isolated (easiest via unique names)
 -   Player Book
     -   Basic configuration/information
     -   on/off? (will change later to cost players, don't overengineer this yet)
@@ -31,10 +37,10 @@ When this Phase is complete, that means we are able to start using it on the NFG
 
 Things to Test:
 
-* 2 players placing at the same time
-  * 1 player deleting while placing
-  * Actionbar is giving accurate info
-  * Have players run through eachother to see if helper's swap
+-   2 players placing at the same time
+    -   1 player deleting while placing
+    -   Actionbar is giving accurate info
+    -   Have players run through eachother to see if helper's swap
 
 ## Phase 2
 
@@ -136,7 +142,7 @@ Things to Test:
 -   Deleting a forcefield
     -   existing needs redo, score won't work if you go out of chunk and kills the FF's
         -   remove concept of score pair :(
-    -    needs to remove from the array to stop future processing
+    -   needs to remove from the array to stop future processing
     -   Corners in unloaded chunks need handling
         -   Store for deletion later
         -   On corner scan test if we need to delete
@@ -189,18 +195,6 @@ Things to Test:
     -   Convert current corner destroy detection to all corners instead of just configured
     -   Also needs to kill `ff_building_helper`
     -   Dropped items from corners should be tagged for more accurate destroying (instead of destroying in a block zone around detected breaking)
-
-
-
-
-
-
-
-
-
-
-
-
 -   Bug: Items are still dropping when a corner is destroyed
     -   Try tagging the items on the stand, and when they drop just del them `@e[type=item,tag=ff_corner_armor]`
 
@@ -249,6 +243,3 @@ execute as @a[nbt={Inventory:[{id:"minecraft:armor_stand",tag:{display:{Name:'[{
 ```
 
 ---
-
-
-

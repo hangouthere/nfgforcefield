@@ -1,3 +1,5 @@
-execute at @p[tag=ff_knockback] run kill @e[tag=ff_knockback_helper,sort=nearest,limit=1]
+execute at @s run kill @e[tag=ff_effect_knockback_helper,sort=nearest,limit=1]
 
-tag @p[tag=ff_knockback] remove ff_knockback
+tag @s remove ff_effect_knockback
+
+scoreboard players reset @s ff_effect_knockback

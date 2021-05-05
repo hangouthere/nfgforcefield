@@ -14,8 +14,8 @@ data modify entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0]
 ## Set initial values for this ForceField
 # id.ff - Unique ForceField ID
 execute store result entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag.IDs.ff int 1 run scoreboard players get #ffNextId ff_calcs
-# id.owner - Owner ID (set to Player ID)
-execute store result entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag.IDs.owner int 1 run scoreboard players get @p[tag=ff_building] nfg_player_id
+# id.player - Owner ID (set to Player ID)
+execute store result entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag.IDs.player int 1 run scoreboard players get @p[tag=ff_building] nfg_player_id
 # corner.start[x,y,z]
 data modify entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag.corner.start set from entity @s Pos
 
