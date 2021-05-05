@@ -6,8 +6,7 @@
 #####################################
 # Started as:
 
-#execute store result score #_numPlayersNearby ff_calcs if entity @a[distance=..7]
-execute store result score #_numPlayersNearby ff_calcs if entity @e[distance=..7]
+execute store result score #_numPlayersNearby ff_calcs if entity @a[distance=..7]
 
 # Detected that too many players are nearby
-execute if score #_numPlayersNearby ff_calcs matches 3.. run function nfg_forcefield:corners/unconfigured/error_checking/detected_too_many_players
+execute if score #_numPlayersNearby ff_calcs matches 2.. run function nfg_forcefield:corners/unconfigured/error_checking/detected_too_many_players
