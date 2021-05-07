@@ -40,11 +40,11 @@ scoreboard players set MobRecycleSeconds ff_calcs 15
 # Default FF Template
 # Note: ff_corner_armor is necessary for deletions when
 # armor drops on the ground that holds a copy of this data
-data modify storage nfg:forcefield template.buildFF set value { ff_corner_armor: 1b, IDs: { ff: 0, player: 0 }, calc: { area: 0 }, corner: { start: [0,0,0], end: [0,0,0] }, zone: { kill: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, protect: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, track: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, suspend: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}}, protections: { mob: 'perimeter', building: 'volume' }, messages: { entering: { title: 'Entering Safe Zone', subtitle: 'Welcome!', actionbar: 'Extended Block Protection Enabled' }, leaving: { title: 'Leaving Safe Zone', subtitle: 'Be safe, wanderer...', actionbar: 'Extended Block Protection Disabled' }}}
+data modify storage nfg:forcefield template.buildFF set value { ff_corner_armor: 1b, IDs: { ff: 0, player: 0 }, version: 0, calc: { area: 0 }, corner: { start: [0,0,0], end: [0,0,0] }, zone: { kill: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, protect: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, track: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, suspend: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}}, protections: { mob: 'perimeter', building: 'volume', powered: 1 }, messages: { entering: { title: 'Entering Safe Zone', subtitle: 'Welcome!', actionbar: 'Extended Block Protection Enabled' }, leaving: { title: 'Leaving Safe Zone', subtitle: 'Be safe, wanderer...', actionbar: 'Extended Block Protection Disabled' }}}
 
 # ForceField Storage
 data modify storage nfg:forcefield ForceFields set value []
 
 # Scan Storage
-data modify storage nfg:forcefield operations set value { delete: [], create: [], meta: {} }
+data modify storage nfg:forcefield operations set value { create: [], update: [], delete: [], meta: {} }
 data modify storage nfg:forcefield scanner.current set value {}

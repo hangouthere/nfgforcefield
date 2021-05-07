@@ -3,6 +3,7 @@
 
 # Set current item in memory by copying current index
 data modify storage nfg:forcefield scanner.current set from storage nfg:forcefield scanner.list[0]
+execute store result score #scan_isFFPowered ff_calcs run data get storage nfg:forcefield scanner.current.protections.powered
 
 # Scan mobs as new since we're testing a different FF now
 tag @e remove ff_processed
@@ -11,16 +12,14 @@ tag @e remove ff_processed
 tag @a remove ff_thread_start
 tag @a remove ff_thread_processed
 
-## Utilize Offsets to initially calculate hitbox in Track Zone's Local Space
-# Set in1 at Local Origin (0,0,0)
-scoreboard players set in1_x nfg_calcs 0
-scoreboard players set in1_y nfg_calcs 0
-scoreboard players set in1_z nfg_calcs 0
-
 ## Iterate ForceField numbers/data
 # Delete self in list, and if an item shifted in place then this will re-run on another tick
 data remove storage nfg:forcefield scanner.list[0]
 # Count down scanning ForceField by 1
 scoreboard players remove #_scanff_idx ff_calcs 1
-# Reset Player Count to number of Players
-execute store result score #_scan_player_idx ff_calcs run execute if entity @a
+
+# If the FF is powered, we'll set up the data the way we need to iterate...
+execute if score #scan_isFFPowered ff_calcs matches 1 run function nfg_forcefield:scanning/process/loop/forcefield_powered
+
+# If the FF is NOT powered, we set it up to look like this FF is fully processed to skip
+execute if score #scan_isFFPowered ff_calcs matches 0 run function nfg_forcefield:scanning/process/loop/forcefield_unpowered

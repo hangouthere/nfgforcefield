@@ -1,9 +1,10 @@
-data remove storage nfg:forcefield operations.meta
+data modify storage nfg:forcefield operations.meta.list set from storage nfg:forcefield operations.delete
+data modify storage nfg:forcefield operations.meta.target set from entity @s ArmorItems[0].tag
 
-# Attempt to find a matching demolishable ID of the current Corner
-function nfg_forcefield:corners/configured/orphaned/find_deleted_id
+# Attempt to find a matching updated ID of the current Corner
+function nfg_forcefield:corners/find_by_id/search
 
-# Found out that we're an Orphan, so let's destroy ourselves!
-execute if data storage nfg:forcefield operations.meta.id_found run function nfg_forcefield:corners/configured/orphaned/destroy_orphan
+# Found that we match as orphaned!
+execute if data storage nfg:forcefield operations.meta.found_ff run function nfg_forcefield:corners/configured/orphaned/destroy_orphan
 
-data remove storage nfg:forcefield operations.meta
+function nfg_forcefield:corners/find_by_id/cleanup_meta

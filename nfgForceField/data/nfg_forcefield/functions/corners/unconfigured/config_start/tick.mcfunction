@@ -1,12 +1,13 @@
-data remove storage nfg:forcefield operations.meta
+data modify storage nfg:forcefield operations.meta.list set from storage nfg:forcefield operations.create
+data modify storage nfg:forcefield operations.meta.target set from entity @s ArmorItems[0].tag
 
-# Attempt to find a matching creatable ID of the current Corner
-function nfg_forcefield:corners/unconfigured/config_start/find_created_id
+# Attempt to find a matching updated ID of the current Corner
+function nfg_forcefield:corners/find_by_id/search
 
-# Store Start Corner Data since if it was just found
-execute if data storage nfg:forcefield operations.meta.IDs run function nfg_forcefield:corners/unconfigured/store_corner_data
+# Found that we match as updated! Let's attempt to do said update!
+execute if data storage nfg:forcefield operations.meta.found_ff run function nfg_forcefield:corners/unconfigured/config_start/apply_config
 
-data remove storage nfg:forcefield operations.meta
+function nfg_forcefield:corners/find_by_id/cleanup_meta
 
 # Mark End Corner as now Configured
 tag @s add ff_configured

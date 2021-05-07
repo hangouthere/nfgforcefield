@@ -4,9 +4,9 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
--   Bug: Power mod status doesn't affect matching corner
-    -   Might need an `operations` namespace/process?
-    -   Doesn't actually have an effect on the FF
+-   Bug: Enabling/Disabling a single FF seems to affect ALL FF's in a scan...
+    -   I swear this was working before... wtf...
+-   Combine create/update corner process such that new corners have version 0, and incremented to 1 on successful build... Instead of create being scanned, now only update needs scanning and will detect based on a new version
 -   Revisit admin book, make sure terminology and functionality matches new processing and implementation(s)
     -   Add info about settings and meanings
     -   Cover protection area better
@@ -192,6 +192,14 @@ Things to Test:
 -   Bug: When multiple FF's exist, entering/leaving an area gets wonky real quick
 -   Bug: When building, a player that's technically closer will take control
     -   Needs to error if >= 2 players found within 5 (or 6) radius of newly placed corners (to avoid mis-writing)
+-   Bug: Power mod status doesn't affect matching corner
+    -   Might need an `operations` namespace/process?
+    -   Doesn't actually have an effect on the FF
+-   HUGE bug: Array loopings operate on a copy now, so operations that assume index 0 to be the current are invalid
+    -   Need to copy back after search in every instance
+        -   CREATE
+        -   UPDATE
+        -   DELETE
 
 ---
 

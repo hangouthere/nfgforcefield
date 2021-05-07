@@ -8,11 +8,11 @@
 
 ## Modify the base Item NBT of Head Armor to have a tag with
 # TODO: Dangerous??? Is this MP friendly?
-data modify entity @s ArmorItems[0].tag set from storage nfg:forcefield operations.meta
+data modify entity @s ArmorItems[0].tag set from storage nfg:forcefield operations.meta.found_ff
 
 # Show name by default
 data merge entity @s {CustomNameVisible: 1b, Glowing: 0b}
 
 ## Mark as Power Changed, and Power On to transition (updates later once marked configured)
-tag @s add ff_power_change
+tag @s add ff_power_changed
 tag @s add ff_power_on
