@@ -30,17 +30,17 @@
 #   - We are now in Local Space
 
 ## Build in1 (-X, -Y, -Z)-most point to be the Starting Corner
-execute if score #_temp1_x nfg_calcs < #_temp2_x nfg_calcs run scoreboard players operation in1_x nfg_calcs = #_temp1_x nfg_calcs
-execute if score #_temp2_x nfg_calcs < #_temp1_x nfg_calcs run scoreboard players operation in1_x nfg_calcs = #_temp2_x nfg_calcs
-execute if score #_temp1_y nfg_calcs < #_temp2_y nfg_calcs run scoreboard players operation in1_y nfg_calcs = #_temp1_y nfg_calcs
-execute if score #_temp2_y nfg_calcs < #_temp1_y nfg_calcs run scoreboard players operation in1_y nfg_calcs = #_temp2_y nfg_calcs
-execute if score #_temp1_z nfg_calcs < #_temp2_z nfg_calcs run scoreboard players operation in1_z nfg_calcs = #_temp1_z nfg_calcs
-execute if score #_temp2_z nfg_calcs < #_temp1_z nfg_calcs run scoreboard players operation in1_z nfg_calcs = #_temp2_z nfg_calcs
+execute if score #_temp1_x nfg_util < #_temp2_x nfg_util run scoreboard players operation in1_x nfg_util = #_temp1_x nfg_util
+execute if score #_temp2_x nfg_util < #_temp1_x nfg_util run scoreboard players operation in1_x nfg_util = #_temp2_x nfg_util
+execute if score #_temp1_y nfg_util < #_temp2_y nfg_util run scoreboard players operation in1_y nfg_util = #_temp1_y nfg_util
+execute if score #_temp2_y nfg_util < #_temp1_y nfg_util run scoreboard players operation in1_y nfg_util = #_temp2_y nfg_util
+execute if score #_temp1_z nfg_util < #_temp2_z nfg_util run scoreboard players operation in1_z nfg_util = #_temp1_z nfg_util
+execute if score #_temp2_z nfg_util < #_temp1_z nfg_util run scoreboard players operation in1_z nfg_util = #_temp2_z nfg_util
 
 ## Build in2 (+X, +Y, +Z)-most point to be the Ending Corner
-execute if score #_temp1_x nfg_calcs > #_temp2_x nfg_calcs run scoreboard players operation in2_x nfg_calcs = #_temp1_x nfg_calcs
-execute if score #_temp2_x nfg_calcs > #_temp1_x nfg_calcs run scoreboard players operation in2_x nfg_calcs = #_temp2_x nfg_calcs
-execute if score #_temp1_y nfg_calcs > #_temp2_y nfg_calcs run scoreboard players operation in2_y nfg_calcs = #_temp1_y nfg_calcs
-execute if score #_temp2_y nfg_calcs > #_temp1_y nfg_calcs run scoreboard players operation in2_y nfg_calcs = #_temp2_y nfg_calcs
-execute if score #_temp1_z nfg_calcs > #_temp2_z nfg_calcs run scoreboard players operation in2_z nfg_calcs = #_temp1_z nfg_calcs
-execute if score #_temp2_z nfg_calcs > #_temp1_z nfg_calcs run scoreboard players operation in2_z nfg_calcs = #_temp2_z nfg_calcs
+execute if score #_temp1_x nfg_util > #_temp2_x nfg_util run scoreboard players operation in2_x nfg_util = #_temp1_x nfg_util
+execute if score #_temp2_x nfg_util > #_temp1_x nfg_util run scoreboard players operation in2_x nfg_util = #_temp2_x nfg_util
+execute if score #_temp1_y nfg_util > #_temp2_y nfg_util run scoreboard players operation in2_y nfg_util = #_temp1_y nfg_util
+execute if score #_temp2_y nfg_util > #_temp1_y nfg_util run scoreboard players operation in2_y nfg_util = #_temp2_y nfg_util
+execute if score #_temp1_z nfg_util > #_temp2_z nfg_util run scoreboard players operation in2_z nfg_util = #_temp1_z nfg_util
+execute if score #_temp2_z nfg_util > #_temp1_z nfg_util run scoreboard players operation in2_z nfg_util = #_temp2_z nfg_util

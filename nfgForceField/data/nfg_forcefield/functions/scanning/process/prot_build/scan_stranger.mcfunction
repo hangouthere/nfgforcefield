@@ -4,7 +4,7 @@ execute as @s run function nfg_forcefield:scanning/process/prot_build/zone_test_
 scoreboard players add @a ff_player_bind 0
 
 # Player Entered a Build Protection Zone (and wasn't bound to one before)
-execute unless score @s ff_player_bind matches 1.. if score #_hitDetected nfg_calcs matches 1 if entity @s[scores={ff_player_bind=0}] run function nfg_forcefield:scanning/process/prot_build/protect_entering
+execute unless score @s ff_player_bind matches 1.. if score #_hitDetected nfg_util matches 1 if entity @s[scores={ff_player_bind=0}] run function nfg_forcefield:scanning/process/prot_build/protect_entering
 
 # Player Leaving the Build Protection Zone (if already bound)
-execute if score @s ff_player_bind = #scan_ffId ff_calcs if score #_hitDetected nfg_calcs matches 0 if entity @s[tag=ff_prot_build] run function nfg_forcefield:scanning/process/prot_build/protect_leaving
+execute if score @s ff_player_bind = #scan_ffId ff_calcs if score #_hitDetected nfg_util matches 0 if entity @s[tag=ff_prot_build] run function nfg_forcefield:scanning/process/prot_build/protect_leaving

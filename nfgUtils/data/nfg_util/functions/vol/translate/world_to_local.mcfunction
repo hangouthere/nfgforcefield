@@ -15,16 +15,16 @@
 
 ## Offset into Local Coordinates
 # Calculate the offset from the [identified] Starting Point to (0,0) (which is just negating the components)
-scoreboard players operation #_W2Loffset_x nfg_calcs = in1_x nfg_calcs
-scoreboard players operation #_W2Loffset_x nfg_calcs *= $-1 nfg_const
-scoreboard players operation #_W2Loffset_y nfg_calcs = in1_y nfg_calcs
-scoreboard players operation #_W2Loffset_y nfg_calcs *= $-1 nfg_const
-scoreboard players operation #_W2Loffset_z nfg_calcs = in1_z nfg_calcs
-scoreboard players operation #_W2Loffset_z nfg_calcs *= $-1 nfg_const
+scoreboard players operation #_W2Loffset_x nfg_util = in1_x nfg_util
+scoreboard players operation #_W2Loffset_x nfg_util *= $-1 nfg_const
+scoreboard players operation #_W2Loffset_y nfg_util = in1_y nfg_util
+scoreboard players operation #_W2Loffset_y nfg_util *= $-1 nfg_const
+scoreboard players operation #_W2Loffset_z nfg_util = in1_z nfg_util
+scoreboard players operation #_W2Loffset_z nfg_util *= $-1 nfg_const
 # Do the actual offset!
-scoreboard players operation in1_x nfg_calcs += #_W2Loffset_x nfg_calcs
-scoreboard players operation in2_x nfg_calcs += #_W2Loffset_x nfg_calcs
-scoreboard players operation in1_y nfg_calcs += #_W2Loffset_y nfg_calcs
-scoreboard players operation in2_y nfg_calcs += #_W2Loffset_y nfg_calcs
-scoreboard players operation in1_z nfg_calcs += #_W2Loffset_z nfg_calcs
-scoreboard players operation in2_z nfg_calcs += #_W2Loffset_z nfg_calcs
+scoreboard players operation in1_x nfg_util += #_W2Loffset_x nfg_util
+scoreboard players operation in2_x nfg_util += #_W2Loffset_x nfg_util
+scoreboard players operation in1_y nfg_util += #_W2Loffset_y nfg_util
+scoreboard players operation in2_y nfg_util += #_W2Loffset_y nfg_util
+scoreboard players operation in1_z nfg_util += #_W2Loffset_z nfg_util
+scoreboard players operation in2_z nfg_util += #_W2Loffset_z nfg_util

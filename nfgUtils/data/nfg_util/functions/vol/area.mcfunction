@@ -10,6 +10,6 @@
 # area = volVec.x * volVec.y * volVec.z
 
 # Calculate Volume Area
-scoreboard players operation #_area nfg_calcs = #_vol_x nfg_calcs
-scoreboard players operation #_area nfg_calcs *= #_vol_y nfg_calcs
-scoreboard players operation #_area nfg_calcs *= #_vol_z nfg_calcs
+scoreboard players operation #_area nfg_util = #_vol_x nfg_util
+scoreboard players operation #_area nfg_util *= #_vol_y nfg_util
+scoreboard players operation #_area nfg_util *= #_vol_z nfg_util

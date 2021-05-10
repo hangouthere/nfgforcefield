@@ -19,29 +19,29 @@
 # hitDetected = #_inRange_x * #_inRange_y * #_inRange_z
 
 # Detect X Range
-scoreboard players operation #_low nfg_calcs = in1_x nfg_calcs
-scoreboard players operation #_high nfg_calcs = in2_x nfg_calcs
-scoreboard players operation #_testFor nfg_calcs = in3_x nfg_calcs
+scoreboard players operation #_low nfg_util = in1_x nfg_util
+scoreboard players operation #_high nfg_util = in2_x nfg_util
+scoreboard players operation #_testFor nfg_util = in3_x nfg_util
 function nfg_util:range/detect
-scoreboard players operation #_inRange_x nfg_calcs = #_inRange nfg_calcs
+scoreboard players operation #_inRange_x nfg_util = #_inRange nfg_util
 
 # Detect Y Range
-scoreboard players operation #_low nfg_calcs = in1_y nfg_calcs
-scoreboard players operation #_high nfg_calcs = in2_y nfg_calcs
-scoreboard players operation #_testFor nfg_calcs = in3_y nfg_calcs
+scoreboard players operation #_low nfg_util = in1_y nfg_util
+scoreboard players operation #_high nfg_util = in2_y nfg_util
+scoreboard players operation #_testFor nfg_util = in3_y nfg_util
 function nfg_util:range/detect
-scoreboard players operation #_inRange_y nfg_calcs = #_inRange nfg_calcs
+scoreboard players operation #_inRange_y nfg_util = #_inRange nfg_util
 
 # Detect Z Range
-scoreboard players operation #_low nfg_calcs = in1_z nfg_calcs
-scoreboard players operation #_high nfg_calcs = in2_z nfg_calcs
-scoreboard players operation #_testFor nfg_calcs = in3_z nfg_calcs
+scoreboard players operation #_low nfg_util = in1_z nfg_util
+scoreboard players operation #_high nfg_util = in2_z nfg_util
+scoreboard players operation #_testFor nfg_util = in3_z nfg_util
 function nfg_util:range/detect
-scoreboard players operation #_inRange_z nfg_calcs = #_inRange nfg_calcs
+scoreboard players operation #_inRange_z nfg_util = #_inRange nfg_util
 
 # AND the results for final output
 # Reset our `out` value, and set up booleans to a default = 1, allowing *= 1, aka AND operations
-scoreboard players operation #_hitDetected nfg_calcs = #_inRange_x nfg_calcs
+scoreboard players operation #_hitDetected nfg_util = #_inRange_x nfg_util
 # Only eval Y if we're doing volume evaluations
-execute if score #_evalVolume nfg_calcs matches 1 run scoreboard players operation #_hitDetected nfg_calcs *= #_inRange_y nfg_calcs
-scoreboard players operation #_hitDetected nfg_calcs *= #_inRange_z nfg_calcs
+execute if score #_evalVolume nfg_util matches 1 run scoreboard players operation #_hitDetected nfg_util *= #_inRange_y nfg_util
+scoreboard players operation #_hitDetected nfg_util *= #_inRange_z nfg_util

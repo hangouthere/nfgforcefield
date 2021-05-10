@@ -10,4 +10,4 @@ execute if entity @s[tag=!ff_configured] run function nfg_forcefield:corners/unc
 execute if entity @s[tag=!ff_init,tag=ff_configured] run function nfg_forcefield:corners/configured/tick
 
 # Security System for Corners
-execute if entity @p[gamemode=!creative,distance=..9] run function nfg_forcefield:corners/security/tick
+execute if entity @p[distance=..9] run function nfg_forcefield:corners/security/tick

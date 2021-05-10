@@ -1,25 +1,4 @@
-# nfgForceField - init
-# Initialize nfgForceField DataPack
+# Ensure we init after `nfg_util`
 
-# Initial Setup of Settings, so rest of pack runs on first setup
-scoreboard objectives add ff_calcs dummy
-# If the datapack has NEVER initiated, let's do so!
-execute unless score #_doneInit ff_calcs matches 1.. as @a[limit=1] run function nfg_forcefield:_first_run/init
-
-function nfg_forcefield:commands/init
-function nfg_forcefield:scheduled/init
-
-# Startup Message
-tellraw @a [{"text":"[nfgForceField] ","color":"gold"},{"text":"by ","color":"white"},{"text":"nfgCodex ","color":"blue"},{"text":"v","color":"white"},{"text":"0.0.1","color":"green"},{"text":" Loaded!","color":"white"}]
-
-# TODO: Do we need this?
-# Ensure old tags aren't left around by accident
-tag @a remove ff_building
-# Clear suspended values.... also think about removing this?
-tag @e remove ff_processed
-tag @e remove ff_suspend
-tag @e remove ff_suspend_temp
-tag @e remove ff_suspend_perm
-tag @e remove ff_demolish_near
-
-function nfg_forcefield:scanning/process/loop/reset_scan
+execute unless score #_doneInit nfg_util matches 1 run schedule function nfg_forcefield:init 2t replace
+execute if score #_doneInit nfg_util matches 1 run function nfg_forcefield:init_

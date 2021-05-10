@@ -4,7 +4,6 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
--   Combine create/update corner process such that new corners have version 0, and incremented to 1 on successful build... Instead of create being scanned, now only update needs scanning and will detect based on a new version
 -   Revisit admin book, make sure terminology and functionality matches new processing and implementation(s)
     -   Add info about settings and meanings
     -   Cover protection area better
@@ -24,6 +23,8 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Basic configuration/information
     -   on/off? (will change later to cost players, don't overengineer this yet)
     -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
+-   `ff_admin` should be able to destroy/update ALL ForceFields!
+    -   Might need some light logic duplication but check for ff_admin instead of owner
 
 Things to Test:
 

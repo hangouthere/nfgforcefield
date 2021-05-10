@@ -5,4 +5,4 @@ execute store result score #ff_curr_playerId ff_calcs run data get entity @s Arm
 execute if score #ff_curr_playerId ff_calcs = @p[distance=..8] nfg_player_id run function nfg_forcefield:corners/security/owner/track
 
 # User is NOT the Owner, handle near/far tracking!
-execute unless score #ff_curr_playerId ff_calcs = @p[distance=..16] nfg_player_id run function nfg_forcefield:corners/security/stranger/track
+execute unless entity @p[gamemode=creative] unless score #ff_curr_playerId ff_calcs = @p[distance=..16] nfg_player_id run function nfg_forcefield:corners/security/stranger/track

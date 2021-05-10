@@ -1,12 +1,12 @@
 ## Set Values:
 # zone.kill.bounds{xyz}
-execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.bounds.x int 1 run scoreboard players get in2_x nfg_calcs
-execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.bounds.y int 1 run scoreboard players get in2_y nfg_calcs
-execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.bounds.z int 1 run scoreboard players get in2_z nfg_calcs
+execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.bounds.x int 1 run scoreboard players get in2_x nfg_util
+execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.bounds.y int 1 run scoreboard players get in2_y nfg_util
+execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.bounds.z int 1 run scoreboard players get in2_z nfg_util
 # zone.kill.offset{xyz}
-execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.offset.x int 1 run scoreboard players get #_W2Loffset_x nfg_calcs
-execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.offset.y int 1 run scoreboard players get #_W2Loffset_y nfg_calcs
-execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.offset.z int 1 run scoreboard players get #_W2Loffset_z nfg_calcs
+execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.offset.x int 1 run scoreboard players get #_W2Loffset_x nfg_util
+execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.offset.y int 1 run scoreboard players get #_W2Loffset_y nfg_util
+execute store result storage nfg:forcefield operations.meta.build_ff.zone.kill.offset.z int 1 run scoreboard players get #_W2Loffset_z nfg_util
 # zone.protect.bounds{xyz}
 execute store result storage nfg:forcefield operations.meta.build_ff.zone.protect.bounds.x int 1 run scoreboard players get #_zoneBoundsProtect_x ff_calcs
 execute store result storage nfg:forcefield operations.meta.build_ff.zone.protect.bounds.y int 1 run scoreboard players get #_zoneBoundsProtect_y ff_calcs
@@ -33,4 +33,4 @@ execute store result storage nfg:forcefield operations.meta.build_ff.zone.suspen
 execute store result storage nfg:forcefield operations.meta.build_ff.zone.suspend.offset.z int 1 run scoreboard players get #_zoneOffsetSuspend_z ff_calcs
 
 # meta.calc.area
-execute store result storage nfg:forcefield operations.meta.build_ff.calc.area int 1 run scoreboard players get #_area nfg_calcs
+execute store result storage nfg:forcefield operations.meta.build_ff.calc.area int 1 run scoreboard players get #_area nfg_util
