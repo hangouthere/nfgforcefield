@@ -4,8 +4,6 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
--   Bug: Enabling/Disabling a single FF seems to affect ALL FF's in a scan...
-    -   I swear this was working before... wtf...
 -   Combine create/update corner process such that new corners have version 0, and incremented to 1 on successful build... Instead of create being scanned, now only update needs scanning and will detect based on a new version
 -   Revisit admin book, make sure terminology and functionality matches new processing and implementation(s)
     -   Add info about settings and meanings
@@ -200,6 +198,7 @@ Things to Test:
         -   CREATE
         -   UPDATE
         -   DELETE
+-   Bug: Enabling/Disabling a single FF seems to affect ALL FF's in a scan...
 
 ---
 
