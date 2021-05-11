@@ -11,7 +11,7 @@
 data modify entity @s ArmorItems[0].tag set from storage nfg:forcefield operations.meta.found_ff
 
 # Show name by default
-data merge entity @s {CustomNameVisible: 1b, Glowing: 0b}
+data merge entity @s {CustomNameVisible: 0b, Glowing: 0b}
 
 ## Mark as Power Changed, and Power On to transition (updates later once marked configured)
 tag @s add ff_power_changed

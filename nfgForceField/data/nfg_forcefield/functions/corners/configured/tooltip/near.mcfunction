@@ -5,11 +5,15 @@
 
 ## Update Corner Name to Detail Info when Player is "near"
 
-# Create JSONText parsing sign, and build a string for the Corner
-setblock ~ ~ ~ dark_oak_sign{Text1:'[{"text":"FF ID: ","color":"gold"},{"nbt":"ArmorItems[0].tag.type","entity":"@e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1]","color":"green"},{"text":"[","color":"gray"},{"nbt":"ArmorItems[0].tag.IDs.ff","entity":"@e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1]","color":"gray"},{"text":"] ","color":"gray"},{"text":"Area: ","color":"dark_aqua"},{"nbt":"ArmorItems[0].tag.calc.area","entity":"@e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1]","color":"white"}]'} replace
+function nfg_forcefield:corners/configured/tooltip/get_tooltip_info
 
-# Copy parsed text to the Corner
-data modify entity @e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1] CustomName set from block ~ ~ ~ Text1
+# Copy parsed text to the Labels
+data modify entity @e[tag=ff_line_1,sort=nearest,limit=1] CustomName set from block ~ ~ ~ Text1
+data modify entity @e[tag=ff_line_2,sort=nearest,limit=1] CustomName set from block ~ ~ ~ Text2
+data modify entity @e[tag=ff_line_3,sort=nearest,limit=1] CustomName set from block ~ ~ ~ Text3
+data modify entity @e[tag=ff_line_1,sort=nearest,limit=1] CustomNameVisible set value 1b
+data modify entity @e[tag=ff_line_2,sort=nearest,limit=1] CustomNameVisible set value 1b
+data modify entity @e[tag=ff_line_3,sort=nearest,limit=1] CustomNameVisible set value 1b
 
 # Remove Sign
 setblock ~ ~ ~ air replace

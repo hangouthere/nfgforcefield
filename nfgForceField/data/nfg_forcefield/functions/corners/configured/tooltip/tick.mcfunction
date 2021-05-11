@@ -9,7 +9,7 @@ execute unless entity @p[tag=ff_tooltip_near] if entity @p[distance=..4] if enti
 
 # Display Medium Tooltips, and enforce when Powered OFF
 execute unless entity @p[tag=ff_tooltip_medium] if entity @p[distance=..5] if entity @s[tag=ff_power_off] run function nfg_forcefield:corners/configured/tooltip/medium
-execute unless entity @p[tag=ff_tooltip_medium] if entity @p[distance=5..6] run function nfg_forcefield:corners/configured/tooltip/medium
+execute unless entity @p[tag=ff_tooltip_medium] if entity @p[distance=5..8] run function nfg_forcefield:corners/configured/tooltip/medium
 
 ## As the player distances from the corner, we remove the CustonName visibility to reduce screen clutter
-execute if entity @p[distance=7..] run function nfg_forcefield:corners/configured/tooltip/far
+execute unless entity @p[tag=ff_tooltip_near] if entity @p[distance=9..] run function nfg_forcefield:corners/configured/tooltip/far
