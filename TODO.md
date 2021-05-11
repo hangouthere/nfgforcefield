@@ -4,9 +4,6 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
--   Revisit admin book, make sure terminology and functionality matches new processing and implementation(s)
-    -   Add info about settings and meanings
-    -   Cover protection area better
 -   Consider changing coords from {x,y,z} to [x,y,z] for less command execs?
     -   Basically anywhere `_x` appears
 -   Enchance corner tooltips, they're bland and boring. Might need multi-line!
@@ -200,6 +197,9 @@ Things to Test:
         -   UPDATE
         -   DELETE
 -   Bug: Enabling/Disabling a single FF seems to affect ALL FF's in a scan...
+-   Revisit admin book, make sure terminology and functionality matches new processing and implementation(s)
+    -   Add info about settings and meanings
+    -   Cover protection area better
 
 ---
 
