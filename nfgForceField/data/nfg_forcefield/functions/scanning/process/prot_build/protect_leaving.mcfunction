@@ -1,6 +1,4 @@
-# Remove player from prot build mode
-tag @s remove ff_prot_build
-scoreboard players set @s ff_player_bind 0
+function nfg_forcefield:scanning/process/prot_build/reset_prot_build
 
 gamemode survival @s
 
