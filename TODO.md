@@ -4,20 +4,22 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
--   `ff_admin` should be able to destroy/update ALL ForceFields!
 -   Sounds
     -   Fix sounds to be mono so they position correctly!!!
     -   Separate ambient vs zap
--   Clean up/review all docs
--   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
-    -   Clean up entity selectors, esp when copy/writing data... Use storage as temp location, then store on Entity at end
-    -   Corner deletion/creation updates kinda stuff? every 10-20t
-    -   Corner tooltip updates could be every 10t
-    -   Double check scores (esp `store result score`) to make sure scopes are isolated (easiest via unique names)
+    -   Include sources in README!
 -   Player Book
     -   Basic configuration/information
     -   on/off? (will change later to cost players, don't overengineer this yet)
     -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
+-   Clean up/review all docs
+-   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
+
+    -   Clean up entity selectors, esp when copy/writing data... Use storage as temp location, then store on Entity at end
+    -   Corner deletion/creation updates kinda stuff? every 10-20t
+    -   Corner tooltip updates could be every 10t
+    -   Double check scores (esp `store result score`) to make sure scopes are isolated (easiest via unique names)
+
 -   Minor update to Create process:
     -   Area should be split between perim and volume
         -   Needs volume calc added
@@ -204,6 +206,7 @@ Things to Test:
 -   Check/clean up things that maybe shouldn't happen in Creative Mode
     -   Corner Knockbacks shouldn't affect creative mode ppl
     -   Users that go into creative mode while in a stranger's FF aren't handled correctly when going back into Survival
+-   `ff_admin` should be able to destroy/update ALL ForceFields!
 
 ---
 
