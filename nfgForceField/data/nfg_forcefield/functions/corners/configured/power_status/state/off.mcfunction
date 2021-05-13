@@ -11,4 +11,4 @@ data modify entity @s HandItems set value []
 # Fun Particles at the Corner
 particle minecraft:smoke ~ ~ ~ 0 1 0 0.1 10
 # Fun Sound Effect at the Corner
-playsound minecraft:entity.wither.hurt block @a[distance=..16] ~ ~ ~ 0.6 0.1
+playsound nfg_forcefield:power_off block @a[distance=..16] ~ ~ ~

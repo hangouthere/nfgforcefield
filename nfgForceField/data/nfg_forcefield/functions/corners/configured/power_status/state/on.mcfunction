@@ -11,4 +11,4 @@ data modify entity @s HandItems set value [{id:"minecraft:diamond_sword",Count:1
 # Fun Particles at the Corner
 particle minecraft:end_rod ~ ~ ~ 0 1 0 0.1 10
 # Fun Sound Effect at the Corner
-playsound minecraft:entity.guardian.death block @a[distance=..16] ~ ~ ~ 1 0.2
+playsound nfg_forcefield:power_on block @a[distance=..16] ~ ~ ~

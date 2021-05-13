@@ -1,5 +1,5 @@
 # Error sound, and Kill the erroneous Corner
-playsound minecraft:entity.elder_guardian.curse master @p ~ ~ ~ 0.3 2
+playsound nfg_forcefield:error master @p ~ ~ ~
 tag @s remove ff_no_errors
 kill @s
 
