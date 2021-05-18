@@ -14,3 +14,6 @@ kill @e[tag=ff_tooltip_line,distance=..1]
 
 # Clean up Player tags
 tag @p remove ff_tooltip_near
+
+# Break any nearby Configurators!
+execute at @e[limit=1,sort=nearest,distance=..16,tag=ff_config_marker] run setblock ~ ~ ~ air replace

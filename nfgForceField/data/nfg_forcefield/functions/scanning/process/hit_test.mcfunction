@@ -6,8 +6,4 @@ scoreboard players operation in3_x nfg_util += #_W2Loffset_x nfg_util
 scoreboard players operation in3_y nfg_util += #_W2Loffset_y nfg_util
 scoreboard players operation in3_z nfg_util += #_W2Loffset_z nfg_util
 
-# TODO: Eval type for scan type (ie, perim vs volume)
-# ^Note: Be sure to always set, even if zero! This ensures it calcs properly!
-# Check if in Bounds (Currently Perimieter only)
-scoreboard players set #_evalVolume nfg_util 0
 function nfg_util:vol/eval_in_bounds

@@ -4,14 +4,22 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
-- Config
-  - Optimize:
-    - Update shape types from string to ints for less commands during detections
-    - Only reset if detected
-    - Only draw page if detected items
-  - still needs to give player items back
-  - Replace `powered`
-    - Update to shape type, will require a semi-heavy lift
+-   Config
+
+    -   Should error if player is not within 5 blocks of the corner
+    -   Should error if > 1 player is within 5 blocks of the corner
+    -   Needs to finish tooltips on 2nd page
+    -   Needs to place message books in inventory
+    -   Optimize:
+        -   Placing a configurator and not touching seems to use cycles... figure it out
+            -   Only render when `ff_configuring` OPENS the thing
+                -   Save/Cancel on CLOSE
+        -   ~~Update shape types from string to ints for less commands during detections~~
+        -   ~~Only reset if detected~~
+        -   ~~Only draw page if detected items~~
+    -   still needs to give player items back
+    -   Replace `powered`
+        -   Update to shape type, will require a semi-heavy lift
 
 -   Player Book
     -   on/off? (will change later to cost players, don't overengineer this yet)
