@@ -10,6 +10,7 @@ scoreboard objectives remove ff_suspend_perm
 scoreboard objectives remove ff_suspend_temp
 scoreboard objectives remove ff_scan_track
 scoreboard objectives remove ff_scan_kill
+scoreboard objectives remove ff_config
 # Temp storage for calculations
 #declare objective ff_calcs Calculations
 scoreboard objectives add ff_calcs dummy
@@ -25,6 +26,8 @@ scoreboard objectives add ff_suspend_temp dummy
 scoreboard objectives add ff_scan_track dummy
 #declare objective ff_scan_kill Tally Killable marked mobs
 scoreboard objectives add ff_scan_kill dummy
+#declare objective ff_config Which page of the config the player is on
+scoreboard objectives add ff_config dummy
 # Setup FF IDs
 scoreboard players set #ffNextId ff_calcs 1
 # Establish base settings for ForceField settings
@@ -40,7 +43,7 @@ scoreboard players set MobRecycleSeconds ff_calcs 15
 # Default FF Template
 # Note: ff_corner_armor is necessary for deletions when
 # armor drops on the ground that holds a copy of this data
-data modify storage nfg:forcefield template.buildFF set value { ff_corner_armor: 1b, IDs: { ff: 0, player: 0, playerName: '' }, version: 0, calc: { area: 0 }, corner: { start: [0,0,0], end: [0,0,0] }, zone: { kill: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, protect: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, track: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, suspend: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}}, protections: { mob: 'Perimeter', building: 'Volume', powered: 1 }, messages: { entering: { title: 'Entering Safe Zone', subtitle: 'Welcome!', actionbar: 'Extended Block Protection Enabled' }, leaving: { title: 'Leaving Safe Zone', subtitle: 'Be safe, wanderer...', actionbar: 'Extended Block Protection Disabled' }}}
+data modify storage nfg:forcefield template.buildFF set value { ff_corner_armor: 1b, IDs: { ff: 0, player: 0, playerName: '' }, version: 0, calc: { area: 0 }, corner: { start: [0,0,0], end: [0,0,0] }, zone: { kill: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, protect: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, track: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}, suspend: { offset: { x: 0,y:0,z:0 }, bounds: { x: 0,y:0,z:0 }}}, protections: { building: 2, mob: 1 }, messages: { entering: { title: 'Entering Safe Zone', subtitle: 'Welcome!', actionbar: 'Extended Block Protection Enabled' }, leaving: { title: 'Leaving Safe Zone', subtitle: 'Be safe, wanderer...', actionbar: 'Extended Block Protection Disabled' }}}
 
 # ForceField Storage
 data modify storage nfg:forcefield ForceFields set value []

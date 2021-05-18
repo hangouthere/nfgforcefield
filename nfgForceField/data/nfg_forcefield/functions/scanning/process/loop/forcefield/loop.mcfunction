@@ -19,7 +19,7 @@ data remove storage nfg:forcefield scanner.list[0]
 scoreboard players remove #_scanff_idx ff_calcs 1
 
 # If the FF is powered, we'll set up the data the way we need to iterate...
-execute if score #scan_isFFPowered ff_calcs matches 1 run function nfg_forcefield:scanning/process/loop/forcefield_powered
+execute if score #scan_isFFPowered ff_calcs matches 1 run function nfg_forcefield:scanning/process/loop/forcefield/powered
 
 # If the FF is NOT powered, we set it up to look like this FF is fully processed to skip
-execute if score #scan_isFFPowered ff_calcs matches 0 run function nfg_forcefield:scanning/process/loop/forcefield_unpowered
+execute if score #scan_isFFPowered ff_calcs matches 0 run function nfg_forcefield:scanning/process/loop/forcefield/unpowered

@@ -1,4 +1,4 @@
-say Hard Resetting nfgUtils/nfgForceField...
+tellraw @a [{"text":"Hard Resetting nfgUtils/nfgForceField...","color":"red"}]
 
 kill @e[type=!player]
 kill @e[type=!player]

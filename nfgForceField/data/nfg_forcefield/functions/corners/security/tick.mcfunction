@@ -8,4 +8,4 @@ execute if score #ff_curr_playerId ff_calcs = @p[distance=..8] nfg_player_id run
 execute if entity @p[distance=..8,tag=ff_admin,tag=!ff_building] run function nfg_forcefield:corners/security/owner/track
 
 # User is NOT the Owner, handle near/far tracking (except for `ff_admins`)!
-execute unless entity @p[tag=ff_admin,tag=!ff_building] unless entity @p[gamemode=creative] unless score #ff_curr_playerId ff_calcs = @p[distance=..16] nfg_player_id run function nfg_forcefield:corners/security/stranger/track
+execute unless entity @p[tag=ff_admin,tag=!ff_building] unless entity @p[gamemode=creative] unless entity @p[gamemode=spectator] unless score #ff_curr_playerId ff_calcs = @p[distance=..16] nfg_player_id run function nfg_forcefield:corners/security/stranger/track

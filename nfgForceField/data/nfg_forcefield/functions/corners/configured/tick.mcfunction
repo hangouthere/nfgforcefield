@@ -13,4 +13,4 @@ execute if data storage nfg:forcefield operations.update[0] run function nfg_for
 function nfg_forcefield:corners/configured/power_status/tick
 
 # Tooltip Configured Corners
-function nfg_forcefield:corners/configured/tooltip/tick
+execute if entity @p[distance=..12] run function nfg_forcefield:corners/configured/tooltip/tick

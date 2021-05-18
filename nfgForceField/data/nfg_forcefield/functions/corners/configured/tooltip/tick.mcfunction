@@ -12,4 +12,4 @@ execute unless entity @p[tag=ff_tooltip_medium] if entity @p[distance=..5] if en
 execute unless entity @p[tag=ff_tooltip_medium] if entity @p[distance=5..8] run function nfg_forcefield:corners/configured/tooltip/medium
 
 ## As the player distances from the corner, we remove the CustonName visibility to reduce screen clutter
-execute unless entity @p[tag=ff_tooltip_near] if entity @p[distance=9..] run function nfg_forcefield:corners/configured/tooltip/far
+execute if entity @p[tag=ff_tooltip_medium,distance=9..] run function nfg_forcefield:corners/configured/tooltip/far

@@ -10,6 +10,7 @@ data modify entity @s ArmorItems[0].tag set from storage nfg:forcefield operatio
 # Delete the Update value now that it's cleaned up
 data remove storage nfg:forcefield operations.update[0]
 
+# TODO: This needs to be updated to determine shape info
 # Turn off if it was marked on!
 execute if entity @s[tag=ff_power_on,nbt={ArmorItems:[{tag:{protections:{powered:0}}}]}] run function nfg_forcefield:corners/configured/power_status/change/off
 

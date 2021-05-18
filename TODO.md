@@ -4,11 +4,20 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
--   Bug: When a FF is deleted, strangers are left in adventure mode!!!
+- Config
+  - Optimize:
+    - Update shape types from string to ints for less commands during detections
+    - Only reset if detected
+    - Only draw page if detected items
+  - still needs to give player items back
+  - Replace `powered`
+    - Update to shape type, will require a semi-heavy lift
+
 -   Player Book
     -   on/off? (will change later to cost players, don't overengineer this yet)
     -   Basic configuration/information
     -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
+-   Bug: When a FF is deleted, strangers are left in adventure mode!!!
 -   Clean up/review all docs
 -   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
 

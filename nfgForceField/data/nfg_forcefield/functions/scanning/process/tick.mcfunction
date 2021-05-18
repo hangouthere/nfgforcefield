@@ -36,7 +36,7 @@ execute unless score #_scan_state ff_calcs matches 2 unless score #_scanff_idx f
 # Not currently scanning, and All Players were initialized or
 # finished a Scan Loop (count = 0), meaning our ForceField is
 # fully scanned... Loop to the next one!
-execute unless score #_scan_state ff_calcs matches 2 if score #_scan_player_idx ff_calcs matches 0 run function nfg_forcefield:scanning/process/loop/forcefield
+execute unless score #_scan_state ff_calcs matches 2 if score #_scan_player_idx ff_calcs matches 0 run function nfg_forcefield:scanning/process/loop/forcefield/loop
 
 # Mob Scan is initialized or just finished scanning for a Player (ie, state = 2), so loop to next Player
 execute if score #_scan_state ff_calcs matches 1 run function nfg_forcefield:scanning/process/loop/players

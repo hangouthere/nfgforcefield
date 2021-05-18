@@ -87,10 +87,10 @@ Tick
         }
     },
 
-    // Define the protections: "perimeter", "volume", or "off"
+    // Define the protections: Off=0, Perimeter=1, Volume=2
     protections: {
-        mob: "perimeter",
-        building: "volume"
+        mob: 1,
+        building: 2
     },
 
     // Messages for enter/leaving the Protection Zone
