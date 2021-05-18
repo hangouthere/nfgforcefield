@@ -10,6 +10,8 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Should error if > 1 player is within 5 blocks of the corner
     -   Needs to finish tooltips on 2nd page
     -   Needs to place message books in inventory
+    -   Upon saving config, needs to support `written_books` if the user signed by accident!
+        -   Probably need to rely on the tags mostly
     -   Optimize:
         -   Placing a configurator and not touching seems to use cycles... figure it out
             -   Only render when `ff_configuring` OPENS the thing
@@ -34,6 +36,9 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Corner tooltip updates could be every 10t
     -   Double check scores (esp `store result score`) to make sure scopes are isolated (easiest via unique names)
 
+-   Inform `ff_admin` of their abilities in Admin book, as well as a server message as they enter the area
+    -   Consider being able to silence this via a trigger
+-   Update GUI for Page 1 of config, Allied/Stranger need green/red coloring as the in-game color
 -   Minor update to Create process:
     -   Area should be split between perim and volume
         -   Needs volume calc added

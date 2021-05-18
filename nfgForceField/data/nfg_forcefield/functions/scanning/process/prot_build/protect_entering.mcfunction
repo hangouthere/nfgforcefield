@@ -4,6 +4,8 @@ execute store result score @s ff_player_bind run scoreboard players get #scan_ff
 
 gamemode adventure @s
 
-title @s title [{"nbt":"scanner.current.messages.entering.title","storage":"nfg:forcefield"}]
-title @s subtitle [{"nbt":"scanner.current.messages.entering.subtitle","storage":"nfg:forcefield"}]
-title @s actionbar [{"nbt":"scanner.current.messages.entering.actionbar","storage":"nfg:forcefield"}]
+title @s title [{"nbt":"scanner.current.messages.stranger.entering.title","storage":"nfg:forcefield"}]
+title @s subtitle [{"nbt":"scanner.current.messages.stranger.entering.subtitle","storage":"nfg:forcefield"}]
+title @s actionbar [{"nbt":"scanner.current.messages.stranger.entering.actionbar","storage":"nfg:forcefield"}]
+
+execute if data storage nfg:forcefield scanner.current.messages.stranger.entering.serverChat run tellraw @s {"nbt":"scanner.current.messages.stranger.entering.serverChat","storage":"nfg:forcefield"}

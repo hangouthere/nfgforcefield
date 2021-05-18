@@ -1,6 +1,3 @@
-# Copy FF from Corner to temp space
-data modify storage nfg:forcefield operations.meta.config.ff set from entity @e[tag=ff_corner,sort=nearest,limit=1] ArmorItems[0].tag
-
 # Setup Vars for Protection Types
 execute store result score #modeProtBuild ff_config run data get storage nfg:forcefield operations.meta.config.ff.protections.building
 execute store result score #modeProtMob ff_config run data get storage nfg:forcefield operations.meta.config.ff.protections.mob

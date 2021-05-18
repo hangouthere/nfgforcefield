@@ -9,3 +9,8 @@ execute unless block ~ ~ ~ minecraft:chest run function nfg_forcefield:config/de
 
 # Clear Players Inventory of all Config types
 clear @a diamond_hoe{ff:{config:1b}}
+
+# Clear book on the ground
+execute at @p[tag=ff_configuring] store result score #killedBooks ff_calcs run kill @e[sort=nearest,distance=..8,type=item,nbt={Item:{tag:{ff:{messages:1b}}}}]
+# If we cleared books on the ground, we want to re-render
+execute if score #killedBooks ff_calcs matches 1.. run function nfg_forcefield:config/reset_items
