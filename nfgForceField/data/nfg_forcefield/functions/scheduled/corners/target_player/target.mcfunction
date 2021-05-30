@@ -17,7 +17,3 @@ execute if entity @s[y_rotation=-180..-135] run tp @s ~ ~ ~ 180 0
 execute if entity @s[y_rotation=-135..-45] run tp @s ~ ~ ~ -90 0
 # Player facing N
 execute if entity @s[y_rotation=-45..-1] run tp @s ~ ~ ~ 0 0
-
-
-
-
