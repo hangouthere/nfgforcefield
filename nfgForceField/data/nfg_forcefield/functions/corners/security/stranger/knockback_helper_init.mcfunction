@@ -4,7 +4,7 @@ execute facing entity @p[tag=ff_effect_knockback] eyes run tp @s ^ ^ ^ ~ ~
 # Calculate trajectory and apply to `ff_knockback_helper`
 execute at @s run function nfg_forcefield:corners/security/stranger/motion_calc
 
-# Face again back as the user
+# Face again back as the Player
 execute rotated as @p[tag=ff_effect_knockback] run tp @s ^ ^ ^ ~ ~
 
 # Move to the player

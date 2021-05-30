@@ -1,0 +1,1 @@
+tellraw @s [{"text":"[nfgForceField] ","color":"gold"},{"text":"Error","color":"red"},{"text":": ","color":"white"},{"text":"That Messages Book has been signed! Please try again, but without signing the book!","color":"white"}]

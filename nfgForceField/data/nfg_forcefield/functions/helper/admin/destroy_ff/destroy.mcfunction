@@ -1,4 +1,4 @@
-# Tell user we're Destroying!
+# Tell Player we're Destroying!
 tellraw @p [{"text":""},{"text":"[nfgForceField] ","color":"gold"},{"text":"Destroying ","color":"dark_red"},{"text":"a "},{"text":"ForceField","color":"gold"},{"text":" owned by "},{"nbt":"ArmorItems[0].tag.IDs.playerName","entity":"@s","color":"light_purple"},{"text":"!"}]
 
 # Here we cheat, and utilize the `ff_demolish_marker` technique to destroy the Corner and return to the Player

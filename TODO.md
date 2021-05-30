@@ -5,45 +5,58 @@
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
 -   Config
-
-    -   Should error if player is not within 5 blocks of the corner
-    -   Should error if > 1 player is within 5 blocks of the corner
     -   Needs to finish tooltips on 2nd page
-    -   Needs to place message books in inventory
-    -   Upon saving config, needs to support `written_books` if the user signed by accident!
-        -   Probably need to rely on the tags mostly
-    -   Optimize:
-        -   Placing a configurator and not touching seems to use cycles... figure it out
-            -   Only render when `ff_configuring` OPENS the thing
-                -   Save/Cancel on CLOSE
-        -   ~~Update shape types from string to ints for less commands during detections~~
-        -   ~~Only reset if detected~~
-        -   ~~Only draw page if detected items~~
-    -   still needs to give player items back
-    -   Replace `powered`
+    -   Update `powered`
         -   Update to shape type, will require a semi-heavy lift
-
+        -   Both off should actually show power off
+        -   Do we want to change the model? 🤔
+    -   Needs sounds
+        -   Error
+        -   Config Success
+        -   Open
+        -   Close?
+-   Cleanup `operations.meta.list` namespacing.... it should be limited to a deeper search namespace and clear only THAT
+-   Bug: `ff_admin` destroy is not working 🤷‍♂️
+    -   I think it WAS working, I just didn't see the text?
+    -   Maybe add error requirements?
+-   Test: Forcefield inside FF, leaving build prot inner into the outter build prot, does it enable survival erroneously? Or correct itself instantly?
+-   Re-verify `creative/spectator` and `ff_admin` rights....
+    -   It's either not clear enough, or something as to why you can do things
+    -   Message in chat?
+        -   Might need to be different per mode/role as they may actually perform differently
+            -   Consider stranger/ally messages for creative/spectator vs `ff_admin`?
+        -   Per-user setting to disable the message?
 -   Player Book
     -   on/off? (will change later to cost players, don't overengineer this yet)
     -   Basic configuration/information
     -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
 -   Bug: When a FF is deleted, strangers are left in adventure mode!!!
--   Clean up/review all docs
+-   Add Allied Entering messaging!
+-   Add Allied capabilities
+    -   Needs Player Book update, similar to Give/Take `ff_admin`
 -   Look into optimizing some tick functionality, not everything needs to be done EVERY tick
-
     -   Clean up entity selectors, esp when copy/writing data... Use storage as temp location, then store on Entity at end
     -   Corner deletion/creation updates kinda stuff? every 10-20t
     -   Corner tooltip updates could be every 10t
     -   Double check scores (esp `store result score`) to make sure scopes are isolated (easiest via unique names)
-
+-   Need new error check on creating a FF, should be a minimum distance from another FF?
+    -   Think this over
 -   Inform `ff_admin` of their abilities in Admin book, as well as a server message as they enter the area
     -   Consider being able to silence this via a trigger
 -   Update GUI for Page 1 of config, Allied/Stranger need green/red coloring as the in-game color
+-   Admin book Update:
+    -   Take ownership of FF
+    -   Add OP trigger for complete reset, and info in the book about it
+-   Upgrade to messaging: Should allow nbt strings from users, copied from a sign i think?
 -   Minor update to Create process:
     -   Area should be split between perim and volume
         -   Needs volume calc added
     -   Tooltip needs updating to show both, m^2 and m^3
         -   Might need adjustments based on size? That way we don't see 918273912791827391827917m2
+-   Search source for `TODO` entries and clean up!
+-   Consider splitting Player Binding to differentiate between messaging/protection, and being inside the KILL ZONE
+    -   This will clean up Configurator summoning weirdness
+-   Clean up/review all docs
 
 Things to Test:
 
@@ -67,7 +80,7 @@ Things to Test:
         -   Maybe following perimeter?
     -   Complex idea with chest+books...
         -   ~~Messaging:
-            -   ~~Incoming Title/Subtitle/ActionBar/~~Server Text
+            -   ~~Entering Title/Subtitle/ActionBar/~~Server Text
             -   ~~Outgoing Title/Subtitle/ActionBar/~~Server Text
 -   Assignable Forcefields
     -   ~~Need to basically track ID to player~~
@@ -94,7 +107,7 @@ Things to Test:
 -   Corner updates on occassion?
     -   Items might be moved due to gravity, might need minor updates from time to time
 -   Idea for Corner Markers (while placing):
-    -   When user places starting corner, use a light block of some sort (for long distance view)
+    -   When Player places starting corner, use a light block of some sort (for long distance view)
         -   When moving away from the corner, the block should move upward the same amount to visually see (maybe cap height?)
             -   ONLY allow/move block if block is air
 -   ReDo namespacing... currently `nfg_forcefield:blah`, should be `nfg:forcefield/blah`... tedius, but cleaner grouping of my work
@@ -139,9 +152,9 @@ Things to Test:
     -   Needs to include betteranimalsplus hostile mobs
 -   Clean up Scanning so it's easy to split off for Mob vs Build protection
 -   Build Protection
-    -   Needs to tell user on Entry
+    -   Needs to tell Player on Entry
     -   Needs to put into Adventure mode on Entry
-    -   Needs to tell user on Exit
+    -   Needs to tell Player on Exit
     -   Needs to put into Survival mode on Exit
     -   Added: New buffer perim for protecting against destroying corners/etc
 -   Get rid of DEBUG completely - (left sprinkled in for scanning)
@@ -183,7 +196,7 @@ Things to Test:
         -   Update corner ID's/meta for tooltips, and owner evaluations
             -   don't forget process of out of chunk load!
     -   No start/end concept, just --CORNER--
-    -   Remove `ff_prot_build`, `ff_prob_mob` concept (will later use data!!)
+    -   Remove `ff_stranger`, `ff_prob_mob` concept (will later use data!!)
     -   Update labeling to get rid of mob vs build protection wording
     -   Upon config of new FF, should wipe scan array to force new scan on tick
     -   Double check error checking:
@@ -224,12 +237,32 @@ Things to Test:
 -   Enchance corner tooltips, they're bland and boring. Might need multi-line!
 -   Check/clean up things that maybe shouldn't happen in Creative Mode
     -   Corner Knockbacks shouldn't affect creative mode ppl
-    -   Users that go into creative mode while in a stranger's FF aren't handled correctly when going back into Survival
+    -   Players that go into creative mode while in a stranger's FF aren't handled correctly when going back into Survival
 -   `ff_admin` should be able to destroy/update ALL ForceFields!
 -   Sounds
     -   Fix sounds to be mono so they position correctly!!!
     -   Separate ambient vs zap
     -   Include sources in README!
+-   Config
+    -   Needs to give player items back
+    -   Optimize:
+        -   Placing a configurator and not touching seems to use cycles... figure it out
+            -   Only render when `ff_config_active` OPENS the thing
+                -   Save/Cancel on CLOSE
+        -   Upon saving config, needs to support `written_books` if the Player signed by accident!
+        -   Update shape types from string to ints for less commands during detections
+        -   Only reset if detected
+        -   Only draw page if detected items
+    -   error handling on init
+        -   Should error if player is not within 5 blocks of the corner, or inside a FF
+            -   Choose the closest corner over binding as a feature!
+                -   Allows players to have FF next to/embedded to each other, and allow desirable config
+        -   Should error if > 1 player is within 5 blocks of the corner
+        -   ~~Should error if player is not the owner of the corner~~
+            -   Shouldn't actually happen...
+            -   ~~`gamemode=creative` and `tag=ff_admin` should still be able to configure for server-safety purposes~~
+                -   Player/Owner/OP should user Admin Helper book to Take Ownership (TBD)
+        -   Needs to `deactivate`
 
 ---
 

@@ -9,6 +9,9 @@ replaceitem block ~ ~ ~ container.0 diamond_hoe{ff:{config:1b},HideFlags:127,Cus
 ## Tooltips
 # Info
 replaceitem block ~ ~ ~ container.4 diamond_hoe{display:{Name:'[{"text":"nfgForceField ","color":"gold"},{"text":"Configurator ","color":"white"},{"text":"Help","color":"aqua"}]',Lore:['{"text":" "}','{"text":"Configure the Shape per Protection","color":"white"}','{"text":"Type, or you can individually Power","color":"white"}','[{"text":"Off ","color":"red"},{"text":"a Type entirely!","color":"white"}]']},HideFlags:127,CustomModelData:255000,ff:{config:1b}}
+replaceitem block ~ ~ ~ container.21 air
+replaceitem block ~ ~ ~ container.22 air
+replaceitem block ~ ~ ~ container.23 air
 
 ##################################################################
 ## Build Protection
@@ -16,9 +19,9 @@ replaceitem block ~ ~ ~ container.4 diamond_hoe{display:{Name:'[{"text":"nfgForc
 replaceitem block ~ ~ ~ container.10 diamond_hoe{ff:{config:1b},HideFlags:127,CustomModelData:255000,display:{Name:'""'}}
 replaceitem block ~ ~ ~ container.11 diamond_hoe{ff:{config:1b},HideFlags:127,CustomModelData:255000,display:{Name:'""'}}
 # Prot Build Options
-replaceitem block ~ ~ ~ container.9 diamond_hoe{ff:{config:1b,prot_build:1b,prot_type:1},HideFlags:127,CustomModelData:255000,display:{Name:'"Perimeter"'}}
-replaceitem block ~ ~ ~ container.12 diamond_hoe{ff:{config:1b,prot_build:1b,prot_type:2},HideFlags:127,CustomModelData:255000,display:{Name:'"Volume"'}}
-replaceitem block ~ ~ ~ container.19 diamond_hoe{ff:{config:1b,prot_build:1b,prot_type:0},HideFlags:127,CustomModelData:255000,display:{Name:'"Off"'}}
+replaceitem block ~ ~ ~ container.9 diamond_hoe{ff:{config:1b,prot_build:1b,prot_type:1b},HideFlags:127,CustomModelData:255000,display:{Name:'"Perimeter"'}}
+replaceitem block ~ ~ ~ container.12 diamond_hoe{ff:{config:1b,prot_build:1b,prot_type:2b},HideFlags:127,CustomModelData:255000,display:{Name:'"Volume"'}}
+replaceitem block ~ ~ ~ container.19 diamond_hoe{ff:{config:1b,prot_build:1b,prot_type:0b},HideFlags:127,CustomModelData:255000,display:{Name:'"Off"'}}
 
 ##################################################################
 ## Mob Protection
@@ -26,9 +29,9 @@ replaceitem block ~ ~ ~ container.19 diamond_hoe{ff:{config:1b,prot_build:1b,pro
 replaceitem block ~ ~ ~ container.15 diamond_hoe{ff:{config:1b},HideFlags:127,CustomModelData:255000,display:{Name:'""'}}
 replaceitem block ~ ~ ~ container.16 diamond_hoe{ff:{config:1b},HideFlags:127,CustomModelData:255000,display:{Name:'""'}}
 # Prot Mob Options
-replaceitem block ~ ~ ~ container.14 diamond_hoe{ff:{config:1b,prot_mob:1b,prot_type:1},HideFlags:127,CustomModelData:255000,display:{Name:'"Perimeter"'}}
-replaceitem block ~ ~ ~ container.17 diamond_hoe{ff:{config:1b,prot_mob:1b,prot_type:2},HideFlags:127,CustomModelData:255000,display:{Name:'"Volume"'}}
-replaceitem block ~ ~ ~ container.25 diamond_hoe{ff:{config:1b,prot_mob:1b,prot_type:0},HideFlags:127,CustomModelData:255000,display:{Name:'"Off"'}}
+replaceitem block ~ ~ ~ container.14 diamond_hoe{ff:{config:1b,prot_mob:1b,prot_type:1b},HideFlags:127,CustomModelData:255000,display:{Name:'"Perimeter"'}}
+replaceitem block ~ ~ ~ container.17 diamond_hoe{ff:{config:1b,prot_mob:1b,prot_type:2b},HideFlags:127,CustomModelData:255000,display:{Name:'"Volume"'}}
+replaceitem block ~ ~ ~ container.25 diamond_hoe{ff:{config:1b,prot_mob:1b,prot_type:0b},HideFlags:127,CustomModelData:255000,display:{Name:'"Off"'}}
 
 ##################################################################
 
@@ -48,9 +51,6 @@ replaceitem block ~ ~ ~ container.8 air
 replaceitem block ~ ~ ~ container.13 air
 replaceitem block ~ ~ ~ container.18 air
 replaceitem block ~ ~ ~ container.20 air
-replaceitem block ~ ~ ~ container.21 air
-replaceitem block ~ ~ ~ container.22 air
-replaceitem block ~ ~ ~ container.23 air
 replaceitem block ~ ~ ~ container.24 air
 
 ##################################################################

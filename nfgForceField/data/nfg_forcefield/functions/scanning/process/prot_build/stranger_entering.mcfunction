@@ -1,5 +1,8 @@
 # Mark player is in prot build mode
-tag @s add ff_prot_build
+tag @s remove ff_ally
+tag @s add ff_stranger
+
+# Bind player to the FF
 execute store result score @s ff_player_bind run scoreboard players get #scan_ffId ff_calcs
 
 gamemode adventure @s

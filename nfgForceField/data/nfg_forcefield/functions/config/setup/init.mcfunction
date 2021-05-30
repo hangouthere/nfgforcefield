@@ -1,13 +1,18 @@
-# Mark Player as configuring
-tag @p[distance=..5] add ff_configuring
+# Perform Corner Checks
+execute as @p[distance=..5] at @s run function nfg_forcefield:config/setup/attempt_corner_config
 
-# Start the player on Page 0
-scoreboard players set @p[tag=ff_configuring] ff_config 1
-# Internal storage for boundaries for config pages
-scoreboard players set #maxPages ff_config 2
+## If no errors, check for local player count errors
+execute as @p[distance=..5,tag=ff_no_errors] run function nfg_forcefield:config/setup/check_players_nearby
 
-# Summon the Configurator
-function nfg_forcefield:config/setup/summon_configurator
+# There were errors from attempting a Corner Config, try inside a bound FF
+execute as @p[distance=..5,tag=!ff_no_errors,tag=!ff_too_many_players] at @s run function nfg_forcefield:config/setup/attempt_bound_config
 
-# Do first reset of the items
-execute as @p[tag=ff_configuring] run function nfg_forcefield:config/reset_items
+# If no errors, continue init!
+execute as @p[distance=..5,tag=ff_no_errors] run function nfg_forcefield:config/setup/continue_init
+
+# Destroy self if there's not any NON Errored players nearby
+execute unless entity @p[distance=..5,tag=ff_no_errors] run function nfg_forcefield:config/setup/uninit
+
+# Remove specific error tags
+tag @a remove ff_too_many_players
+tag @a remove ff_not_owner

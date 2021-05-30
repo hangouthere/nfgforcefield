@@ -10,4 +10,4 @@ execute store result score #scan_ffId ff_calcs run data get storage nfg:forcefie
 execute unless score @s nfg_player_id = #scan_ownerId ff_calcs run function nfg_forcefield:scanning/process/prot_build/scan_stranger
 
 # Ensure if teleported home from a safe zone, they are insta-cleared of protection
-execute if score @s nfg_player_id = #scan_ownerId ff_calcs run function nfg_forcefield:scanning/process/prot_build/scan_owner
+execute if score @s nfg_player_id = #scan_ownerId ff_calcs run function nfg_forcefield:scanning/process/prot_build/scan_allied
