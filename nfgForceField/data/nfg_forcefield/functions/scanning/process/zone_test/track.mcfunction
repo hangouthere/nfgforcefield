@@ -14,6 +14,3 @@ execute store result score #_W2Loffset_y nfg_util run data get storage nfg:force
 execute store result score #_W2Loffset_z nfg_util run data get storage nfg:forcefield scanner.current.zone.track.offset.z
 
 function nfg_forcefield:scanning/process/hit_test
-
-# Mark as In Bounds to any ForceField (used later when cleaning up Suspensions)
-execute if score #_hitDetected nfg_util matches 1 run scoreboard players add @s ff_scan_track 1

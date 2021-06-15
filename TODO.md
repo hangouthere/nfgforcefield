@@ -4,18 +4,43 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
+-   Consider splitting Player Binding to differentiate between messaging/protection, and being inside the KILL ZONE
+    -   ~~Update owner/ally/stranger targeting everywhere!~~
+    -   ~~Allow config from Owner/creative mode only (not ff_admin, they need to take it over if it's that important!)~~
+-   Cleanup `operations.meta.list` namespacing.... it should be limited to a deeper search namespace and clear only THAT
+    -   Related to FF's breaking wrong? Let's see!
+-   Bugs Found Testing:
+    -   Destroying a FF breaks wrong FF????
+    -   Multiplayer:
+        -   Building a FF
+            -   Shouldn't be able to build near another player's corner while building
+                -   4 chunk default distance, but make a setting: MinDistTandemBuild
+            -   building helper switches players as they cross
+                -   Consider using a scoreboard to associate helper w/player instead of location
+            -   When 2 are building and 1 finishes, the 2nd FF tooltips are activated erroneously
+    -   FF inside FF doesn't fix when you break the inner one
+-   Verify Scanning operations:
+    -   Does it skip players far from FF?
 -   Config
+    -   Change to use SCORE compare for ID matching instead of data copy!
     -   Needs to finish tooltips on 2nd page
     -   Update `powered`
         -   Update to shape type, will require a semi-heavy lift
         -   Both off should actually show power off
         -   Do we want to change the model? 🤔
     -   Needs sounds
-        -   Error
+        -   ✅ Error
         -   Config Success
-        -   Open
-        -   Close?
--   Cleanup `operations.meta.list` namespacing.... it should be limited to a deeper search namespace and clear only THAT
+        -   knockback
+        -   Open Config
+        -   Close Config?
+    -   Trigger command to toggle messaging to ff_admin about ownership
+        -   Will need to update command to only work when score is NOT `1..`
+-   Make all `kill` commands a `tp` command?
+    -   Kill vs TP Setting for mobs? default to tp of course
+-   Breaking a configured FF needs to target OWNER, and ensure owner ID matches for returning corner and breaking!
+-   When a configurator is placed and errors, it needs to check for owner of bound/nearest and return to THAT player
+
 -   Bug: `ff_admin` destroy is not working 🤷‍♂️
     -   I think it WAS working, I just didn't see the text?
     -   Maybe add error requirements?
@@ -26,11 +51,13 @@ When this Phase is complete, that means we are able to start using it on the NFG
         -   Might need to be different per mode/role as they may actually perform differently
             -   Consider stranger/ally messages for creative/spectator vs `ff_admin`?
         -   Per-user setting to disable the message?
+    -   Tell them in chat they can take over via the FF Admin book (which needs to be done)
 -   Player Book
     -   on/off? (will change later to cost players, don't overengineer this yet)
     -   Basic configuration/information
     -   mob/build shape settings? (will change later to cost players, don't overengineer this yet)
 -   Bug: When a FF is deleted, strangers are left in adventure mode!!!
+-   Bug: Clear chat after chat actions... this alleviates any scrolling back up and getting to re-do something you don't want the player to do, such as go around deleting random FF's
 -   Add Allied Entering messaging!
 -   Add Allied capabilities
     -   Needs Player Book update, similar to Give/Take `ff_admin`
@@ -39,6 +66,14 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Corner deletion/creation updates kinda stuff? every 10-20t
     -   Corner tooltip updates could be every 10t
     -   Double check scores (esp `store result score`) to make sure scopes are isolated (easiest via unique names)
+-   Players that switch modes need to have their state cleared
+    -   Maybe keep a score of OP mode = 1, non op mode doesn't have a score?
+    -   If creative or spectator and mode = ??, clear state and set to 1
+    -   If mode = 1 and NOT creative or spectator, clear state and reset score
+-   Look into optimizing if/unless selector attributes...
+    -   Example:
+        -   Before: `execute unless entity @s[tag=ff_effect_knockback] if entity @s[distance=..6] run function nfg_forcefield:corners/security/stranger/near`
+        -   After: `execute if entity @s[tag=!ff_effect_knockback,distance=..6] run function nfg_forcefield:corners/security/stranger/near`
 -   Need new error check on creating a FF, should be a minimum distance from another FF?
     -   Think this over
 -   Inform `ff_admin` of their abilities in Admin book, as well as a server message as they enter the area
@@ -54,19 +89,32 @@ When this Phase is complete, that means we are able to start using it on the NFG
     -   Tooltip needs updating to show both, m^2 and m^3
         -   Might need adjustments based on size? That way we don't see 918273912791827391827917m2
 -   Search source for `TODO` entries and clean up!
--   Consider splitting Player Binding to differentiate between messaging/protection, and being inside the KILL ZONE
-    -   This will clean up Configurator summoning weirdness
 -   Clean up/review all docs
+-   Tags are broken if Better Animals/Etc is not installed - Release as independent datapack, adding to the tag? - Include a separate tag? -
 
 Things to Test:
 
+-   Items give back to the right person correctly
+    -   Creative Owner vs Creative Stranger vs `ff_admin` vs `ff_owner` vs `ff_ally`
 -   2 players placing at the same time
     -   1 player deleting while placing
     -   Actionbar is giving accurate info
     -   Have players run through eachother to see if helper's swap
+    -   check `corners/unconfigured/placing/building_helper/init` to ensure removing the tags that way doesn't over-affect entities in a negative way, particularly `ff_needs_config`, `ff_init`, and `ff_start`
+-   When FF off, can it be destroyed by another player? via TNT?
+    -   Who gets the Corners? Should be OWNER or no one!
+-   When near FF configuring, can another player destroy?
+-   When FF configuring, can/should you place near another chest?
+    -   if opening alt chest, does it mess up?
+    -   might need a predicate to do a quick radius check to avoid issues
+        -   script this out (and k.i.s.s. - it's not a main part of the project!)
+-   100% verify `cleanup_state` and `cleanup_bound_state` are used correctly
 
 ## Phase 2
 
+-   Split up data storage
+    -   Templates (nfg namespaced)
+    -   Operations
 -   Split up nfgUtil and nfgForceField repos, and include build zip for nfgUtil in nfgForceField
 -   Per-FF Configuration
     -   FF Mods: Perim vs Volume, Mob vs Build (see Different Approach below)
@@ -86,6 +134,7 @@ Things to Test:
     -   ~~Need to basically track ID to player~~
     -   ~~Adds features/capabilities based on matching ID (or mismatching ID)~~
     -   Multiple players can match an ID for "tribes"
+        -   Consider Ark approach (ie tribe admins/alliances)
 -   ReadMe Stuffs
     -   Explain Volume vs Perimeter Shapes
     -   Explain Mob vs Build Protection
@@ -263,6 +312,7 @@ Things to Test:
             -   ~~`gamemode=creative` and `tag=ff_admin` should still be able to configure for server-safety purposes~~
                 -   Player/Owner/OP should user Admin Helper book to Take Ownership (TBD)
         -   Needs to `deactivate`
+-   Bug: Tooltips keep sticking around, annoyingly
 
 ---
 

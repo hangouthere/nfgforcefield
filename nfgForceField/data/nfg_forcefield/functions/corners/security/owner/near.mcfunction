@@ -5,8 +5,8 @@ summon armor_stand ~ ~ ~ {Small:1b,Invisible:1b,Invulnerable:1b,Marker:1b,NoGrav
 # Copy NBT data from Corner to Marker for later use.
 data modify entity @e[tag=ff_demolish_marker,limit=1,sort=nearest] ArmorItems[0].tag set from entity @s ArmorItems[0].tag
 
-# Make Corner NOT Invulnerable, so the Owner can destroy it
-data modify entity @s Invulnerable set value 0b
+# Make Corner NOT Invulnerable, so the Owner can destroy it (we're positioned at the current Secure Corner)
+data modify entity @e[tag=ff_corner,distance=..1,limit=1] Invulnerable set value 0b
 
 # Add Near Tag to avoid over-processing
-tag @p[distance=..8] add ff_demolish_near
+tag @s add ff_demolish_near

@@ -1,0 +1,5 @@
+tellraw @s [{"text":"[nfgForceField] ","color":"gold"},{"text":"You can assume ","color":"white"},{"text":"Ownership ","color":"light_purple"},{"text":"of this ","color":"white"},{"text":"ForceField ","color":"gold"},{"text":" (currently owned by ","color":"white"},{"nbt":"ArmorItems[0].tag.IDs.playerName","entity":"@e[tag=ff_corner,tag=ff_configured,sort=nearest,limit=1]","color":"light_purple"},{"text":") by accessing your ","color":"white"},{"text":"nfgForceField -","color":"gold"},{"text":" Admin Helper","color":"aqua"},{"text":" book.","color":"white"}]
+
+execute unless entity @s[nbt={Inventory:[{tag:{ff_admin_helper:1b}}]}] run tellraw @s [{"text":"[nfgForceField] ","color":"gold"},{"text":"You don't appear to have an ","color":"white"},{"text":"Admin Helper","color":"aqua"},{"text":" book, would you like one? [","color":"white"},{"text":"Yes","color":"red","clickEvent":{"action":"run_command","value":"/function nfg_forcefield:inventory/give_admin_book"}},{"text":"]","color":"white"}]
+
+tag @s add ff_info

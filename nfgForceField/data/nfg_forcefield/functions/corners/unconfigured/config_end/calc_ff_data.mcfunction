@@ -1,6 +1,7 @@
 # Calculate supporting values
 function nfg_util:vec/calc
 function nfg_util:vol/calc
+function nfg_util:perim/area
 
 # Backup original coords...
 function nfg_util:helpers/backup_in1_in2

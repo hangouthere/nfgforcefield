@@ -5,4 +5,4 @@
 execute if entity @a[limit=1] run function nfg_forcefield:scanning/process/tick
 
 # Debug Draw baddies
-execute if score #DEBUG ff_calcs matches 1 run function nfg_forcefield:scanning/debug_draw
+execute if score #DEBUG ff_calcs matches 1.. run function nfg_forcefield:scanning/debug_draw

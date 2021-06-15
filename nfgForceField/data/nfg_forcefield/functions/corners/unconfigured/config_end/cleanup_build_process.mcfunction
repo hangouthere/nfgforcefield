@@ -8,10 +8,10 @@ kill @e[tag=ff_building_helper,sort=nearest,limit=1]
 data remove storage nfg:forcefield operations.meta
 
 # Remove Player Building Status and other FF related tags to clear state
-tag @p remove ff_building
-tag @p remove ff_demolish_near
-tag @p remove ff_tooltip_near
-tag @p remove ff_tooltip_medium
+tag @p[tag=ff_building] add ff_wait
+execute as @p[tag=ff_building] run function nfg_forcefield:helper/player/cleanup_state
+tag @p[tag=ff_wait] add ff_owner
+tag @p[tag=ff_wait] remove ff_wait
 
 # Reintroduce Suspended mobs, because a new ForceField
 # could have been built nearby

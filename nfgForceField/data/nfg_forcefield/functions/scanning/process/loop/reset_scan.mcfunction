@@ -1,3 +1,5 @@
+execute if score #DEBUG ff_calcs matches 10 run say %% RESET
+
 # Global reset of scan vars
 
 function nfg_forcefield:scanning/process/loop/finalize_suspend_states
@@ -20,14 +22,21 @@ scoreboard players set @e ff_scan_track 0
 scoreboard players set @e ff_suspend_perm 0
 scoreboard players set @e ff_suspend_temp 0
 
-scoreboard players set #_scanff_idx ff_calcs 0
-scoreboard players set #_scan_player_idx ff_calcs 0
-scoreboard players set #_scan_state ff_calcs 1
+scoreboard players set #_scan_idx_ff ff_calcs 0
+scoreboard players set #_scan_idx_player ff_calcs 0
+scoreboard players set #_scan_state ff_calcs 4
 
 # Copy ForceFields to temp location that we can destroy as we iterate as a queue
 data modify storage nfg:forcefield scanner.list set from storage nfg:forcefield ForceFields
 
 # Set Count of ForceFields from the iterative array (for loop index)
-execute store result score #_scanff_idx ff_calcs run data get storage nfg:forcefield scanner.list
+execute store result score #_scan_idx_ff ff_calcs run data get storage nfg:forcefield scanner.list
 # Set Count of ForceFields from the iterative array (for max counts)
-execute store result score #_scanff_count ff_calcs run data get storage nfg:forcefield scanner.list
+execute store result score #_scan_count_ff ff_calcs run data get storage nfg:forcefield scanner.list
+
+# Increment the FF Count to fix Loop Index process...
+# Basically, the first thing it'll do is idx--, which won't be accurate for the first iteration
+scoreboard players add #_scan_idx_ff ff_calcs 1
+
+execute if score #DEBUG ff_calcs matches 10 run tellraw @a ["Number of FF: ", {"score":{"name": "#_scan_count_ff","objective": "ff_calcs"}}]
+execute if score #DEBUG ff_calcs matches 10 run tellraw @a ["Starting IDX: ", {"score":{"name": "#_scan_idx_ff","objective": "ff_calcs"}}]

@@ -8,7 +8,7 @@ function nfg_forcefield:corners/configured/tooltip/get_tooltip_info
 # Hide top label
 data modify entity @e[tag=ff_line_1,sort=nearest,limit=1] CustomNameVisible set value 0b
 
-# Show Owner
+# Show Owner Name on label
 data modify entity @e[tag=ff_line_2,sort=nearest,limit=1] CustomName set from block ~ ~ ~ Text1
 
 ## Update Corner Name to Generic name

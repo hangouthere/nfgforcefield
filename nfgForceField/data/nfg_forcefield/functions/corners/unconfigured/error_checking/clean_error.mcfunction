@@ -1,7 +1,12 @@
+# Error symbol
+execute at @s run particle barrier ^ ^0.5 ^ 0 0 0 0 0 force @p[tag=ff_building]
 # Error sound, and Kill the erroneous Corner
-playsound nfg_forcefield:error master @p ~ ~ ~
-tag @s remove ff_no_errors
+playsound nfg_forcefield:error master @p[tag=ff_building] ~ ~ ~
+
 kill @s
 
 # Give corners back if needed
-execute unless entity @p[gamemode=creative] unless entity @p[gamemode=spectator] run schedule function nfg_forcefield:inventory/give_corner 2t replace
+tag @p[tag=ff_building,gamemode=!creative,gamemode=!spectator] add ff_return_corner
+
+# Schedule for return, due to needing to have item fully out of inventory after this tick
+schedule function nfg_forcefield:corners/unconfigured/error_checking/scheduled_return_corner 2t replace

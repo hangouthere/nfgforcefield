@@ -1,4 +1,4 @@
-tag @p add ff_effect_knockback
+tag @s add ff_effect_knockback
 
 # Create trajectory object to knock back player
 summon armor_stand ~ ~ ~ {Small:1b,Invisible:1b,Invulnerable:1b,Tags:["ff_knockback_helper"]}

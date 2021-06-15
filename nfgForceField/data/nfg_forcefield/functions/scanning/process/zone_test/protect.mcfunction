@@ -14,3 +14,4 @@ execute store result score #_W2Loffset_y nfg_util run data get storage nfg:force
 execute store result score #_W2Loffset_z nfg_util run data get storage nfg:forcefield scanner.current.zone.protect.offset.z
 
 function nfg_forcefield:scanning/process/hit_test
+

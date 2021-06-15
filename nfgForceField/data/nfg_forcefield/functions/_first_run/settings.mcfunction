@@ -4,7 +4,8 @@
 ## Scoreboard Setup
 # Cleanup Old Values, just in case...
 scoreboard objectives remove ff_calcs
-scoreboard objectives remove ff_player_bind
+scoreboard objectives remove ff_bind_prot
+scoreboard objectives remove ff_bind_kill
 scoreboard objectives remove ff_tmrKnockback
 scoreboard objectives remove ff_suspend_perm
 scoreboard objectives remove ff_suspend_temp
@@ -15,8 +16,10 @@ scoreboard objectives remove ff_config_open
 # Temp storage for calculations
 #declare objective ff_calcs Calculations
 scoreboard objectives add ff_calcs dummy
-#declare objective ff_player_bind Maps a player to an FF_ID (aka BINDing) when they are inside a FF
-scoreboard objectives add ff_player_bind dummy
+#declare objective ff_bind_prot Maps a player to an FF_ID when inside Protection Zone
+scoreboard objectives add ff_bind_prot dummy
+#declare objective ff_bind_kill Maps a player to an FF_ID for when inside the actual ForceField Shape
+scoreboard objectives add ff_bind_kill dummy
 #declare objective ff_tmrKnockback Tracks how long knockback has been applied for a TTL
 scoreboard objectives add ff_tmrKnockback dummy
 #declare objective ff_suspend_perm Tally Permanently Suspended marked mobs
@@ -40,6 +43,9 @@ scoreboard players set BoundsTrackZoneDistance ff_calcs 75
 scoreboard players set BoundsIgnoreZoneDistance ff_calcs 150
 scoreboard players set BoundsProtectZoneDistance ff_calcs 16
 scoreboard players set MobRecycleSeconds ff_calcs 15
+
+# Internal storage for boundaries for config pages
+scoreboard players set #maxPages ff_config 2
 
 ## Data Storage Configuration
 #define storage nfg:forcefield NFG ForceField Storage

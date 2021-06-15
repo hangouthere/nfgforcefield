@@ -10,4 +10,6 @@ execute as @e[limit=75,distance=..128,type=#nfg_forcefield:zappable,tag=!ff_proc
 execute unless entity @e[limit=1,distance=..128,type=#nfg_forcefield:zappable,tag=!ff_processed,tag=!ff_suspend,sort=nearest] run tag @s add ff_thread_processed
 
 # Mark Enum value indicating we're fully processed,
-execute if entity @s[tag=ff_thread_processed] run scoreboard players set #_scan_state ff_calcs 1
+execute if entity @s[tag=ff_thread_processed] run scoreboard players set #_scan_state ff_calcs 3
+
+execute if score #DEBUG ff_calcs matches 10 if entity @s[tag=ff_thread_processed] run say Done scanning FF, moving on?

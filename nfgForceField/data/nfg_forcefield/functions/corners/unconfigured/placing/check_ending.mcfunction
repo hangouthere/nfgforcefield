@@ -1,3 +1,8 @@
+tag @s add ff_no_errors
+
+# Mark Corner as End Corner
+tag @s add ff_end
+
 # Check for Error Conditions: Init Area Sizing
 function nfg_forcefield:corners/unconfigured/error_checking/check_area
 

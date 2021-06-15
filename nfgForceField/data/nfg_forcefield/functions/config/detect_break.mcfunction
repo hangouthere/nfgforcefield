@@ -1,4 +1,4 @@
-execute if entity @s[tag=ff_config_saved] run tellraw @s [{"text":"[nfgForceField] ","color":"gold"},{"text":"Saved ","color":"white"},{"text":" ForceField ","color":"gold"},{"text":" configuration!","color":"white"}]
+execute if entity @s[tag=ff_config_saved] run tellraw @s [{"text":"[nfgForceField] ","color":"gold"},{"text":"Saved ","color":"white"},{"text":"ForceField ","color":"gold"},{"text":"configuration!","color":"white"}]
 
 # Kill junk that was left behind from breaking the chest
 kill @e[sort=nearest,distance=..8,type=item,nbt={Item:{tag:{ff:{config:1b}}}}]
@@ -22,4 +22,4 @@ tag @s remove ff_config_saved
 function nfg_forcefield:config/pages/page_return
 
 # Give the Player an Item to place another Configurator
-execute if entity @s[gamemode=!creative,gamemode=!spectator] run function nfg_forcefield:inventory/give_configure_marker
+execute if entity @s[gamemode=!creative,gamemode=!spectator] run function nfg_forcefield:inventory/give_config_marker

@@ -1,9 +1,6 @@
-# Init test value with the FF's configured Owner
-data modify storage nfg:forcefield operations.meta.id_comp set from entity @e[tag=ff_config_marker,sort=nearest,limit=1] ArmorItems[0].tag.IDs.owner
+#TODO: Determine if this is even possible...
+# Shouldn't strangers all be in adventure mode? No way else to configure unless you're in Creative mode, in which case you also shouldn't get this error
 
-# Copy actual player's ID, and on FAILURE means it matches!
-execute store success score #notOwner ff_config store result storage nfg:forcefield operations.meta.id_comp int 1 run scoreboard players get @s nfg_player_id
+tag @s remove ff_no_errors
 
-# NOT Owner!
-execute if score #notOwner ff_config matches 1 run tag @s remove ff_no_errors
-execute if score #notOwner ff_config matches 1 run tag @s add ff_not_owner
+tellraw @s [{"text":"[nfgForceField] ","color":"gold"},{"text":"Error","color":"red"},{"text":": ","color":"white"},{"text":"You are ","color":"white"},{"text":"NOT the Owner ","color":"red"},{"text":"of this ","color":"white"},{"text":"ForceField","color":"gold"},{"text":", and therefore cannot configure it!","color":"white"}]

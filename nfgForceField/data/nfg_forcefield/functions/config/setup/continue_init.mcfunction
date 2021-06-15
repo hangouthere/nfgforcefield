@@ -2,4 +2,4 @@
 function nfg_forcefield:config/setup/setup_player
 
 # Summon the Configurator
-function nfg_forcefield:config/setup/setup_configurator
+execute at @e[tag=ff_config_marker,sort=nearest,limit=1] run function nfg_forcefield:config/setup/setup_configurator

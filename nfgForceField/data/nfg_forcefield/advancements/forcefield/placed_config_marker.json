@@ -1,0 +1,16 @@
+{
+    "criteria": {
+        "is_config_marker": {
+            "trigger": "minecraft:item_used_on_block",
+            "conditions": {
+                "item": {
+                    "item": "minecraft:sheep_spawn_egg",
+                    "nbt": "{ff_config_marker:1b}"
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "nfg_forcefield:helper/player/advancements/used_config_marker"
+    }
+}

@@ -8,7 +8,10 @@ function nfg_forcefield:ff_search/by_ids_obj/search
 execute if data storage nfg:forcefield operations.meta.found_ff run function nfg_forcefield:corners/security/demolish_marker/schedule_delete
 
 # Give the player back the pieces
-function nfg_forcefield:inventory/give_corners
+execute if entity @s[gamemode=!creative,gamemode=!spectator] run function nfg_forcefield:inventory/give_corners
 
 # Clean up detection state
 function nfg_forcefield:ff_search/cleanup_meta
+
+# Clean up player state
+function nfg_forcefield:helper/player/cleanup_state
