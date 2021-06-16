@@ -1,8 +1,6 @@
 # Corners - Corner Tooltip
 # Shows the player which mode the ForceField is set to
 # Create AEC tooltip, but only if one doesn't exist, and only when really close
-#####################################
-# Started as: execute as @e[tag=ff_corner,tag=ff_configured] at @s
 
 # Display Near Tooltips
 execute unless entity @p[tag=ff_tooltip_near] if entity @p[distance=..4] if entity @s[tag=ff_power_on] run function nfg_forcefield:corners/configured/tooltip/near

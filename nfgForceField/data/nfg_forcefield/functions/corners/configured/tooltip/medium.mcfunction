@@ -1,7 +1,5 @@
 # Corners - Tooltip: Medium
 # Show tooltips when a player is medium distance to a Corner
-#####################################
-# Started as: execute if entity @p[distance=4..6]
 
 function nfg_forcefield:corners/configured/tooltip/get_tooltip_info
 

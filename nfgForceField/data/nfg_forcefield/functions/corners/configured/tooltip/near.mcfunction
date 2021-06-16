@@ -1,7 +1,5 @@
 # Corners - Tooltip: Near
 # Show tooltips when a player is close to a Corner
-#####################################
-# Started as: execute if entity @p[distance=..3]
 
 ## Update Corner Name to Detail Info when Player is "near"
 

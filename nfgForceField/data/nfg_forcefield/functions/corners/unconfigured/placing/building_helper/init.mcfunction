@@ -6,13 +6,13 @@ execute at @s run summon armor_stand ~ ~ ~ {Small:1b,Invisible:1b,Invulnerable:1
 scoreboard players add #ffNextId ff_calcs 1
 
 # Copy Template to build FF data
-data modify storage nfg:forcefield operations.meta.ff_start set from storage nfg:forcefield template.buildFF
+data modify storage nfg:forcefield operations.meta.placing_ff set from storage nfg:forcefield template.buildFF
 
 #####################
 
 # Use dummy loot item to get player name
 execute as @s run loot spawn ~ ~ ~ loot nfg_forcefield:get_player_head
-execute as @e[type=item,nbt={Item:{id:"minecraft:player_head"}},sort=nearest,limit=1] run data modify storage nfg:forcefield operations.meta.ff_start.IDs.playerName set from entity @s Item.tag.SkullOwner.Name
+execute as @e[type=item,nbt={Item:{id:"minecraft:player_head"}},sort=nearest,limit=1] run data modify storage nfg:forcefield operations.meta.placing_ff.IDs.playerName set from entity @s Item.tag.SkullOwner.Name
 
 # Kill player head
 kill @e[type=item,nbt={Item:{id:"minecraft:player_head"}},sort=nearest,limit=1]
@@ -21,19 +21,19 @@ kill @e[type=item,nbt={Item:{id:"minecraft:player_head"}},sort=nearest,limit=1]
 
 ## Set initial values for this ForceField
 # id.ff - Unique ForceField ID
-execute store result storage nfg:forcefield operations.meta.ff_start.IDs.ff int 1 run scoreboard players get #ffNextId ff_calcs
+execute store result storage nfg:forcefield operations.meta.placing_ff.IDs.ff int 1 run scoreboard players get #ffNextId ff_calcs
 # id.player - Owner ID (set to Player ID)
-execute store result storage nfg:forcefield operations.meta.ff_start.IDs.player int 1 run scoreboard players get @s nfg_player_id
+execute store result storage nfg:forcefield operations.meta.placing_ff.IDs.player int 1 run scoreboard players get @s nfg_player_id
 # corner.start[x,y,z]
-data modify storage nfg:forcefield operations.meta.ff_start.corner.start set from entity @e[tag=ff_start,sort=nearest,limit=1] Pos
+data modify storage nfg:forcefield operations.meta.placing_ff.corner.start set from entity @e[tag=ff_start,sort=nearest,limit=1] Pos
 
 #####################
 
 # Copy initial data to corner
-data modify entity @e[tag=ff_start,sort=nearest,limit=1] ArmorItems[0].tag set from storage nfg:forcefield operations.meta.ff_start
+data modify entity @e[tag=ff_start,sort=nearest,limit=1] ArmorItems[0].tag set from storage nfg:forcefield operations.meta.placing_ff
 
 # Copy initial data to `ff_building_helper`
-data modify entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag set from storage nfg:forcefield operations.meta.ff_start
+data modify entity @e[tag=ff_building_helper,sort=nearest,limit=1] ArmorItems[0].tag set from storage nfg:forcefield operations.meta.placing_ff
 
 # Clear up junk storage
-data remove storage nfg:forcefield operations.meta.ff_start
+data remove storage nfg:forcefield operations.meta.placing_ff

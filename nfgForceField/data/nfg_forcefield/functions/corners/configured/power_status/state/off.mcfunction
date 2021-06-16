@@ -1,7 +1,5 @@
 # Power Status - Power Off
 # Turn off the Power!
-#####################################
-# Started as: execute as @e[tag=ff_corner,tag=ff_configured] at @s run execute if entity @s[tag=ff_power_off]
 
 # Update Tools & Pose so it appears powered off :(
 data modify entity @s Pose set value {Head:[75f,0f,0f]}

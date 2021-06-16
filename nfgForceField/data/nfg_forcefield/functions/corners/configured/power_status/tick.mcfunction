@@ -1,7 +1,5 @@
 # Power Status - Tick
 # Pay attention to Power Updates
-#####################################
-# Started as: execute as @e[tag=ff_corner,tag=ff_configured] at @s
 
 # Detect Mod Changes to the forcefield (ie, power status)
 execute if entity @s[tag=!ff_mod_detected] run function nfg_forcefield:corners/configured/power_status/change/detect

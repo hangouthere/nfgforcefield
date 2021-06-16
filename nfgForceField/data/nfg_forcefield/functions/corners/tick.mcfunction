@@ -1,7 +1,5 @@
 # Corners - Tick
 # Per tick, detect, error-check, and evaluate Corners!
-#####################################
-# Started as: execute as @e[tag=ff_corner] at @s
 
 # Unconfigured Corner Handling
 execute if entity @s[tag=!ff_configured] run function nfg_forcefield:corners/unconfigured/tick

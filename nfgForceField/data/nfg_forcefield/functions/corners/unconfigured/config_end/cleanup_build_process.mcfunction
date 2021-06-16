@@ -5,12 +5,15 @@ title @p actionbar ""
 kill @e[tag=ff_building_helper,sort=nearest,limit=1]
 
 # Clean up data storage
-data remove storage nfg:forcefield operations.meta
+#TODO: Clean up proper namespace under meta
+data remove storage nfg:forcefield operations.meta.placing_ff
 
 # Remove Player Building Status and other FF related tags to clear state
 tag @p[tag=ff_building] add ff_wait
 execute as @p[tag=ff_building] run function nfg_forcefield:helper/player/cleanup_state
+# Mark the Player as Owner/Ally so things work correctly, like protections, messaging, etc.
 tag @p[tag=ff_wait] add ff_owner
+tag @p[tag=ff_wait] add ff_ally
 tag @p[tag=ff_wait] remove ff_wait
 
 # Reintroduce Suspended mobs, because a new ForceField

@@ -1,11 +1,11 @@
 # Find FF by ID
 #
-# operations.meta.list - Required - Array to loop through and compare/find by `IDs.ff` property
+# operations.meta.search.list - Required - Array to loop through and compare/find by `IDs.ff` property
 #
 # Example:
-# data remove storage nfg:forcefield operations.meta
-# data modify storage nfg:forcefield operations.meta.list set from storage nfg:forcefield ForceFields
-# data modify storage nfg:forcefield operations.meta.target set from entity @s ArmorItems[0].tag
+# data remove storage nfg:forcefield operations.meta.search
+# data modify storage nfg:forcefield operations.meta.search.list set from storage nfg:forcefield ForceFields
+# data modify storage nfg:forcefield operations.meta.search.target set from entity @s ArmorItems[0].tag
 
 ###################################################################
 # This file recursively calls itself until it either loops an entire array,
@@ -15,15 +15,15 @@
 ## Setup necessary data, but only first run
 
 # Prep ID index loop value
-execute unless score #_search_count_list ff_calcs matches 1.. store result score #_search_count_list ff_calcs run data get storage nfg:forcefield operations.meta.list
+execute unless score #_search_count_list ff_calcs matches 1.. store result score #_search_count_list ff_calcs run data get storage nfg:forcefield operations.meta.search.list
 
 ## Do evaluations
 
 # Copy value to test against
-data modify storage nfg:forcefield operations.meta.currIdx set from storage nfg:forcefield operations.meta.list[0].IDs.ff
+data modify storage nfg:forcefield operations.meta.search.currIdx set from storage nfg:forcefield operations.meta.search.list[0].IDs.ff
 
 # Do ID compare...
-execute store success score #_search_found_id ff_calcs run data modify storage nfg:forcefield operations.meta.currIdx set from storage nfg:forcefield operations.meta.target
+execute store success score #_search_found_id ff_calcs run data modify storage nfg:forcefield operations.meta.search.currIdx set from storage nfg:forcefield operations.meta.search.target
 
 # Found!
 execute if score #_search_found_id ff_calcs matches 0 run function nfg_forcefield:ff_search/found

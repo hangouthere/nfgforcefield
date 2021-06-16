@@ -1,7 +1,5 @@
 # Power Status - Power On
 # Turn on the Power!
-#####################################
-# Started as: execute as @e[tag=ff_corner,tag=ff_configured] at @s run execute if entity @s[tag=ff_power_on]
 
 # Update Tools & Pose so it appears powered on!
 data modify entity @s Pose set value {LeftArm:[311f,0f,0f],RightArm:[275f,0f,0f]}

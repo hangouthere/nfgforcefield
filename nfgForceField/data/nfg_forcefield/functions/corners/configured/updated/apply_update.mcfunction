@@ -2,7 +2,7 @@
 scoreboard players set #isUpdateForced ff_calcs 1
 
 # Copy re-sorted list to proper location
-data modify storage nfg:forcefield operations.update set from storage nfg:forcefield operations.meta.list
+data modify storage nfg:forcefield operations.update set from storage nfg:forcefield operations.meta.search.list
 
 # Copy Update value to Corner
 data modify entity @s ArmorItems[0].tag set from storage nfg:forcefield operations.update[0]

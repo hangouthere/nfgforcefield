@@ -7,7 +7,7 @@ When this Phase is complete, that means we are able to start using it on the NFG
 -   Consider splitting Player Binding to differentiate between messaging/protection, and being inside the KILL ZONE
     -   ~~Update owner/ally/stranger targeting everywhere!~~
     -   ~~Allow config from Owner/creative mode only (not ff_admin, they need to take it over if it's that important!)~~
--   Cleanup `operations.meta.list` namespacing.... it should be limited to a deeper search namespace and clear only THAT
+-   Cleanup `operations.meta.search.list` namespacing.... it should be limited to a deeper search namespace and clear only THAT
     -   Related to FF's breaking wrong? Let's see!
 -   Bugs Found Testing:
     -   Destroying a FF breaks wrong FF????
