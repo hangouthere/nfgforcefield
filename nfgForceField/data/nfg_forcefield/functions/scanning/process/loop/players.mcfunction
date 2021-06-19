@@ -15,7 +15,8 @@ execute if score #_scan_idx_player ff_calcs matches 1.. run scoreboard players s
 execute if score #_scan_idx_player ff_calcs matches 0 run scoreboard players set #_scan_state ff_calcs 4
 
 # DEBUG junk
-execute if score #DEBUG ff_calcs matches 10 run tellraw @a ["Processing Player: ", {"selector":"@e[tag=ff_thread_start]"}]
+execute if score #DEBUG ff_calcs matches 10 if score #_scan_state ff_calcs matches 2 run tellraw @a ["Processing Player: ", {"selector":"@e[tag=ff_thread_start]"}]
+execute if score #DEBUG ff_calcs matches 10 if score #_scan_state ff_calcs matches 4 run tellraw @a ["No more Players to scan"]
 
 # Start Binding checks as the newly selected Player
 execute as @e[tag=ff_thread_start] run function nfg_forcefield:scanning/process/player_binding/scan

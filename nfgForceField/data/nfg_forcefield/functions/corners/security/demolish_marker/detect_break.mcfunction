@@ -1,4 +1,4 @@
-# TODO: Support creative/ff_admin?
+execute if score #DEBUG ff_calcs matches 55 run say Break Detected!
 
 # If an Owner is near, demolish as an Configured FF
 execute as @p[tag=ff_owner,tag=!ff_building,distance=..8] run function nfg_forcefield:corners/security/demolish_marker/break_configured
@@ -20,3 +20,5 @@ kill @e[type=item,nbt={Item:{tag:{ff_corner_armor: 1b}}}]
 kill @e[type=item,nbt={Item:{id:"minecraft:armor_stand"}},sort=nearest,limit=1]
 
 execute as @a[distance=..16] run function nfg_forcefield:helper/player/cleanup_state
+execute as @a[distance=..16] run scoreboard players reset @s ff_bind_prot
+execute as @a[distance=..16] run scoreboard players reset @s ff_bind_kill

@@ -4,13 +4,13 @@
 
 When this Phase is complete, that means we are able to start using it on the NFGArmy server!
 
--   Consider splitting Player Binding to differentiate between messaging/protection, and being inside the KILL ZONE
-    -   ~~Update owner/ally/stranger targeting everywhere!~~
-    -   ~~Allow config from Owner/creative mode only (not ff_admin, they need to take it over if it's that important!)~~
--   Cleanup `operations.meta.search.list` namespacing.... it should be limited to a deeper search namespace and clear only THAT
-    -   Related to FF's breaking wrong? Let's see!
+-   Consider:
+    -   Switch after break:
+        -   when a player breaks a FF and goes to a new one, we don't want to make it LOOK like we did, so tag the player when they break it, and if we do a re-bind with the tag active we skip messaging protocols
 -   Bugs Found Testing:
-    -   Destroying a FF breaks wrong FF????
+    -   Moving between 2 FF near each other do not bind properly
+        -   ie, an INNER FF cannot be configured internally, must be done via corner (not cool!)
+            -   Does processing prot/hit for EVERY zone make sense? Does it add too much lag? If not lag, latency?
     -   Multiplayer:
         -   Building a FF
             -   Shouldn't be able to build near another player's corner while building
@@ -18,7 +18,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
             -   building helper switches players as they cross
                 -   Consider using a scoreboard to associate helper w/player instead of location
             -   When 2 are building and 1 finishes, the 2nd FF tooltips are activated erroneously
-    -   FF inside FF doesn't fix when you break the inner one
 -   Verify Scanning operations:
     -   Does it skip players far from FF?
 -   Config
@@ -313,6 +312,14 @@ Things to Test:
                 -   Player/Owner/OP should user Admin Helper book to Take Ownership (TBD)
         -   Needs to `deactivate`
 -   Bug: Tooltips keep sticking around, annoyingly
+-   Consider splitting Player Binding to differentiate between messaging/protection, and being inside the KILL ZONE
+    -   Update owner/ally/stranger targeting everywhere!
+    -   Allow config from Owner/creative mode only (not ff_admin, they need to take it over if it's that important!)
+-   Cleanup `operations.meta` namespacing across the board, so cleanups are explicit
+-   Bugs Found Testing:
+    -   Building a 2nd FF breaks player state!!!!
+    -   Destroying a FF breaks wrong FF????
+    -   FF inside FF doesn't fix when you break the inner one
 
 ---
 
@@ -330,6 +337,7 @@ Get Tags and ArmorItems info:
 ```
 execute as @e[sort=nearest,limit=1,type=!player] run tag @s list
 execute as @e[sort=nearest,limit=1,type=!player] run data get entity @s ArmorItems[0].tag
+execute as @e[tag=ff_demolish_marker,sort=nearest,limit=1,type=!player] run data get entity @s ArmorItems[0].tag.IDs
 ```
 
 Get Player ID:

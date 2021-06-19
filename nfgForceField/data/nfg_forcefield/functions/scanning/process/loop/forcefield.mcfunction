@@ -42,8 +42,8 @@ scoreboard players add #_scan_idx_player ff_calcs 1
 execute if score #_scan_idx_ff ff_calcs matches 1.. run scoreboard players set #_scan_state ff_calcs 3
 execute if score #_scan_idx_ff ff_calcs matches 0 run scoreboard players set #_scan_state ff_calcs 1
 
-execute if score #DEBUG ff_calcs matches 10 run tellraw @a ["Processing FF IDX: ", {"score":{"name": "#_scan_idx_ff","objective": "ff_calcs"}}]
-execute if score #DEBUG ff_calcs matches 10 run tellraw @a ["Processing Num Players: ", {"score":{"name": "#_scan_count_player","objective": "ff_calcs"}}]
+execute if score #DEBUG ff_calcs matches 10 if score #_scan_state ff_calcs matches 3 run tellraw @a ["Processing FF IDX: ", {"score":{"name": "#_scan_idx_ff","objective": "ff_calcs"}}]
+execute if score #DEBUG ff_calcs matches 10 if score #_scan_state ff_calcs matches 3 run tellraw @a ["Processing Num Players: ", {"score":{"name": "#_scan_count_player","objective": "ff_calcs"}}]
 
 execute if score #DEBUG ff_calcs matches 10 if score #_scan_idx_ff ff_calcs matches 1.. run say Should Continue to Proc Players
 execute if score #DEBUG ff_calcs matches 10 if score #_scan_idx_ff ff_calcs matches 0 run say No more FF, Need to reset...

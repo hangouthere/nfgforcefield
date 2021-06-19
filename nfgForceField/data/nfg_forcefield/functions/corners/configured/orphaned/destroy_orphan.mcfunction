@@ -1,5 +1,5 @@
 kill @e[tag=ff_demolish_marker,limit=1,sort=nearest]
-kill @e[tag=ff_tooltip_line,distance=..8]
+kill @e[tag=ff_tooltip_line,distance=..3]
 
 execute as @a[distance=..16] run function nfg_forcefield:helper/player/cleanup_state
 

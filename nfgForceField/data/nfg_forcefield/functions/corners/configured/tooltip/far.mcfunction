@@ -3,4 +3,4 @@ tag @p remove ff_tooltip_medium
 
 data merge entity @s {CustomNameVisible: 0b}
 
-kill @e[tag=ff_tooltip_line,distance=..1]
+kill @e[tag=ff_tooltip_line,distance=..3]
