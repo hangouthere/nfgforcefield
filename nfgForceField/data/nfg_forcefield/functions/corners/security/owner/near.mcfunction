@@ -1,5 +1,3 @@
-particle dust 1 0 0 2 ~ ~1 ~ 0 4 0 1 10
-
 # Create Demolition Marker to compare existence against corners later.
 # If the Corner goes missing while this Marker exists, that means the Player destroyed the Corner.
 summon armor_stand ~ ~ ~ {Small:0b,Invisible:0b,Invulnerable:1b,Marker:1b,NoGravity:1b,Tags:["ff_demolish_marker"],ArmorItems:[{id:"minecraft:dirt",Count:1b}]}
