@@ -43,6 +43,7 @@ scoreboard players set BoundsTrackZoneDistance ff_calcs 75
 scoreboard players set BoundsIgnoreZoneDistance ff_calcs 150
 scoreboard players set BoundsProtectZoneDistance ff_calcs 16
 scoreboard players set MobRecycleSeconds ff_calcs 15
+scoreboard players set PotionFrequencySeconds ff_calcs 10
 
 # Internal storage for boundaries for config pages
 scoreboard players set #maxPages ff_config 2
@@ -52,7 +53,7 @@ scoreboard players set #maxPages ff_config 2
 # Default FF Template
 # Note: ff_corner_armor is necessary for deletions when
 # armor drops on the ground that holds a copy of this data
-data modify storage nfg:forcefield template.buildFF set value {ff_corner_armor: 1b,IDs: { ff: 0, player: 0, playerName: ""},version: 0,calc: { area: 0},corner: { start: [0, 0, 0], end: [0, 0, 0]},zone: { kill: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 } }, protect: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 } }, track: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 } }, suspend: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 } }},protections: { building: 2, mob: 1},messages: { allied: { entering: { title: "", subtitle: "", actionbar: "", serverChat: "" }, leaving: { title: "", subtitle: "", actionbar: "", serverChat: "" } }, stranger: { entering: { title: "Entering Safe Zone", subtitle: "Welcome!", actionbar: "Extended Block Protection Enabled", serverChat: "" }, leaving: { title: "Leaving Safe Zone", subtitle: "Be safe, wanderer...", actionbar: "Extended Block Protection Disabled", serverChat: "" } }}}
+data modify storage nfg:forcefield template.buildFF set value {ff_corner_armor: 1b,IDs: { ff: 0, player: 0, playerName: ""},version: 0,calc: { potion_time: -10, area: 0},corner: { start: [0, 0, 0], end: [0, 0, 0]},zone: { kill: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 } }, protect: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 } }, track: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 } }, suspend: { offset: { x: 0, y: 0, z: 0 }, bounds: { x: 0, y: 0, z: 0 } }},protections: { building: 2, mob: 1},messages: { allied: { entering: { title: "", subtitle: "", actionbar: "", serverChat: "" }, leaving: { title: "", subtitle: "", actionbar: "", serverChat: "" } }, stranger: { entering: { title: "Entering Safe Zone", subtitle: "Welcome!", actionbar: "Extended Block Protection Enabled", serverChat: "" }, leaving: { title: "Leaving Safe Zone", subtitle: "Be safe, wanderer...", actionbar: "Extended Block Protection Disabled", serverChat: "" } }}}
 
 # ForceField Storage
 data modify storage nfg:forcefield ForceFields set value []

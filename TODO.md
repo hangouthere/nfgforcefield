@@ -1,3 +1,13 @@
+-   [GreenThreaded] Scan Players into a known Bound State
+    -   Unbound/Unsuspended players are scanned
+    -   Each FF is scanned, unfortunately... This could be a lot, really, so i might need to look at sub-greenthreading this functionality
+    -   If not in tracking zone, skip player, mark as temp suspend for future scans (scheduled function will clear, or a score timer kept for a TTY for next scan)
+    -   If in tracking zone, do further hit tests (prot/kill zone)
+        -   Tag as "bound"
+        -   "Hits" result in storing apropos meta into "current" player data in storage as we scan _per_ player
+        -   Determine ownership/affiliation (owner/ally/stranger)
+-   [GreenThreaded] Bound Players are scanned via
+
 # TODO:
 
 ## Phase 1
@@ -18,8 +28,6 @@ When this Phase is complete, that means we are able to start using it on the NFG
             -   building helper switches players as they cross
                 -   Consider using a scoreboard to associate helper w/player instead of location
             -   When 2 are building and 1 finishes, the 2nd FF tooltips are activated erroneously
--   Verify Scanning operations:
-    -   Does it skip players far from FF?
 -   Config
     -   Change to use SCORE compare for ID matching instead of data copy!
     -   Needs to finish tooltips on 2nd page
@@ -87,6 +95,8 @@ When this Phase is complete, that means we are able to start using it on the NFG
         -   Needs volume calc added
     -   Tooltip needs updating to show both, m^2 and m^3
         -   Might need adjustments based on size? That way we don't see 918273912791827391827917m2
+    -   Cache tooltip to avoid future processing!
+    -   Make corner avoid gravity???????? Decide once and for all!
 -   Search source for `TODO` entries and clean up!
 -   Clean up/review all docs
 -   Tags are broken if Better Animals/Etc is not installed - Release as independent datapack, adding to the tag? - Include a separate tag? -

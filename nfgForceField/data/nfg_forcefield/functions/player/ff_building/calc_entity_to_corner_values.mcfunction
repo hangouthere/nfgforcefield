@@ -1,4 +1,4 @@
-# Store in1 as ourselves (the player locked)
+# Store in1 as ourselves
 function nfg_util:vec/store_in1
 
 # Store Starting Corner as in2
